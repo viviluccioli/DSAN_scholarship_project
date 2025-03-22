@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Scrollytelling Example – _site</title>
+<title>_site</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,78 +111,117 @@ ul.task-list li input[type="checkbox"] {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Scrollytelling Example</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
+<!-- ---
+title: "Humanitarian Impact"
+format: html
+page-layout: full
 
+---
 
-</header>
-
-
-<div class="{=html}">
-<div id="scrolly">
-<div id="graphic">
-<pre><code>&lt;p&gt;Here’s where you put your image or plot&lt;/p&gt;</code></pre>
-</div>
-<div id="text">
-<pre><code>&lt;div class="step" data-step="1"&gt;Step 1 content here&lt;/div&gt;
-&lt;div class="step" data-step="2"&gt;Step 2 content here&lt;/div&gt;
-&lt;div class="step" data-step="3"&gt;Step 3 content here&lt;/div&gt;</code></pre>
-</div>
-</div>
-<script src="https://unpkg.com/scrollama"></script>
-<script>
-  const scroller = scrollama();
-
-  scroller
-    .setup({
-      step: ".step",
-      offset: 0.5,
-      debug: false
-    })
-    .onStepEnter(response => {
-      const step = response.element.getAttribute("data-step");
-      document.getElementById("graphic").innerHTML = `<p>You’re on step ${step}</p>`;
-    });
-</script>
+::: {=html}
 <style>
-#scrolly {
+body {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
   display: flex;
-  flex-direction: row;
-  margin-top: 2em;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-#graphic {
-  width: 50%;
-  position: sticky;
-  top: 50px;
-  height: 300px;
-  background: #eee;
-  padding: 1em;
+#counter {
+  font-size: 4em;
+  color: red;
+  font-weight: bold;
 }
-#text {
-  width: 50%;
-  padding: 1em;
-}
-.step {
-  margin-bottom: 300px;
-  padding: 1em;
-  background: #f9f9f9;
-  border-left: 4px solid #ccc;
+.container {
+  max-width: 800px;
+  padding: 2em;
 }
 </style>
+
+<div class="container">
+  <p style="font-size: 1.5em;">
+    Since 1997, <span id="counter">0</span> humanitarian aid workers, who risked their lives and left their homes to serve the greater good, have been affected by security incidents.
+  </p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js" defer></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      const counter = new CountUp('counter', 20000, {
+        startVal: 1,
+        duration: 4,
+        separator: ',',
+        useEasing: true
+      });
+      if (!counter.error) {
+        counter.start();
+      } else {
+        console.error(counter.error);
+      }
+    }, 500); // Delay slightly to ensure Quarto fully loads first
+  });
+</script>
+
+::: -->
+<hr>
+<p>title: “Humanitarian Impact” format: html page-layout: full</p>
+<hr>
+<div class="{=html}">
+<style>
+body {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#counter {
+  font-size: 4em;
+  color: red;
+  font-weight: bold;
+}
+.container {
+  max-width: 800px;
+  padding: 2em;
+}
+</style>
+<div class="container">
+<p style="font-size: 1.5em;">
+Since 1997, <span id="counter">0</span> humanitarian aid workers, who risked their lives and left their homes to serve the greater good, have been affected by security incidents.
+</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.7/dist/countUp.umd.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const counter = new countUp.CountUp('counter', 20000, {
+      startVal: 1,
+      duration: 4,
+      separator: ',',
+      useEasing: true
+    });
+    if (!counter.error) {
+      counter.start();
+    } else {
+      console.error(counter.error);
+    }
+  });
+</script>
 </div>
 
 

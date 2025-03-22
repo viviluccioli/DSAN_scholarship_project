@@ -1,0 +1,54 @@
+---
+title: "Humanitarian Impact"
+format: html
+page-layout: full
+---
+
+::: {=html}
+<style>
+body {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#counter {
+  font-size: 4em;
+  color: red;
+  font-weight: bold;
+}
+.container {
+  max-width: 800px;
+  padding: 2em;
+}
+</style>
+
+<div class="container">
+  <p style="font-size: 1.5em;">
+    Since 1997, <span id="counter">0</span> humanitarian aid workers, who risked their lives and left their homes to serve the greater good, have been affected by security incidents.
+  </p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.7/dist/countUp.umd.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const counter = new countUp.CountUp('counter', 20000, {
+      startVal: 1,
+      duration: 4,
+      separator: ',',
+      useEasing: true
+    });
+    if (!counter.error) {
+      counter.start();
+    } else {
+      console.error(counter.error);
+    }
+  });
+</script>
+:::
