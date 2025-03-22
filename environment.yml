@@ -1,0 +1,26 @@
+name: dataviz5200
+channels:
+  - conda-forge
+  - defaults
+  - apple
+dependencies:
+  - python
+  - geopandas
+  - matplotlib
+  - contextily
+  - cartopy
+  - folium
+  - plotly
+  - altair
+  - vega_datasets
+  - jupyter
+  - nodejs  
+  - pandas
+  - shapely
+  - pyproj
+  - ipywidgets 
+  - notebook
+  - nbconvert
+  - pycountry
+  - pyjanitor
+  - altair

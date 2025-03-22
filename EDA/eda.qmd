@@ -1,0 +1,21 @@
+---
+title: "EDA"
+format: 
+  html:
+    embed-resources: true
+    code-fold: true
+    warning: FALSE
+    message: FALSE
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(readr)
+df <- read.csv("../data/security_incidents.csv")
+```
+```{r}
+table(df$Country)
+```
+
+
