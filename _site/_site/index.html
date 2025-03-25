@@ -116,7 +116,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="{=html}">
+<!-- 
+::: {=html}
 <style>
 body {
   background-color: black;
@@ -169,17 +170,21 @@ body {
   filter: invert(1);
 }
 </style>
+
 <div class="container">
-<p class="message" id="message1">
-Since 1997, violence against humanitarian operations has impacted <span id="counter1" class="counter">0</span> aid workers.
-</p>
-<p class="message" id="message2">
-But in total, <span id="counter2" class="counter">0</span> people have been affected by these attacks.
-</p>
-<p class="message" id="message3">
-These acts of violence do not only hurt selfless humanitarian aid workers. At a greater scale, they <strong>also hurt innocent civilians</strong>.
-</p>
+  <p class="message" id="message1">
+    Since 1997, violence against humanitarian operations has impacted <span class="counter" id="counter1">0</span> aid workers. 
+  </p>
+  
+  <p class="message" id="message2">
+    But in total, <span class="counter" id="counter2">0</span> people have been affected by these attacks.
+  </p>
+  
+  <p class="message" id="message3">
+    These acts of violence do not only hurt selfless humanitarian aid workers. At a greater scale, they **also hurt innocent civilians**.
+  </p>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.7/dist/countUp.umd.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -217,6 +222,158 @@ These acts of violence do not only hurt selfless humanitarian aid workers. At a 
     setTimeout(() => showMessage('message1', 'counter1'), 500);  // First message appears after 0.5s
     setTimeout(() => showMessage('message2', 'counter2'), 5500); // Second message appears after 5.5s
     setTimeout(() => showMessage('message3', null), 10500);      // Third message appears after 10.5s
+  });
+</script>
+::: -->
+<div class="{=html}">
+<style>
+body {
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 800px;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.counter {
+  font-size: 3em;
+  color: #e32d2d;
+  font-weight: bold;
+  display: inline;
+  line-height: 1.2;
+}
+
+.message {
+  font-size: 1.8em;
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+}
+
+#first-container, #second-container {
+  transition: opacity 2s ease-in-out;
+  width: 100%;
+}
+
+.second-phase {
+  line-height: 1.6;
+}
+
+.navbar {
+  background-color: black !important;
+}
+
+.navbar-title, .nav-link, ._site {
+  color: #e32d2d !important;
+}
+
+.navbar-title:hover, .nav-link:hover {
+  color: #ff6b6b !important;
+}
+
+.navbar-logo {
+  filter: invert(1);
+}
+</style>
+<div id="first-container" class="container">
+<p class="message" id="message1">
+Since 1997, <span id="counter1" class="counter">0</span> humanitarian aid workers have been affected by violence against aid workers.
+</p>
+<p class="message" id="message2">
+But <span id="counter2" class="counter">0</span> total people have been affected.
+</p>
+<p class="message" id="message3">
+These acts of violence do not only hurt selfless humanitarian aid workers. At a greater scale, they hurt innocent civilians.
+</p>
+</div>
+<div id="second-container" class="container" style="opacity: 0;">
+<p class="message second-phase" id="message4">
+Limited resources have long prevented global organizations from fully capturing the truth behind attacks on humanitarian missions.
+</p>
+<p class="message second-phase" id="message5">
+But behind every missing detail is a missed opportunity to prepare, to protect, to prevent.
+</p>
+<p class="message second-phase" id="message6">
+To minimize the harm, we must uncover the patterns hidden in the data—and come together, as a global force, to turn insight into action.
+</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.7/dist/countUp.umd.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Set up counters
+    const counter1 = new countUp.CountUp('counter1', 766, {
+      startVal: 1,
+      duration: 3,
+      separator: ',',
+      useEasing: true
+    });
+    
+    const counter2 = new countUp.CountUp('counter2', 7316, {
+      startVal: 1,
+      duration: 3,
+      separator: ',',
+      useEasing: true
+    });
+    
+    // Function to show message and start counter if it has one
+    function showMessage(messageId, counterId) {
+      const message = document.getElementById(messageId);
+      message.style.opacity = 1;
+      
+      if (counterId) {
+        const counter = counterId === 'counter1' ? counter1 : counter2;
+        if (!counter.error) {
+          counter.start();
+        } else {
+          console.error(counter.error);
+        }
+      }
+    }
+    
+    // Function to hide element
+    function hideElement(elementId) {
+      const element = document.getElementById(elementId);
+      element.style.opacity = 0;
+    }
+    
+    // Function to show element
+    function showElement(elementId) {
+      const element = document.getElementById(elementId);
+      element.style.opacity = 1;
+    }
+    
+    // Schedule the first phase messages to appear
+    setTimeout(() => showMessage('message1', 'counter1'), 500);   // First message appears after 0.5s
+    setTimeout(() => showMessage('message2', 'counter2'), 5500);  // Second message appears after 5.5s
+    setTimeout(() => showMessage('message3', null), 10500);       // Third message appears after 10.5s
+    
+    // Fade out first container after all messages shown
+    setTimeout(() => hideElement('first-container'), 16000);      // First container fades out after 16s
+    
+    // Show second container and fade in second phase messages
+    setTimeout(() => {
+      showElement('second-container');
+      setTimeout(() => showMessage('message4', null), 500);       // First second-phase message
+      setTimeout(() => showMessage('message5', null), 5500);      // Second second-phase message
+      setTimeout(() => showMessage('message6', null), 10500);     // Third second-phase message
+    }, 18000);  // Start second phase after 18s (2s after first container fades out)
   });
 </script>
 </div>
