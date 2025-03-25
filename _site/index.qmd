@@ -1,8 +1,9 @@
 ---
-title: "Humanitarian Impact"
-format: html
+format: 
+  html:
+    css: styles.css
 page-layout: full
----
+--- 
 
 ::: {=html}
 <style>
@@ -18,37 +19,97 @@ body {
   justify-content: center;
   text-align: center;
 }
-#counter {
-  font-size: 4em;
-  color: red;
+
+.counter {
+  font-size: 3em;
+  color: #e32d2d;
   font-weight: bold;
+  display: inline;
+  line-height: 1.2;
 }
+
 .container {
   max-width: 800px;
   padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.message {
+  font-size: 1.8em;
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+}
+
+.navbar {
+  background-color: black !important;
+}
+
+.navbar-title, .nav-link, ._site {
+  color: #e32d2d !important;
+}
+
+.navbar-title:hover, .nav-link:hover {
+  color: #ff6b6b !important;
+}
+
+.navbar-logo {
+  filter: invert(1);
 }
 </style>
 
 <div class="container">
-  <p style="font-size: 1.5em;">
-    Since 1997, <span id="counter">0</span> humanitarian aid workers, who risked their lives and left their homes to serve the greater good, have been affected by security incidents.
+  <p class="message" id="message1">
+    Since 1997, violence against humanitarian operations has impacted <span class="counter" id="counter1">0</span> aid workers. 
+  </p>
+  
+  <p class="message" id="message2">
+    But in total, <span class="counter" id="counter2">0</span> people have been affected by these attacks.
+  </p>
+  
+  <p class="message" id="message3">
+    These acts of violence do not only hurt selfless humanitarian aid workers. At a greater scale, they **also hurt innocent civilians**.
   </p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.7/dist/countUp.umd.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const counter = new countUp.CountUp('counter', 20000, {
+  document.addEventListener("DOMContentLoaded", function() {
+    // Set up counters
+    const counter1 = new countUp.CountUp('counter1', 766, {
       startVal: 1,
-      duration: 4,
+      duration: 3,
       separator: ',',
       useEasing: true
     });
-    if (!counter.error) {
-      counter.start();
-    } else {
-      console.error(counter.error);
+    
+    const counter2 = new countUp.CountUp('counter2', 7316, {
+      startVal: 1,
+      duration: 3,
+      separator: ',',
+      useEasing: true
+    });
+    
+    // Function to show message and start counter if it has one
+    function showMessage(messageId, counterId) {
+      const message = document.getElementById(messageId);
+      message.style.opacity = 1;
+      
+      if (counterId) {
+        const counter = counterId === 'counter1' ? counter1 : counter2;
+        if (!counter.error) {
+          counter.start();
+        } else {
+          console.error(counter.error);
+        }
+      }
     }
+    
+    // Schedule the messages to appear
+    setTimeout(() => showMessage('message1', 'counter1'), 500);  // First message appears after 0.5s
+    setTimeout(() => showMessage('message2', 'counter2'), 5500); // Second message appears after 5.5s
+    setTimeout(() => showMessage('message3', null), 10500);      // Third message appears after 10.5s
   });
 </script>
 :::

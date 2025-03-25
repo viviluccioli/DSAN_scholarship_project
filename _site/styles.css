@@ -1,1 +1,22 @@
 /* css styles */
+/* styles.css */
+.navbar {
+    background-color: black !important;
+  }
+  
+  .navbar-title, .nav-link, ._site {
+    color: #e32d2d !important;
+  }
+  
+  .navbar-title:hover, .nav-link:hover {
+    color: #ff6b6b !important;
+  }
+  
+  .navbar-logo {
+    filter: invert(1);
+  }
+  
+  /* Override Quarto's title display */
+  .quarto-title {
+    display: none;
+  }
