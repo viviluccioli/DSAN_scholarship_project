@@ -1,10 +1,35 @@
-/* css styles */
-/* styles.css */
-.navbar {
-    background-color: black !important;
+/* Define CSS variables for the entire document */
+:root {
+    --link-color: #e32d2d;
+    --link-hover-color: #ff6b6b;
   }
   
-  .navbar-title, .nav-link, ._site {
+  /* Global styles */
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    background-color: black !important;
+    color: white !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .navbar-brand {
+    color: #e32d2d !important;
+  }
+  
+  .navbar-title, .nav-link {
     color: #e32d2d !important;
   }
   
@@ -12,11 +37,37 @@
     color: #ff6b6b !important;
   }
   
-  .navbar-logo {
-    filter: invert(1);
+  /* Make sure navbar is visible against all backgrounds */
+  #quarto-header {
+    background-color: black;
+    width: 100%;
+    position: relative;
+    z-index: 1000;
   }
   
-  /* Override Quarto's title display */
-  .quarto-title {
-    display: none;
+  /* Quarto navbar specific */
+  .quarto-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
   }
+  
+  /* Footer styles */
+  .footer {
+    margin-top: 2em;
+    padding: 1em 0;
+    font-size: 0.9em;
+    text-align: center;
+  }
+  
+  /* Background page specific styles */
+  body.background-page {
+    background-color: #fca7a7;
+  }
+
+  main.content {
+    padding-top: 80px; /* Adjust if needed */
+  }
+  

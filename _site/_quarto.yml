@@ -1,21 +1,21 @@
 project:
   type: website
+  output-dir: _site
 
 website:
-  title: "_site"
+  title: "Violence Against Humanitarian Aid"
   navbar:
+    background: black
+    foreground: white
     left:
       - href: index.qmd
-        text: Home
-      - about.qmd
+        text: "Home"
+      - href: background.qmd
+        text: "Background & Context"
+      - href: analysis/tables.ipynb
+        text: "Analysis"
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
+    theme: cosmo
     css: styles.css
-    toc: true
-
-
-

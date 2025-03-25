@@ -1,0 +1,39 @@
+---
+title: "Uncovering the Unknown - Insights into Violence Against Humanitarian Aid"
+subtitle: "Background and Context"
+format:
+  html:
+    css: styles.css
+    page-layout: article
+class: background-page
+---
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.classList.add('background-page');
+});
+</script>
+
+## Data Source
+
+The Aid Worker Security Database (AWSD) documents instances of 'major violence' against aid workers, which includes:
+
+* Kidnapping
+* Killing
+* Wounding (serious injury requiring medical attention)
+* Rape and sexual assault
+
+## Definition of Aid Workers
+
+Aid workers are defined as employees and associated personnel (both paid and volunteer) of nonprofit aid agencies providing material and technical assistance in humanitarian contexts. This encompasses:
+
+* National and international NGOs
+* Local volunteer groups
+* International Red Cross/Red Crescent Movement
+* Donor agencies
+* UN agencies within the Inter-Agency Standing Committee on Humanitarian Affairs (FAO, OCHA, UNDP, UNFPA, UNHCR, UNICEF, UN-Habitat, WFP and WHO)
+* IOM, UNRWA, UNMAS, and when relevant, the World Bank
+
+This definition includes locally contracted staff like drivers and security guards. It also covers contracted workers and vendors of humanitarian organizations when they are affected by violence while supporting humanitarian missions.
+
+The definition excludes UN peacekeeping personnel, human rights workers, election monitors, and organizations focused solely on political, religious, or advocacy work.
