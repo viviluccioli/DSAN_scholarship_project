@@ -4,7 +4,7 @@ subtitle: "Background and Context"
 format:
   html:
     css: styles.css
-    page-layout: article
+    # page-layout: article
 class: background-page
 ---
 

@@ -1,231 +1,135 @@
-<!-- 
-::: {=html}
-<style>
-/* Inside your <style> section */
-body {
-  background-color: black;
-  color: white;
-  font-family: sans-serif;
-  margin: 0;
-  padding: 60px 0 0 0; /* Add top padding for navbar */
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Optional: add specific navbar styling for the index page */
-#quarto-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.container {
-  max-width: 800px;
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.counter {
-  font-size: 3em;
-  color: #e32d2d;
-  font-weight: bold;
-  display: inline;
-  line-height: 1.2;
-}
-
-.message {
-  font-size: 1.8em;
-  opacity: 0;
-  transition: opacity 1.5s ease-in;
-}
-
-#first-container, #second-container {
-  transition: opacity 2s ease-in-out;
-  width: 100%;
-}
-
-.second-phase {
-  line-height: 1.6;
-}
-
-.navbar {
-  background-color: black !important;
-}
-
-.navbar-title, .nav-link, ._site {
-  color: #e32d2d !important;
-}
-
-.navbar-title:hover, .nav-link:hover {
-  color: #ff6b6b !important;
-}
-
-.navbar-logo {
-  filter: invert(1);
-}
-</style>
-
-<div class="container" id="first-container">
-  <p class="message" id="message1">
-    Since 1997, <span class="counter" id="counter1">0</span> humanitarian aid workers have been affected by violence against aid workers.
-  </p>
-  
-  <p class="message" id="message2">
-    But <span class="counter" id="counter2">0</span> total people have been affected.
-  </p>
-  
-  <p class="message" id="message3">
-    These acts of violence do not only hurt selfless humanitarian aid workers. At a greater scale, they hurt innocent civilians.
-  </p>
-</div>
-
-<div class="container" id="second-container" style="opacity: 0;">
-  <p class="message second-phase" id="message4">
-    Limited resources have long prevented global organizations from fully capturing the truth behind attacks on humanitarian missions.
-  </p>
-  
-  <p class="message second-phase" id="message5">
-    But behind every missing detail is a missed opportunity to prepare, to protect, to prevent.
-  </p>
-  
-  <p class="message second-phase" id="message6">
-    To minimize the harm, we must uncover the patterns hidden in the data—and come together, as a global force, to turn insight into action.
-  </p>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.7/dist/countUp.umd.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Set up counters
-    const counter1 = new countUp.CountUp('counter1', 766, {
-      startVal: 1,
-      duration: 3,
-      separator: ',',
-      useEasing: true
-    });
-    
-    const counter2 = new countUp.CountUp('counter2', 7316, {
-      startVal: 1,
-      duration: 3,
-      separator: ',',
-      useEasing: true
-    });
-    
-    // Function to show message and start counter if it has one
-    function showMessage(messageId, counterId) {
-      const message = document.getElementById(messageId);
-      message.style.opacity = 1;
-      
-      if (counterId) {
-        const counter = counterId === 'counter1' ? counter1 : counter2;
-        if (!counter.error) {
-          counter.start();
-        } else {
-          console.error(counter.error);
-        }
-      }
-    }
-    
-    // Function to hide element
-    function hideElement(elementId) {
-      const element = document.getElementById(elementId);
-      element.style.opacity = 0;
-    }
-    
-    // Function to show element
-    function showElement(elementId) {
-      const element = document.getElementById(elementId);
-      element.style.opacity = 1;
-    }
-    
-    // Schedule the first phase messages to appear
-    setTimeout(() => showMessage('message1', 'counter1'), 500);   // First message appears after 0.5s
-    setTimeout(() => showMessage('message2', 'counter2'), 5500);  // Second message appears after 5.5s
-    setTimeout(() => showMessage('message3', null), 10500);       // Third message appears after 10.5s
-    
-    // Fade out first container after all messages shown
-    setTimeout(() => hideElement('first-container'), 16000);      // First container fades out after 16s
-    
-    // Show second container and fade in second phase messages
-    setTimeout(() => {
-      showElement('second-container');
-      setTimeout(() => showMessage('message4', null), 500);       // First second-phase message
-      setTimeout(() => showMessage('message5', null), 5500);      // Second second-phase message
-      setTimeout(() => showMessage('message6', null), 10500);     // Third second-phase message
-    }, 18000);  // Start second phase after 18s (2s after first container fades out)
-  });
-</script>
-::: -->
-
 ---
 format:
   html:
     css: styles.css
-page-layout: full
+    page-layout: full
 ---
 
-::: {=html}
+```{=html}
 <style>
+/* Hide the YAML header that's showing */
+.cell-output-stdout pre, 
+.yaml-block, 
+.yaml-header,
+pre {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
 body {
   background-color: black;
   color: white;
   font-family: sans-serif;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   overflow: hidden;
-  transition: background-color 2s ease-in-out;
 }
 
+/* Custom navbar */
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: black;
+  z-index: 1000;
+}
+
+.brand {
+  color: #e32d2d;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-items {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-item {
+  color: #e32d2d;
+  text-decoration: none;
+}
+
+/* Main Content */
 .container {
   max-width: 800px;
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-.counter {
-  font-size: 3em;
-  color: #e32d2d;
-  font-weight: bold;
-  display: inline;
-  line-height: 1.2;
+/* First phase styles */
+#first-container {
+  width: 100%;
+  transition: opacity 2s ease-in-out;
 }
 
 .message {
   font-size: 1.8em;
   opacity: 0;
   transition: opacity 1.5s ease-in;
+  margin-bottom: 2rem;
 }
 
-#first-container, #second-container {
-  transition: opacity 2s ease-in-out;
+.counter {
+  font-size: 5rem;
+  color: #e32d2d;
+  font-weight: bold;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+}
+
+.stat-box {
+  flex: 1;
+  padding: 1em;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  color: #e32d2d;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 1.5rem;
+}
+
+/* Second phase styles */
+#second-container {
+  opacity: 0;
   width: 100%;
+  transition: opacity 2s ease-in-out;
 }
 
 .second-phase {
+  font-size: 1.8em;
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
   line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
+/* Background container */
 #background-container {
   width: 100%;
   height: 100vh;
@@ -235,6 +139,15 @@ body {
   left: 0;
   overflow-y: auto;
   background-color: #fca7a7;
+  display: none;
+  opacity: 0;
+}
+
+.bg-content {
+  color: black;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2em;
 }
 
 .bg-title {
@@ -251,13 +164,6 @@ body {
   text-align: center;
   margin-bottom: 2em;
   font-weight: normal;
-}
-
-.bg-content {
-  color: black;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 2em 4em 2em;
 }
 
 .bg-info {
@@ -282,56 +188,79 @@ body {
   margin-bottom: 0.5em;
   padding-left: 0.5em;
 }
-
-.navbar {
-  background-color: black !important;
-  transition: background-color 2s ease-in-out;
-}
-
-.navbar-title, .nav-link, ._site {
-  color: #e32d2d !important;
-  transition: color 2s ease-in-out;
-}
-
-.navbar-title:hover, .nav-link:hover {
-  color: #ff6b6b !important;
-}
-
-.navbar-logo {
-  filter: invert(1);
-  transition: filter 2s ease-in-out;
-}
 </style>
 
+<!-- Hide the YAML header with JavaScript -->
+<script>
+window.onload = function() {
+  // Find and hide any pre elements containing YAML code
+  const preElements = document.querySelectorAll('pre');
+  preElements.forEach(pre => {
+    if (pre.textContent.includes('title:') || 
+        pre.textContent.includes('format:') || 
+        pre.textContent.includes('page-layout:')) {
+      pre.style.display = 'none';
+      let parent = pre.parentNode;
+      for (let i = 0; i < 3; i++) {
+        if (parent) {
+          parent.style.display = 'none';
+          parent = parent.parentNode;
+        }
+      }
+    }
+  });
+}
+</script>
+
+<!-- Custom Navbar -->
+<div class="custom-navbar">
+  <a href="#" class="brand">Violence Against Humanitarian...</a>
+  <div class="nav-items">
+    <a href="index.html" class="nav-item">Home</a>
+    <a href="background.html" class="nav-item">Background & Context</a>
+    <a href="analysis.html" class="nav-item">Analysis</a>
+  </div>
+</div>
+
+<!-- First Phase Content -->
 <div class="container" id="first-container">
   <p class="message" id="message1">
     Since 1997, <span class="counter" id="counter1">0</span> humanitarian aid workers have been affected by violence against aid workers.
   </p>
   
-  <p class="message" id="message2">
-    But <span class="counter" id="counter2">0</span> total people have been affected.
-  </p>
-  
-  <p class="message" id="message3">
-    These acts of violence do not only hurt selfless humanitarian aid workers. At a greater scale, they hurt innocent civilians.
-  </p>
+  <div class="stats-row" id="stats-boxes">
+    <div class="stat-box">
+      <div class="stat-number" id="killed-counter">0</div>
+      <div class="stat-label">killed</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="wounded-counter">0</div>
+      <div class="stat-label">wounded</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="kidnapped-counter">0</div>
+      <div class="stat-label">kidnapped</div>
+    </div>
+  </div>
 </div>
 
-<div class="container" id="second-container" style="opacity: 0;">
-  <p class="message second-phase" id="message4">
+<!-- Second Phase Content -->
+<div class="container" id="second-container">
+  <p class="second-phase" id="message4">
     Limited resources have long prevented global organizations from fully capturing the truth behind attacks on humanitarian missions.
   </p>
   
-  <p class="message second-phase" id="message5">
+  <p class="second-phase" id="message5">
     But behind every missing detail is a missed opportunity to prepare, to protect, to prevent.
   </p>
   
-  <p class="message second-phase" id="message6">
+  <p class="second-phase" id="message6">
     To minimize the harm, we must uncover the patterns hidden in the data—and come together, as a global force, to turn insight into action.
   </p>
 </div>
 
-<div id="background-container" style="opacity: 0; display: none;">
+<!-- Background Container -->
+<div id="background-container">
   <div class="bg-content">
     <h1 class="bg-title">Uncovering the Unknown - Insights into Violence Against Humanitarian Aid</h1>
     <h2 class="bg-subtitle">Background and Context</h2>
@@ -368,15 +297,29 @@ body {
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Set up counters
-    const counter1 = new countUp.CountUp('counter1', 766, {
-      startVal: 1,
+    const counter1 = new countUp.CountUp('counter1', 7316, {
+      startVal: 0,
       duration: 3,
       separator: ',',
       useEasing: true
     });
     
-    const counter2 = new countUp.CountUp('counter2', 7316, {
-      startVal: 1,
+    const killedCounter = new countUp.CountUp('killed-counter', 2602, {
+      startVal: 0,
+      duration: 3,
+      separator: ',',
+      useEasing: true
+    });
+    
+    const woundedCounter = new countUp.CountUp('wounded-counter', 2732, {
+      startVal: 0,
+      duration: 3,
+      separator: ',',
+      useEasing: true
+    });
+    
+    const kidnappedCounter = new countUp.CountUp('kidnapped-counter', 1982, {
+      startVal: 0,
       duration: 3,
       separator: ',',
       useEasing: true
@@ -387,14 +330,24 @@ body {
       const message = document.getElementById(messageId);
       message.style.opacity = 1;
       
-      if (counterId) {
-        const counter = counterId === 'counter1' ? counter1 : counter2;
-        if (!counter.error) {
-          counter.start();
+      if (counterId === 'counter1') {
+        if (!counter1.error) {
+          counter1.start();
         } else {
-          console.error(counter.error);
+          console.error(counter1.error);
         }
       }
+    }
+    
+    // Function to show stats boxes and start their counters
+    function showStatsBoxes() {
+      const statsBoxes = document.getElementById('stats-boxes');
+      statsBoxes.style.opacity = 1;
+      
+      // Start all stat counters simultaneously
+      if (!killedCounter.error) killedCounter.start();
+      if (!woundedCounter.error) woundedCounter.start();
+      if (!kidnappedCounter.error) kidnappedCounter.start();
     }
     
     // Function to hide element
@@ -412,58 +365,54 @@ body {
       }
     }
     
-    // Function to change background color
-    function changeBackgroundColor(color) {
-      document.body.style.backgroundColor = color;
-      
-      // Also update navbar colors if background changes to light color
-      if (color === '#fca7a7') {
-        const navbar = document.querySelector('.navbar');
-        if (navbar) {
-          navbar.style.backgroundColor = '#fca7a7';
-          
-          const navLinks = document.querySelectorAll('.navbar-title, .nav-link, ._site');
-          navLinks.forEach(link => {
-            link.style.color = 'black';
-          });
-          
-          const logo = document.querySelector('.navbar-logo');
-          if (logo) {
-            logo.style.filter = 'none';
+    // Hide any YAML header text that might be displayed
+    function hideYamlText() {
+      const preElements = document.querySelectorAll('pre');
+      preElements.forEach(pre => {
+        if (pre.textContent.includes('title:') || 
+            pre.textContent.includes('format:') || 
+            pre.textContent.includes('page-layout:')) {
+          pre.style.display = 'none';
+          let parent = pre.parentNode;
+          for (let i = 0; i < 3; i++) {
+            if (parent) {
+              parent.style.display = 'none';
+              parent = parent.parentNode;
+            }
           }
         }
-      }
+      });
     }
     
-    // Wait for the document to be fully loaded, including stylesheets
+    // Call this function immediately and again after a delay
+    hideYamlText();
+    setTimeout(hideYamlText, 500);
+    
+    // Animation sequence
     window.addEventListener('load', function() {
-      // Add class to body for index-specific styling
-      document.body.classList.add('index-page');
-    
-    // Schedule the first phase messages to appear
-    setTimeout(() => showMessage('message1', 'counter1'), 500);   // First message appears after 0.5s
-    setTimeout(() => showMessage('message2', 'counter2'), 5500);  // Second message appears after 5.5s
-    setTimeout(() => showMessage('message3', null), 10500);       // Third message appears after 10.5s
-    
-    // Fade out first container after all messages shown
-    setTimeout(() => hideElement('first-container'), 16000);      // First container fades out after 16s
-    
-    // Show second container and fade in second phase messages
-    setTimeout(() => {
-      showElement('second-container');
-      setTimeout(() => showMessage('message4', null), 500);       // First second-phase message
-      setTimeout(() => showMessage('message5', null), 5500);      // Second second-phase message
-      setTimeout(() => showMessage('message6', null), 10500);     // Third second-phase message
+      // First phase
+      setTimeout(() => showMessage('message1', 'counter1'), 500);   // First message appears after 0.5s
+      setTimeout(() => showStatsBoxes(), 5500);                     // Stats boxes appear 5 seconds after first message
       
-      // Fade out second container after all second-phase messages shown
-      setTimeout(() => hideElement('second-container'), 16000);   // Second container fades out after 16s
+      // Fade out first container 5 seconds after stats boxes appear
+      setTimeout(() => hideElement('first-container'), 10500);      // First container fades out 5s after stats appear
       
-      // Redirect to background.qmd page after animations
+      // Show second container and fade in second phase messages
       setTimeout(() => {
-        window.location.href = 'background.html';
-      }, 18000);  // Redirect after 18s (2s after second container fades out)
-    }, 18000);  // Start second phase after 18s (2s after first container fades out)
+        showElement('second-container');
+        setTimeout(() => showMessage('message4'), 500);       // First second-phase message
+        setTimeout(() => showMessage('message5'), 5500);      // Second second-phase message
+        setTimeout(() => showMessage('message6'), 10500);     // Third second-phase message
+        
+        // Fade out second container after all second-phase messages shown
+        setTimeout(() => hideElement('second-container'), 16000);   // Second container fades out after 16s
+        
+        // Redirect to background.qmd page after animations
+        setTimeout(() => {
+          window.location.href = 'background.html';
+        }, 18000);  // Redirect after 18s (2s after second container fades out)
+      }, 12500);  // Start second phase 2s after first container fades out
     });
   });
 </script>
-:::
+```

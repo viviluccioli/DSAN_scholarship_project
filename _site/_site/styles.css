@@ -66,8 +66,16 @@
   body.background-page {
     background-color: #fca7a7;
   }
-
+  
   main.content {
     padding-top: 80px; /* Adjust if needed */
   }
+
+  :target::before {
+    content: "";
+    display: block;
+    height: 60px;
+    margin-top: -80px;
+  }
+  
   
