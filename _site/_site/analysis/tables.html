@@ -4749,73 +4749,32 @@ vertical-align: -.125em;
 
 
 <style type="text/css">
-:root {
---link-color: #e32d2d;
---link-hover-color: #ff6b6b;
-}
-
 a {
-color: var(--link-color);
+color: #e32d2d;
 text-decoration: none;
 }
 a:hover {
-color: var(--link-hover-color);
+color: #ff6b6b;
 text-decoration: underline;
 }
 
 .navbar {
 background-color: black !important;
 color: white !important;
-position: fixed;
-top: 0;
-width: 100%;
-z-index: 1000;
 }
-.navbar-brand {
-color: #e32d2d !important;
-}
-.navbar-title, .nav-link {
+.navbar-brand, .navbar-title, .nav-link {
 color: #e32d2d !important;
 }
 .navbar-title:hover, .nav-link:hover {
 color: #ff6b6b !important;
 }
 
-#quarto-header {
-background-color: black;
-width: 100%;
-position: relative;
-z-index: 1000;
-}
-
-.quarto-navbar {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-z-index: 1000;
-}
-
-.footer {
-margin-top: 2em;
-padding: 1em 0;
-font-size: 0.9em;
-text-align: center;
-}
-
 body.background-page {
 background-color: #fca7a7;
 }
-main.content {
-padding-top: 80px; 
-}
-:target::before {
-content: "";
-display: block;
-height: 60px;
-margin-top: -80px;
-}
-</style>
+
+h2::before, h3::before {
+display: block; content: " "; margin-top: -70px; height: 70px; visibility: hidden; }</style>
 </head>
 
 <body class="nav-fixed fullcontent">

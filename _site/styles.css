@@ -1,81 +1,38 @@
-/* Define CSS variables for the entire document */
-:root {
-    --link-color: #e32d2d;
-    --link-hover-color: #ff6b6b;
-  }
-  
-  /* Global styles */
-  a {
-    color: var(--link-color);
-    text-decoration: none;
-  }
-  
-  a:hover {
-    color: var(--link-hover-color);
-    text-decoration: underline;
-  }
-  
-  /* Navbar styling */
-  .navbar {
-    background-color: black !important;
-    color: white !important;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-  
-  .navbar-brand {
-    color: #e32d2d !important;
-  }
-  
-  .navbar-title, .nav-link {
-    color: #e32d2d !important;
-  }
-  
-  .navbar-title:hover, .nav-link:hover {
-    color: #ff6b6b !important;
-  }
-  
-  /* Make sure navbar is visible against all backgrounds */
-  #quarto-header {
-    background-color: black;
-    width: 100%;
-    position: relative;
-    z-index: 1000;
-  }
-  
-  /* Quarto navbar specific */
-  .quarto-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-  }
-  
-  /* Footer styles */
-  .footer {
-    margin-top: 2em;
-    padding: 1em 0;
-    font-size: 0.9em;
-    text-align: center;
-  }
-  
-  /* Background page specific styles */
-  body.background-page {
-    background-color: #fca7a7;
-  }
-  
-  main.content {
-    padding-top: 80px; /* Adjust if needed */
-  }
+/* Link colors */
+a {
+  color: #e32d2d;
+  text-decoration: none;
+}
 
-  :target::before {
-    content: "";
-    display: block;
-    height: 60px;
-    margin-top: -80px;
-  }
-  
-  
+a:hover {
+  color: #ff6b6b;
+  text-decoration: underline;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: black !important;
+  color: white !important;
+}
+
+.navbar-brand, .navbar-title, .nav-link {
+  color: #e32d2d !important;
+}
+
+.navbar-title:hover, .nav-link:hover {
+  color: #ff6b6b !important;
+}
+
+/* Background page styling */
+body.background-page {
+  background-color: #fca7a7;
+}
+
+/* For anchor links to section headers */
+h2::before, h3::before {
+  display: block; 
+  content: " "; 
+  margin-top: -70px; 
+  height: 70px; 
+  visibility: hidden; 
+}
