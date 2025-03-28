@@ -3106,19 +3106,19 @@ vertical-align: -.125em;
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;../data/cleaned_security_incidents.csv&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-2" class="cell" data-execution_count="14">
+<div id="cell-2" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create styled tables with &quot;Unknown&quot; highlighted in red</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_styled_table(series_counts, title):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert to DataFrame for styling</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    df_counts <span class="op">=</span> series_counts.reset_index()</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    df_counts.columns <span class="op">=</span> [<span class="st">&#39;Category&#39;</span>, <span class="st">&#39;Count&#39;</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define styling function</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> highlight_unknown(row):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> row[<span class="st">&#39;Category&#39;</span>] <span class="op">==</span> <span class="st">&#39;Unknown&#39;</span>:</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create styled tables with &quot;Unknown&quot; highlighted in red</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_styled_table(series_counts, title):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert to DataFrame for styling</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    df_counts <span class="op">=</span> series_counts.reset_index()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    df_counts.columns <span class="op">=</span> [<span class="st">&#39;Category&#39;</span>, <span class="st">&#39;Count&#39;</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define styling function</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> highlight_unknown(row):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check if the category contains any form of &quot;unknown&quot; (case insensitive)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="st">&#39;unknown&#39;</span> <span class="kw">in</span> <span class="bu">str</span>(row[<span class="st">&#39;Category&#39;</span>]).lower()):</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [<span class="st">&#39;background-color: rgba(255, 0, 0, 0.2)&#39;</span>]<span class="op">*</span><span class="bu">len</span>(row)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [<span class="st">&#39;background-color: transparent&#39;</span>]<span class="op">*</span><span class="bu">len</span>(row)</span>
@@ -3150,489 +3150,554 @@ vertical-align: -.125em;
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>styled_actor <span class="op">=</span> create_styled_table(actor_counts, <span class="st">&#39;Actor Type&#39;</span>)</span>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>styled_motive <span class="op">=</span> create_styled_table(motive_counts, <span class="st">&#39;Motive&#39;</span>)</span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Display tables in a 2x2 grid using HTML</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Display tables in a 2x2 grid using grid_items from IPython</span></span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Create HTML for 2x2 grid layout</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>html_content <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a more explicit grid structure with inline HTML</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>grid_html <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;style&gt;</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="st">    .table-container {</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="st">    .grid-container {</span></span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="st">        display: grid;</span></span>
 <span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="st">        grid-template-columns: 1fr 1fr;</span></span>
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="st">        grid-gap: 20px;</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="st">        margin-bottom: 20px;</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="st">        width: 100%;</span></span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/style&gt; </span><span class="ch">\</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the tables in a 2x2 grid</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>display(HTML(html_content))</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Top Row: Means of Attack and Attack Context&quot;</span>)</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">&#39;&lt;div class=&quot;table-container&quot;&gt;&#39;</span>))</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>display(styled_means, styled_context)</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">&#39;&lt;/div&gt;&#39;</span>))</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Bottom Row: Actor Type and Motive&quot;</span>)</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">&#39;&lt;div class=&quot;table-container&quot;&gt;&#39;</span>))</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>display(styled_actor, styled_motive)</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>display(HTML(<span class="st">&#39;&lt;/div&gt;&#39;</span>))</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="st">    .grid-item {</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="st">        width: 100%;</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/style&gt;</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;div class=&quot;grid-container&quot;&gt;</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;div class=&quot;grid-item&quot; id=&quot;table1&quot;&gt;&lt;/div&gt;</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;div class=&quot;grid-item&quot; id=&quot;table2&quot;&gt;&lt;/div&gt;</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;div class=&quot;grid-item&quot; id=&quot;table3&quot;&gt;&lt;/div&gt;</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;div class=&quot;grid-item&quot; id=&quot;table4&quot;&gt;&lt;/div&gt;</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/div&gt;</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="co"># First display the grid structure</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>display(HTML(grid_html))</span>
 <span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative approach using Matplotlib and Seaborn for better control of layout</span></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co"># This is another option if you prefer plots over HTML tables</span></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_count_tables(df, variables, titles, nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>)):</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span>nrows, ncols<span class="op">=</span>ncols, figsize<span class="op">=</span>figsize)</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.flatten()</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (var, title) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(variables, titles)):</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>        counts <span class="op">=</span> df[var].value_counts().reset_index()</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        counts.columns <span class="op">=</span> [<span class="st">&#39;Category&#39;</span>, <span class="st">&#39;Count&#39;</span>]</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create bar plot</span></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>        sns.barplot(x<span class="op">=</span><span class="st">&#39;Category&#39;</span>, y<span class="op">=</span><span class="st">&#39;Count&#39;</span>, data<span class="op">=</span>counts, ax<span class="op">=</span>axes[i], color<span class="op">=</span><span class="st">&#39;skyblue&#39;</span>)</span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlight Unknown in red if present</span></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">&#39;Unknown&#39;</span> <span class="kw">in</span> counts[<span class="st">&#39;Category&#39;</span>].values:</span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>            unknown_idx <span class="op">=</span> counts[counts[<span class="st">&#39;Category&#39;</span>] <span class="op">==</span> <span class="st">&#39;Unknown&#39;</span>].index[<span class="dv">0</span>]</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>            unknown_bar <span class="op">=</span> axes[i].patches[unknown_idx]</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>            unknown_bar.set_facecolor(<span class="st">&#39;red&#39;</span>)</span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>            unknown_bar.set_alpha(<span class="fl">0.7</span>)</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Customize plot</span></span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(title, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>        axes[i].tick_params(axis<span class="op">=</span><span class="st">&#39;x&#39;</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>        axes[i].set_xlabel(<span class="st">&#39;&#39;</span>)</span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment to use the matplotlib/seaborn approach</span></span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;&#39;&#39;</span></span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="co">plot_count_tables(</span></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="co">    df,</span></span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="co">    variables=[&#39;means_of_attack&#39;, &#39;attack_context&#39;, &#39;actor_type&#39;, &#39;motive&#39;],</span></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="co">    titles=[&#39;Means of Attack&#39;, &#39;Attack Context&#39;, &#39;Actor Type&#39;, &#39;Motive&#39;]</span></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="co">)&#39;&#39;&#39;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Then inject each table into its respective grid cell using JavaScript</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (table_id, styled_table) <span class="kw">in</span> <span class="bu">enumerate</span>([</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;table1&quot;</span>, styled_means),</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;table2&quot;</span>, styled_actor),</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;table3&quot;</span>, styled_context),</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;table4&quot;</span>, styled_motive)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>]):</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert styled table to HTML and inject into the grid</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    table_html <span class="op">=</span> styled_table.to_html()</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    display(HTML(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;script&gt;</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="ss">        document.getElementById(&quot;</span><span class="sc">{</span>table_id<span class="sc">}</span><span class="ss">&quot;).innerHTML = `</span><span class="sc">{</span>table_html<span class="sc">}</span><span class="ss">`;</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;/script&gt;</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="ss">    &quot;&quot;&quot;</span>))</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative approach that works well in most Jupyter environments</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display_html</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.display <span class="im">import</span> HTML, display</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_side_by_side(dfs, captions<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Display tables side by side in Jupyter.&quot;&quot;&quot;</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> captions <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>        captions <span class="op">=</span> [<span class="st">&#39;&#39;</span>] <span class="op">*</span> <span class="bu">len</span>(dfs)</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> df, caption <span class="kw">in</span> <span class="bu">zip</span>(dfs, captions):</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> <span class="st">&#39;&lt;div style=&quot;flex: 50%; padding: 5px;&quot;&gt;&#39;</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> <span class="ss">f&#39;&lt;h4 style=&quot;text-align: center;&quot;&gt;</span><span class="sc">{</span>caption<span class="sc">}</span><span class="ss">&lt;/h4&gt;&#39;</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> df.to_html()</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> <span class="st">&#39;&lt;/div&gt;&#39;</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>    display_html(HTML(<span class="st">&#39;&lt;div style=&quot;display: flex; flex-wrap: wrap;&quot;&gt;&#39;</span><span class="op">+</span>output<span class="op">+</span><span class="st">&#39;&lt;/div&gt;&#39;</span>))</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncommenting this will provide another option if the grid approach doesn&#39;t work</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="co">print(&quot;Top Row:&quot;)</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co">display_side_by_side([styled_means, styled_context], </span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="co">                    captions=[&#39;Means of Attack&#39;, &#39;Attack Context&#39;])</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="co">print(&quot;Bottom Row:&quot;)</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="co">display_side_by_side([styled_actor, styled_motive], </span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="co">                    captions=[&#39;Actor Type&#39;, &#39;Motive&#39;])</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative approach using Matplotlib and Seaborn for better control of layout</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="co"># This is another option if you prefer plots over HTML tables</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_count_tables(df, variables, titles, nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>)):</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span>nrows, ncols<span class="op">=</span>ncols, figsize<span class="op">=</span>figsize)</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.flatten()</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (var, title) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(variables, titles)):</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>        counts <span class="op">=</span> df[var].value_counts().reset_index()</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>        counts.columns <span class="op">=</span> [<span class="st">&#39;Category&#39;</span>, <span class="st">&#39;Count&#39;</span>]</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create bar plot</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>        sns.barplot(x<span class="op">=</span><span class="st">&#39;Category&#39;</span>, y<span class="op">=</span><span class="st">&#39;Count&#39;</span>, data<span class="op">=</span>counts, ax<span class="op">=</span>axes[i], color<span class="op">=</span><span class="st">&#39;skyblue&#39;</span>)</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlight Unknown in red if present</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">&#39;Unknown&#39;</span> <span class="kw">in</span> counts[<span class="st">&#39;Category&#39;</span>].values:</span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>            unknown_idx <span class="op">=</span> counts[counts[<span class="st">&#39;Category&#39;</span>] <span class="op">==</span> <span class="st">&#39;Unknown&#39;</span>].index[<span class="dv">0</span>]</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>            unknown_bar <span class="op">=</span> axes[i].patches[unknown_idx]</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>            unknown_bar.set_facecolor(<span class="st">&#39;red&#39;</span>)</span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>            unknown_bar.set_alpha(<span class="fl">0.7</span>)</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Customize plot</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(title, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>        axes[i].tick_params(axis<span class="op">=</span><span class="st">&#39;x&#39;</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>        axes[i].set_xlabel(<span class="st">&#39;&#39;</span>)</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment to use the matplotlib/seaborn approach</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;&#39;&#39;</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="co">plot_count_tables(</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="co">    df,</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a><span class="co">    variables=[&#39;means_of_attack&#39;, &#39;attack_context&#39;, &#39;actor_type&#39;, &#39;motive&#39;],</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="co">    titles=[&#39;Means of Attack&#39;, &#39;Attack Context&#39;, &#39;Actor Type&#39;, &#39;Motive&#39;]</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a><span class="co">)</span></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;&#39;&#39;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
 <style>
-.table-container {
+.grid-container {
 display: grid;
 grid-template-columns: 1fr 1fr;
 grid-gap: 20px;
-margin-bottom: 20px;
+width: 100%;
 }
-</style> 
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Top Row: Means of Attack and Attack Context</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div class="table-container">
-</div>
-<div class="cell-output cell-output-display">
-<style type="text/css">
-#T_fcb9b caption {
-font-weight: bold;
-font-size: 1.1em;
-text-align: center;
-}
-#T_fcb9b th {
-text-align: center;
-background-color: #f2f2f2;
-}
-#T_fcb9b td {
-text-align: center;
-}
-#T_fcb9b_row0_col0, #T_fcb9b_row0_col1, #T_fcb9b_row1_col0, #T_fcb9b_row1_col1, #T_fcb9b_row2_col0, #T_fcb9b_row2_col1, #T_fcb9b_row4_col0, #T_fcb9b_row4_col1, #T_fcb9b_row5_col0, #T_fcb9b_row5_col1, #T_fcb9b_row6_col0, #T_fcb9b_row6_col1, #T_fcb9b_row7_col0, #T_fcb9b_row7_col1, #T_fcb9b_row8_col0, #T_fcb9b_row8_col1, #T_fcb9b_row9_col0, #T_fcb9b_row9_col1, #T_fcb9b_row10_col0, #T_fcb9b_row10_col1, #T_fcb9b_row11_col0, #T_fcb9b_row11_col1, #T_fcb9b_row12_col0, #T_fcb9b_row12_col1, #T_fcb9b_row13_col0, #T_fcb9b_row13_col1 {
-background-color: transparent;
-}
-#T_fcb9b_row3_col0, #T_fcb9b_row3_col1 {
-background-color: rgba(255, 0, 0, 0.2);
+.grid-item {
+width: 100%;
 }
 </style>
 
-<div id="T_fcb9b" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_fcb9b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="grid-container">
+    <div class="grid-item" id="table1"></div>
+    <div class="grid-item" id="table2"></div>
+    <div class="grid-item" id="table3"></div>
+    <div class="grid-item" id="table4"></div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+
+    <script>
+        document.getElementById("table1").innerHTML = `<style type="text/css">
+#T_df700 caption {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
+}
+#T_df700 th {
+  text-align: center;
+  background-color: #f2f2f2;
+}
+#T_df700 td {
+  text-align: center;
+}
+#T_df700_row0_col0, #T_df700_row0_col1, #T_df700_row1_col0, #T_df700_row1_col1, #T_df700_row2_col0, #T_df700_row2_col1, #T_df700_row4_col0, #T_df700_row4_col1, #T_df700_row5_col0, #T_df700_row5_col1, #T_df700_row6_col0, #T_df700_row6_col1, #T_df700_row7_col0, #T_df700_row7_col1, #T_df700_row8_col0, #T_df700_row8_col1, #T_df700_row9_col0, #T_df700_row9_col1, #T_df700_row10_col0, #T_df700_row10_col1, #T_df700_row11_col0, #T_df700_row11_col1, #T_df700_row12_col0, #T_df700_row12_col1, #T_df700_row13_col0, #T_df700_row13_col1 {
+  background-color: transparent;
+}
+#T_df700_row3_col0, #T_df700_row3_col1 {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+</style>
+
+<div id="T_df700" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_df700-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table 1: Means of Attack
 </figcaption>
-<div aria-describedby="T_fcb9b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_fcb9b" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_df700-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_df700" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_fcb9b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
-<th id="T_fcb9b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
+<th id="T_df700_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
+<th id="T_df700_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_fcb9b_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_fcb9b_row0_col0" class="data row0 col0">Shooting</td>
-<td id="T_fcb9b_row0_col1" class="data row0 col1">1168</td>
+<td id="T_df700_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_df700_row0_col0" class="data row0 col0">Shooting</td>
+<td id="T_df700_row0_col1" class="data row0 col1">1168</td>
 </tr>
 <tr class="even">
-<td id="T_fcb9b_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_fcb9b_row1_col0" class="data row1 col0">Kidnapping</td>
-<td id="T_fcb9b_row1_col1" class="data row1 col1">818</td>
+<td id="T_df700_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_df700_row1_col0" class="data row1 col0">Kidnapping</td>
+<td id="T_df700_row1_col1" class="data row1 col1">818</td>
 </tr>
 <tr class="odd">
-<td id="T_fcb9b_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_fcb9b_row2_col0" class="data row2 col0">Bodily assault</td>
-<td id="T_fcb9b_row2_col1" class="data row2 col1">789</td>
+<td id="T_df700_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_df700_row2_col0" class="data row2 col0">Bodily assault</td>
+<td id="T_df700_row2_col1" class="data row2 col1">789</td>
 </tr>
 <tr class="even">
-<td id="T_fcb9b_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_fcb9b_row3_col0" class="data row3 col0">Unknown</td>
-<td id="T_fcb9b_row3_col1" class="data row3 col1">378</td>
+<td id="T_df700_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_df700_row3_col0" class="data row3 col0">Unknown</td>
+<td id="T_df700_row3_col1" class="data row3 col1">378</td>
 </tr>
 <tr class="odd">
-<td id="T_fcb9b_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_fcb9b_row4_col0" class="data row4 col0">Aerial bombardment</td>
-<td id="T_fcb9b_row4_col1" class="data row4 col1">246</td>
+<td id="T_df700_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_df700_row4_col0" class="data row4 col0">Aerial bombardment</td>
+<td id="T_df700_row4_col1" class="data row4 col1">246</td>
 </tr>
 <tr class="even">
-<td id="T_fcb9b_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_fcb9b_row5_col0" class="data row5 col0">Shelling</td>
-<td id="T_fcb9b_row5_col1" class="data row5 col1">153</td>
+<td id="T_df700_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_df700_row5_col0" class="data row5 col0">Shelling</td>
+<td id="T_df700_row5_col1" class="data row5 col1">153</td>
 </tr>
 <tr class="odd">
-<td id="T_fcb9b_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
-<td id="T_fcb9b_row6_col0" class="data row6 col0">Kidnap-killing</td>
-<td id="T_fcb9b_row6_col1" class="data row6 col1">99</td>
+<td id="T_df700_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_df700_row6_col0" class="data row6 col0">Kidnap-killing</td>
+<td id="T_df700_row6_col1" class="data row6 col1">99</td>
 </tr>
 <tr class="even">
-<td id="T_fcb9b_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
-<td id="T_fcb9b_row7_col0" class="data row7 col0">Vehicle-born IED</td>
-<td id="T_fcb9b_row7_col1" class="data row7 col1">74</td>
+<td id="T_df700_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
+<td id="T_df700_row7_col0" class="data row7 col0">Vehicle-born IED</td>
+<td id="T_df700_row7_col1" class="data row7 col1">74</td>
 </tr>
 <tr class="odd">
-<td id="T_fcb9b_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
-<td id="T_fcb9b_row8_col0" class="data row8 col0">Roadside IED</td>
-<td id="T_fcb9b_row8_col1" class="data row8 col1">60</td>
+<td id="T_df700_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
+<td id="T_df700_row8_col0" class="data row8 col0">Roadside IED</td>
+<td id="T_df700_row8_col1" class="data row8 col1">60</td>
 </tr>
 <tr class="even">
-<td id="T_fcb9b_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
-<td id="T_fcb9b_row9_col0" class="data row9 col0">Other Explosives</td>
-<td id="T_fcb9b_row9_col1" class="data row9 col1">41</td>
+<td id="T_df700_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
+<td id="T_df700_row9_col0" class="data row9 col0">Other Explosives</td>
+<td id="T_df700_row9_col1" class="data row9 col1">41</td>
 </tr>
 <tr class="odd">
-<td id="T_fcb9b_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
-<td id="T_fcb9b_row10_col0" class="data row10 col0">Rape/sexual assault</td>
-<td id="T_fcb9b_row10_col1" class="data row10 col1">40</td>
+<td id="T_df700_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
+<td id="T_df700_row10_col0" class="data row10 col0">Rape/sexual assault</td>
+<td id="T_df700_row10_col1" class="data row10 col1">40</td>
 </tr>
 <tr class="even">
-<td id="T_fcb9b_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
-<td id="T_fcb9b_row11_col0" class="data row11 col0">Complex attack</td>
-<td id="T_fcb9b_row11_col1" class="data row11 col1">39</td>
+<td id="T_df700_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
+<td id="T_df700_row11_col0" class="data row11 col0">Complex attack</td>
+<td id="T_df700_row11_col1" class="data row11 col1">39</td>
 </tr>
 <tr class="odd">
-<td id="T_fcb9b_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
-<td id="T_fcb9b_row12_col0" class="data row12 col0">Landmine</td>
-<td id="T_fcb9b_row12_col1" class="data row12 col1">35</td>
+<td id="T_df700_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
+<td id="T_df700_row12_col0" class="data row12 col0">Landmine</td>
+<td id="T_df700_row12_col1" class="data row12 col1">35</td>
 </tr>
 <tr class="even">
-<td id="T_fcb9b_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
-<td id="T_fcb9b_row13_col0" class="data row13 col0">Body-borne IED</td>
-<td id="T_fcb9b_row13_col1" class="data row13 col1">17</td>
+<td id="T_df700_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
+<td id="T_df700_row13_col0" class="data row13 col0">Body-borne IED</td>
+<td id="T_df700_row13_col1" class="data row13 col1">17</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
+
+`;
+    </script>
+    
 </div>
 <div class="cell-output cell-output-display">
-<style type="text/css">
-#T_be05b caption {
-font-weight: bold;
-font-size: 1.1em;
-text-align: center;
+
+    <script>
+        document.getElementById("table2").innerHTML = `<style type="text/css">
+#T_7a8f8 caption {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
 }
-#T_be05b th {
-text-align: center;
-background-color: #f2f2f2;
+#T_7a8f8 th {
+  text-align: center;
+  background-color: #f2f2f2;
 }
-#T_be05b td {
-text-align: center;
+#T_7a8f8 td {
+  text-align: center;
 }
-#T_be05b_row0_col0, #T_be05b_row0_col1, #T_be05b_row1_col0, #T_be05b_row1_col1, #T_be05b_row2_col0, #T_be05b_row2_col1, #T_be05b_row4_col0, #T_be05b_row4_col1, #T_be05b_row5_col0, #T_be05b_row5_col1, #T_be05b_row6_col0, #T_be05b_row6_col1 {
-background-color: transparent;
+#T_7a8f8_row0_col0, #T_7a8f8_row0_col1, #T_7a8f8_row1_col0, #T_7a8f8_row1_col1, #T_7a8f8_row15_col0, #T_7a8f8_row15_col1 {
+  background-color: rgba(255, 0, 0, 0.2);
 }
-#T_be05b_row3_col0, #T_be05b_row3_col1 {
-background-color: rgba(255, 0, 0, 0.2);
+#T_7a8f8_row2_col0, #T_7a8f8_row2_col1, #T_7a8f8_row3_col0, #T_7a8f8_row3_col1, #T_7a8f8_row4_col0, #T_7a8f8_row4_col1, #T_7a8f8_row5_col0, #T_7a8f8_row5_col1, #T_7a8f8_row6_col0, #T_7a8f8_row6_col1, #T_7a8f8_row7_col0, #T_7a8f8_row7_col1, #T_7a8f8_row8_col0, #T_7a8f8_row8_col1, #T_7a8f8_row9_col0, #T_7a8f8_row9_col1, #T_7a8f8_row10_col0, #T_7a8f8_row10_col1, #T_7a8f8_row11_col0, #T_7a8f8_row11_col1, #T_7a8f8_row12_col0, #T_7a8f8_row12_col1, #T_7a8f8_row13_col0, #T_7a8f8_row13_col1, #T_7a8f8_row14_col0, #T_7a8f8_row14_col1 {
+  background-color: transparent;
 }
 </style>
 
-<div id="T_be05b" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_be05b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table 2: Attack Context
+<div id="T_7a8f8" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_7a8f8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 2: Actor Type
 </figcaption>
-<div aria-describedby="T_be05b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_be05b" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_7a8f8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_7a8f8" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_be05b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
-<th id="T_be05b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
+<th id="T_7a8f8_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
+<th id="T_7a8f8_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_be05b_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_be05b_row0_col0" class="data row0 col0">Ambush</td>
-<td id="T_be05b_row0_col1" class="data row0 col1">1298</td>
+<td id="T_7a8f8_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_7a8f8_row0_col0" class="data row0 col0">Unknown</td>
+<td id="T_7a8f8_row0_col1" class="data row0 col1">1985</td>
 </tr>
 <tr class="even">
-<td id="T_be05b_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_be05b_row1_col0" class="data row1 col0">Individual attack</td>
-<td id="T_be05b_row1_col1" class="data row1 col1">821</td>
+<td id="T_7a8f8_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_7a8f8_row1_col0" class="data row1 col0">Non-state armed group: Unknown</td>
+<td id="T_7a8f8_row1_col1" class="data row1 col1">369</td>
 </tr>
 <tr class="odd">
-<td id="T_be05b_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_be05b_row2_col0" class="data row2 col0">Combat/Crossfire</td>
-<td id="T_be05b_row2_col1" class="data row2 col1">639</td>
+<td id="T_7a8f8_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_7a8f8_row2_col0" class="data row2 col0">Non-state armed group: National</td>
+<td id="T_7a8f8_row2_col1" class="data row2 col1">336</td>
 </tr>
 <tr class="even">
-<td id="T_be05b_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_be05b_row3_col0" class="data row3 col0">Unknown</td>
-<td id="T_be05b_row3_col1" class="data row3 col1">591</td>
+<td id="T_7a8f8_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_7a8f8_row3_col0" class="data row3 col0">Unaffiliated</td>
+<td id="T_7a8f8_row3_col1" class="data row3 col1">211</td>
 </tr>
 <tr class="odd">
-<td id="T_be05b_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_be05b_row4_col0" class="data row4 col0">Raid</td>
-<td id="T_be05b_row4_col1" class="data row4 col1">467</td>
+<td id="T_7a8f8_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_7a8f8_row4_col0" class="data row4 col0">Foreign or coalition forces</td>
+<td id="T_7a8f8_row4_col1" class="data row4 col1">199</td>
 </tr>
 <tr class="even">
-<td id="T_be05b_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_be05b_row5_col0" class="data row5 col0">Mob violence</td>
-<td id="T_be05b_row5_col1" class="data row5 col1">84</td>
+<td id="T_7a8f8_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_7a8f8_row5_col0" class="data row5 col0">Host state</td>
+<td id="T_7a8f8_row5_col1" class="data row5 col1">188</td>
 </tr>
 <tr class="odd">
-<td id="T_be05b_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
-<td id="T_be05b_row6_col0" class="data row6 col0">Detention</td>
-<td id="T_be05b_row6_col1" class="data row6 col1">57</td>
+<td id="T_7a8f8_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_7a8f8_row6_col0" class="data row6 col0">Non-state armed group: Regional</td>
+<td id="T_7a8f8_row6_col1" class="data row6 col1">176</td>
+</tr>
+<tr class="even">
+<td id="T_7a8f8_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
+<td id="T_7a8f8_row7_col0" class="data row7 col0">Non-state armed group: Subnational</td>
+<td id="T_7a8f8_row7_col1" class="data row7 col1">137</td>
+</tr>
+<tr class="odd">
+<td id="T_7a8f8_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
+<td id="T_7a8f8_row8_col0" class="data row8 col0">Criminal</td>
+<td id="T_7a8f8_row8_col1" class="data row8 col1">122</td>
+</tr>
+<tr class="even">
+<td id="T_7a8f8_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
+<td id="T_7a8f8_row9_col0" class="data row9 col0">Police or paramilitary</td>
+<td id="T_7a8f8_row9_col1" class="data row9 col1">84</td>
+</tr>
+<tr class="odd">
+<td id="T_7a8f8_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
+<td id="T_7a8f8_row10_col0" class="data row10 col0">Aid recipient</td>
+<td id="T_7a8f8_row10_col1" class="data row10 col1">58</td>
+</tr>
+<tr class="even">
+<td id="T_7a8f8_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
+<td id="T_7a8f8_row11_col0" class="data row11 col0">Staff member</td>
+<td id="T_7a8f8_row11_col1" class="data row11 col1">29</td>
+</tr>
+<tr class="odd">
+<td id="T_7a8f8_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
+<td id="T_7a8f8_row12_col0" class="data row12 col0">Host State</td>
+<td id="T_7a8f8_row12_col1" class="data row12 col1">26</td>
+</tr>
+<tr class="even">
+<td id="T_7a8f8_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
+<td id="T_7a8f8_row13_col0" class="data row13 col0">Non-state armed group: Global</td>
+<td id="T_7a8f8_row13_col1" class="data row13 col1">21</td>
+</tr>
+<tr class="odd">
+<td id="T_7a8f8_level0_row14" class="row_heading level0 row14" data-quarto-table-cell-role="th">14</td>
+<td id="T_7a8f8_row14_col0" class="data row14 col0">Non-state armed group: Global</td>
+<td id="T_7a8f8_row14_col1" class="data row14 col1">10</td>
+</tr>
+<tr class="even">
+<td id="T_7a8f8_level0_row15" class="row_heading level0 row15" data-quarto-table-cell-role="th">15</td>
+<td id="T_7a8f8_row15_col0" class="data row15 col0">State: unknown</td>
+<td id="T_7a8f8_row15_col1" class="data row15 col1">6</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
+
+`;
+    </script>
+    
 </div>
 <div class="cell-output cell-output-display">
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Bottom Row: Actor Type and Motive</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div class="table-container">
-</div>
-<div class="cell-output cell-output-display">
-<style type="text/css">
-#T_8efa1 caption {
-font-weight: bold;
-font-size: 1.1em;
-text-align: center;
+
+    <script>
+        document.getElementById("table3").innerHTML = `<style type="text/css">
+#T_a9100 caption {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
 }
-#T_8efa1 th {
-text-align: center;
-background-color: #f2f2f2;
+#T_a9100 th {
+  text-align: center;
+  background-color: #f2f2f2;
 }
-#T_8efa1 td {
-text-align: center;
+#T_a9100 td {
+  text-align: center;
 }
-#T_8efa1_row0_col0, #T_8efa1_row0_col1 {
-background-color: rgba(255, 0, 0, 0.2);
+#T_a9100_row0_col0, #T_a9100_row0_col1, #T_a9100_row1_col0, #T_a9100_row1_col1, #T_a9100_row2_col0, #T_a9100_row2_col1, #T_a9100_row4_col0, #T_a9100_row4_col1, #T_a9100_row5_col0, #T_a9100_row5_col1, #T_a9100_row6_col0, #T_a9100_row6_col1 {
+  background-color: transparent;
 }
-#T_8efa1_row1_col0, #T_8efa1_row1_col1, #T_8efa1_row2_col0, #T_8efa1_row2_col1, #T_8efa1_row3_col0, #T_8efa1_row3_col1, #T_8efa1_row4_col0, #T_8efa1_row4_col1, #T_8efa1_row5_col0, #T_8efa1_row5_col1, #T_8efa1_row6_col0, #T_8efa1_row6_col1, #T_8efa1_row7_col0, #T_8efa1_row7_col1, #T_8efa1_row8_col0, #T_8efa1_row8_col1, #T_8efa1_row9_col0, #T_8efa1_row9_col1, #T_8efa1_row10_col0, #T_8efa1_row10_col1, #T_8efa1_row11_col0, #T_8efa1_row11_col1, #T_8efa1_row12_col0, #T_8efa1_row12_col1, #T_8efa1_row13_col0, #T_8efa1_row13_col1, #T_8efa1_row14_col0, #T_8efa1_row14_col1, #T_8efa1_row15_col0, #T_8efa1_row15_col1 {
-background-color: transparent;
+#T_a9100_row3_col0, #T_a9100_row3_col1 {
+  background-color: rgba(255, 0, 0, 0.2);
 }
 </style>
 
-<div id="T_8efa1" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_8efa1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table 3: Actor Type
+<div id="T_a9100" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_a9100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 3: Attack Context
 </figcaption>
-<div aria-describedby="T_8efa1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_8efa1" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_a9100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_a9100" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_8efa1_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
-<th id="T_8efa1_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
+<th id="T_a9100_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
+<th id="T_a9100_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_8efa1_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_8efa1_row0_col0" class="data row0 col0">Unknown</td>
-<td id="T_8efa1_row0_col1" class="data row0 col1">1985</td>
+<td id="T_a9100_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_a9100_row0_col0" class="data row0 col0">Ambush</td>
+<td id="T_a9100_row0_col1" class="data row0 col1">1298</td>
 </tr>
 <tr class="even">
-<td id="T_8efa1_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_8efa1_row1_col0" class="data row1 col0">Non-state armed group: Unknown</td>
-<td id="T_8efa1_row1_col1" class="data row1 col1">369</td>
+<td id="T_a9100_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_a9100_row1_col0" class="data row1 col0">Individual attack</td>
+<td id="T_a9100_row1_col1" class="data row1 col1">821</td>
 </tr>
 <tr class="odd">
-<td id="T_8efa1_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_8efa1_row2_col0" class="data row2 col0">Non-state armed group: National</td>
-<td id="T_8efa1_row2_col1" class="data row2 col1">336</td>
+<td id="T_a9100_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_a9100_row2_col0" class="data row2 col0">Combat/Crossfire</td>
+<td id="T_a9100_row2_col1" class="data row2 col1">639</td>
 </tr>
 <tr class="even">
-<td id="T_8efa1_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_8efa1_row3_col0" class="data row3 col0">Unaffiliated</td>
-<td id="T_8efa1_row3_col1" class="data row3 col1">211</td>
+<td id="T_a9100_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_a9100_row3_col0" class="data row3 col0">Unknown</td>
+<td id="T_a9100_row3_col1" class="data row3 col1">591</td>
 </tr>
 <tr class="odd">
-<td id="T_8efa1_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_8efa1_row4_col0" class="data row4 col0">Foreign or coalition forces</td>
-<td id="T_8efa1_row4_col1" class="data row4 col1">199</td>
+<td id="T_a9100_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_a9100_row4_col0" class="data row4 col0">Raid</td>
+<td id="T_a9100_row4_col1" class="data row4 col1">467</td>
 </tr>
 <tr class="even">
-<td id="T_8efa1_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_8efa1_row5_col0" class="data row5 col0">Host state</td>
-<td id="T_8efa1_row5_col1" class="data row5 col1">188</td>
+<td id="T_a9100_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_a9100_row5_col0" class="data row5 col0">Mob violence</td>
+<td id="T_a9100_row5_col1" class="data row5 col1">84</td>
 </tr>
 <tr class="odd">
-<td id="T_8efa1_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
-<td id="T_8efa1_row6_col0" class="data row6 col0">Non-state armed group: Regional</td>
-<td id="T_8efa1_row6_col1" class="data row6 col1">176</td>
-</tr>
-<tr class="even">
-<td id="T_8efa1_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
-<td id="T_8efa1_row7_col0" class="data row7 col0">Non-state armed group: Subnational</td>
-<td id="T_8efa1_row7_col1" class="data row7 col1">137</td>
-</tr>
-<tr class="odd">
-<td id="T_8efa1_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
-<td id="T_8efa1_row8_col0" class="data row8 col0">Criminal</td>
-<td id="T_8efa1_row8_col1" class="data row8 col1">122</td>
-</tr>
-<tr class="even">
-<td id="T_8efa1_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
-<td id="T_8efa1_row9_col0" class="data row9 col0">Police or paramilitary</td>
-<td id="T_8efa1_row9_col1" class="data row9 col1">84</td>
-</tr>
-<tr class="odd">
-<td id="T_8efa1_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
-<td id="T_8efa1_row10_col0" class="data row10 col0">Aid recipient</td>
-<td id="T_8efa1_row10_col1" class="data row10 col1">58</td>
-</tr>
-<tr class="even">
-<td id="T_8efa1_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
-<td id="T_8efa1_row11_col0" class="data row11 col0">Staff member</td>
-<td id="T_8efa1_row11_col1" class="data row11 col1">29</td>
-</tr>
-<tr class="odd">
-<td id="T_8efa1_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
-<td id="T_8efa1_row12_col0" class="data row12 col0">Host State</td>
-<td id="T_8efa1_row12_col1" class="data row12 col1">26</td>
-</tr>
-<tr class="even">
-<td id="T_8efa1_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
-<td id="T_8efa1_row13_col0" class="data row13 col0">Non-state armed group: Global</td>
-<td id="T_8efa1_row13_col1" class="data row13 col1">21</td>
-</tr>
-<tr class="odd">
-<td id="T_8efa1_level0_row14" class="row_heading level0 row14" data-quarto-table-cell-role="th">14</td>
-<td id="T_8efa1_row14_col0" class="data row14 col0">Non-state armed group: Global</td>
-<td id="T_8efa1_row14_col1" class="data row14 col1">10</td>
-</tr>
-<tr class="even">
-<td id="T_8efa1_level0_row15" class="row_heading level0 row15" data-quarto-table-cell-role="th">15</td>
-<td id="T_8efa1_row15_col0" class="data row15 col0">State: unknown</td>
-<td id="T_8efa1_row15_col1" class="data row15 col1">6</td>
+<td id="T_a9100_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_a9100_row6_col0" class="data row6 col0">Detention</td>
+<td id="T_a9100_row6_col1" class="data row6 col1">57</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
+
+`;
+    </script>
+    
 </div>
 <div class="cell-output cell-output-display">
-<style type="text/css">
-#T_20eab caption {
-font-weight: bold;
-font-size: 1.1em;
-text-align: center;
+
+    <script>
+        document.getElementById("table4").innerHTML = `<style type="text/css">
+#T_45218 caption {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
 }
-#T_20eab th {
-text-align: center;
-background-color: #f2f2f2;
+#T_45218 th {
+  text-align: center;
+  background-color: #f2f2f2;
 }
-#T_20eab td {
-text-align: center;
+#T_45218 td {
+  text-align: center;
 }
-#T_20eab_row0_col0, #T_20eab_row0_col1 {
-background-color: rgba(255, 0, 0, 0.2);
+#T_45218_row0_col0, #T_45218_row0_col1 {
+  background-color: rgba(255, 0, 0, 0.2);
 }
-#T_20eab_row1_col0, #T_20eab_row1_col1, #T_20eab_row2_col0, #T_20eab_row2_col1, #T_20eab_row3_col0, #T_20eab_row3_col1, #T_20eab_row4_col0, #T_20eab_row4_col1, #T_20eab_row5_col0, #T_20eab_row5_col1 {
-background-color: transparent;
+#T_45218_row1_col0, #T_45218_row1_col1, #T_45218_row2_col0, #T_45218_row2_col1, #T_45218_row3_col0, #T_45218_row3_col1, #T_45218_row4_col0, #T_45218_row4_col1, #T_45218_row5_col0, #T_45218_row5_col1 {
+  background-color: transparent;
 }
 </style>
 
-<div id="T_20eab" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_20eab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="T_45218" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_45218-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table 4: Motive
 </figcaption>
-<div aria-describedby="T_20eab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_20eab" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<div aria-describedby="T_45218-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_45218" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_20eab_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
-<th id="T_20eab_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
+<th id="T_45218_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
+<th id="T_45218_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_20eab_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_20eab_row0_col0" class="data row0 col0">Unknown</td>
-<td id="T_20eab_row0_col1" class="data row0 col1">1721</td>
+<td id="T_45218_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_45218_row0_col0" class="data row0 col0">Unknown</td>
+<td id="T_45218_row0_col1" class="data row0 col1">1721</td>
 </tr>
 <tr class="even">
-<td id="T_20eab_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_20eab_row1_col0" class="data row1 col0">Political</td>
-<td id="T_20eab_row1_col1" class="data row1 col1">764</td>
+<td id="T_45218_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_45218_row1_col0" class="data row1 col0">Political</td>
+<td id="T_45218_row1_col1" class="data row1 col1">764</td>
 </tr>
 <tr class="odd">
-<td id="T_20eab_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_20eab_row2_col0" class="data row2 col0">Incidental</td>
-<td id="T_20eab_row2_col1" class="data row2 col1">734</td>
+<td id="T_45218_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_45218_row2_col0" class="data row2 col0">Incidental</td>
+<td id="T_45218_row2_col1" class="data row2 col1">734</td>
 </tr>
 <tr class="even">
-<td id="T_20eab_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_20eab_row3_col0" class="data row3 col0">Economic</td>
-<td id="T_20eab_row3_col1" class="data row3 col1">603</td>
+<td id="T_45218_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_45218_row3_col0" class="data row3 col0">Economic</td>
+<td id="T_45218_row3_col1" class="data row3 col1">603</td>
 </tr>
 <tr class="odd">
-<td id="T_20eab_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_20eab_row4_col0" class="data row4 col0">Disputed</td>
-<td id="T_20eab_row4_col1" class="data row4 col1">113</td>
+<td id="T_45218_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_45218_row4_col0" class="data row4 col0">Disputed</td>
+<td id="T_45218_row4_col1" class="data row4 col1">113</td>
 </tr>
 <tr class="even">
-<td id="T_20eab_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_20eab_row5_col0" class="data row5 col0">Other</td>
-<td id="T_20eab_row5_col1" class="data row5 col1">19</td>
+<td id="T_45218_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_45218_row5_col0" class="data row5 col0">Other</td>
+<td id="T_45218_row5_col1" class="data row5 col1">19</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
+
+`;
+    </script>
+    
 </div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/vs/3j3cdp2s1nn0lr6x50_9ycj00000gn/T/ipykernel_23155/2276398257.py:87: DeprecationWarning: Importing display from IPython.core.display is deprecated since IPython 7.14, please import from IPython.display
+  from IPython.core.display import HTML, display</code></pre>
 </div>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>&quot;\nplot_count_tables(\n    df,\n    variables=[&#39;means_of_attack&#39;, &#39;attack_context&#39;, &#39;actor_type&#39;, &#39;motive&#39;],\n    titles=[&#39;Means of Attack&#39;, &#39;Attack Context&#39;, &#39;Actor Type&#39;, &#39;Motive&#39;]\n)&quot;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>&quot;\nplot_count_tables(\n    df,\n    variables=[&#39;means_of_attack&#39;, &#39;attack_context&#39;, &#39;actor_type&#39;, &#39;motive&#39;],\n    titles=[&#39;Means of Attack&#39;, &#39;Attack Context&#39;, &#39;Actor Type&#39;, &#39;Motive&#39;]\n)\n&quot;</code></pre>
 </div>
 </div>
 

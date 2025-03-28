@@ -24,3 +24,8 @@ dependencies:
   - pycountry
   - pyjanitor
   - altair
+  - seaborn
+  - IPython
+  - notebook
+  - dash
+  - streamlit
