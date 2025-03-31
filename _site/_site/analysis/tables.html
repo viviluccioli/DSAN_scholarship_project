@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Interactive Dashboard – Violence Against Humanitarian Aid</title>
+<title>tables – Violence Against Humanitarian Aid</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4806,6 +4806,10 @@ display: block; content: " "; margin-top: -70px; height: 70px; visibility: hidde
     <a class="nav-link active" href="../analysis/tables.html" aria-current="page"> 
 <span class="menu-text">Analysis</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../analysis/interactive_dashboard.html"> 
+<span class="menu-text">Dashboard</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -4819,28 +4823,12 @@ display: block; content: " "; margin-top: -70px; height: 70px; visibility: hidde
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Interactive Dashboard</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<div id="cell-1" class="cell" data-execution_count="4">
+<div id="cell-1" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -4853,7 +4841,7 @@ display: block; content: " "; margin-top: -70px; height: 70px; visibility: hidde
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;../../data/cleaned_security_incidents.csv&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-2" class="cell" data-execution_count="5">
+<div id="cell-2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to create styled tables with &quot;Unknown&quot; highlighted in red</span></span>
@@ -4938,74 +4926,7 @@ display: block; content: " "; margin-top: -70px; height: 70px; visibility: hidde
 <span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;script&gt;</span></span>
 <span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="ss">        document.getElementById(&quot;</span><span class="sc">{</span>table_id<span class="sc">}</span><span class="ss">&quot;).innerHTML = `</span><span class="sc">{</span>table_html<span class="sc">}</span><span class="ss">`;</span></span>
 <span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;/script&gt;</span></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="ss">    &quot;&quot;&quot;</span>))</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative approach that works well in most Jupyter environments</span></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display_html</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.display <span class="im">import</span> HTML, display</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_side_by_side(dfs, captions<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Display tables side by side in Jupyter.&quot;&quot;&quot;</span></span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> captions <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>        captions <span class="op">=</span> [<span class="st">&#39;&#39;</span>] <span class="op">*</span> <span class="bu">len</span>(dfs)</span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> df, caption <span class="kw">in</span> <span class="bu">zip</span>(dfs, captions):</span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> <span class="st">&#39;&lt;div style=&quot;flex: 50%; padding: 5px;&quot;&gt;&#39;</span></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> <span class="ss">f&#39;&lt;h4 style=&quot;text-align: center;&quot;&gt;</span><span class="sc">{</span>caption<span class="sc">}</span><span class="ss">&lt;/h4&gt;&#39;</span></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> df.to_html()</span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> <span class="st">&#39;&lt;/div&gt;&#39;</span></span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>    display_html(HTML(<span class="st">&#39;&lt;div style=&quot;display: flex; flex-wrap: wrap;&quot;&gt;&#39;</span><span class="op">+</span>output<span class="op">+</span><span class="st">&#39;&lt;/div&gt;&#39;</span>))</span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncommenting this will provide another option if the grid approach doesn&#39;t work</span></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="co">print(&quot;Top Row:&quot;)</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co">display_side_by_side([styled_means, styled_context], </span></span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="co">                    captions=[&#39;Means of Attack&#39;, &#39;Attack Context&#39;])</span></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="co">print(&quot;Bottom Row:&quot;)</span></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="co">display_side_by_side([styled_actor, styled_motive], </span></span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="co">                    captions=[&#39;Actor Type&#39;, &#39;Motive&#39;])</span></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative approach using Matplotlib and Seaborn for better control of layout</span></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="co"># This is another option if you prefer plots over HTML tables</span></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_count_tables(df, variables, titles, nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>)):</span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span>nrows, ncols<span class="op">=</span>ncols, figsize<span class="op">=</span>figsize)</span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.flatten()</span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (var, title) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(variables, titles)):</span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>        counts <span class="op">=</span> df[var].value_counts().reset_index()</span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>        counts.columns <span class="op">=</span> [<span class="st">&#39;Category&#39;</span>, <span class="st">&#39;Count&#39;</span>]</span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create bar plot</span></span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>        sns.barplot(x<span class="op">=</span><span class="st">&#39;Category&#39;</span>, y<span class="op">=</span><span class="st">&#39;Count&#39;</span>, data<span class="op">=</span>counts, ax<span class="op">=</span>axes[i], color<span class="op">=</span><span class="st">&#39;skyblue&#39;</span>)</span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Highlight Unknown in red if present</span></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">&#39;Unknown&#39;</span> <span class="kw">in</span> counts[<span class="st">&#39;Category&#39;</span>].values:</span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>            unknown_idx <span class="op">=</span> counts[counts[<span class="st">&#39;Category&#39;</span>] <span class="op">==</span> <span class="st">&#39;Unknown&#39;</span>].index[<span class="dv">0</span>]</span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>            unknown_bar <span class="op">=</span> axes[i].patches[unknown_idx]</span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>            unknown_bar.set_facecolor(<span class="st">&#39;red&#39;</span>)</span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>            unknown_bar.set_alpha(<span class="fl">0.7</span>)</span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Customize plot</span></span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(title, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">&#39;bold&#39;</span>)</span>
-<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>        axes[i].tick_params(axis<span class="op">=</span><span class="st">&#39;x&#39;</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>        axes[i].set_xlabel(<span class="st">&#39;&#39;</span>)</span>
-<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment to use the matplotlib/seaborn approach</span></span>
-<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;&#39;&#39;</span></span>
-<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="co">plot_count_tables(</span></span>
-<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="co">    df,</span></span>
-<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a><span class="co">    variables=[&#39;means_of_attack&#39;, &#39;attack_context&#39;, &#39;actor_type&#39;, &#39;motive&#39;],</span></span>
-<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="co">    titles=[&#39;Means of Attack&#39;, &#39;Attack Context&#39;, &#39;Actor Type&#39;, &#39;Motive&#39;]</span></span>
-<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a><span class="co">)</span></span>
-<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;&#39;&#39;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="ss">    &quot;&quot;&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
@@ -5032,110 +4953,110 @@ width: 100%;
 
     <script>
         document.getElementById("table1").innerHTML = `<style type="text/css">
-#T_4ac85 caption {
+#T_5c4e9 caption {
   font-weight: bold;
   font-size: 1.1em;
   text-align: center;
 }
-#T_4ac85 th {
+#T_5c4e9 th {
   text-align: center;
   background-color: #f2f2f2;
 }
-#T_4ac85 td {
+#T_5c4e9 td {
   text-align: center;
 }
-#T_4ac85_row0_col0, #T_4ac85_row0_col1, #T_4ac85_row1_col0, #T_4ac85_row1_col1, #T_4ac85_row2_col0, #T_4ac85_row2_col1, #T_4ac85_row4_col0, #T_4ac85_row4_col1, #T_4ac85_row5_col0, #T_4ac85_row5_col1, #T_4ac85_row6_col0, #T_4ac85_row6_col1, #T_4ac85_row7_col0, #T_4ac85_row7_col1, #T_4ac85_row8_col0, #T_4ac85_row8_col1, #T_4ac85_row9_col0, #T_4ac85_row9_col1, #T_4ac85_row10_col0, #T_4ac85_row10_col1, #T_4ac85_row11_col0, #T_4ac85_row11_col1, #T_4ac85_row12_col0, #T_4ac85_row12_col1, #T_4ac85_row13_col0, #T_4ac85_row13_col1 {
+#T_5c4e9_row0_col0, #T_5c4e9_row0_col1, #T_5c4e9_row1_col0, #T_5c4e9_row1_col1, #T_5c4e9_row2_col0, #T_5c4e9_row2_col1, #T_5c4e9_row4_col0, #T_5c4e9_row4_col1, #T_5c4e9_row5_col0, #T_5c4e9_row5_col1, #T_5c4e9_row6_col0, #T_5c4e9_row6_col1, #T_5c4e9_row7_col0, #T_5c4e9_row7_col1, #T_5c4e9_row8_col0, #T_5c4e9_row8_col1, #T_5c4e9_row9_col0, #T_5c4e9_row9_col1, #T_5c4e9_row10_col0, #T_5c4e9_row10_col1, #T_5c4e9_row11_col0, #T_5c4e9_row11_col1, #T_5c4e9_row12_col0, #T_5c4e9_row12_col1, #T_5c4e9_row13_col0, #T_5c4e9_row13_col1 {
   background-color: transparent;
 }
-#T_4ac85_row3_col0, #T_4ac85_row3_col1 {
+#T_5c4e9_row3_col0, #T_5c4e9_row3_col1 {
   background-color: rgba(255, 0, 0, 0.2);
 }
 </style>
 
-<div id="T_4ac85" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
+<div id="T_5c4e9" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_4ac85-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_5c4e9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table 1: Means of Attack
 </figcaption>
-<div aria-describedby="T_4ac85-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_4ac85" class="caption-top" data-quarto-postprocess="true">
+<div aria-describedby="T_5c4e9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_5c4e9" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_4ac85_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
-<th id="T_4ac85_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
+<th id="T_5c4e9_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
+<th id="T_5c4e9_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_4ac85_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_4ac85_row0_col0" class="data row0 col0">Shooting</td>
-<td id="T_4ac85_row0_col1" class="data row0 col1">1168</td>
+<td id="T_5c4e9_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_5c4e9_row0_col0" class="data row0 col0">Shooting</td>
+<td id="T_5c4e9_row0_col1" class="data row0 col1">1168</td>
 </tr>
 <tr class="even">
-<td id="T_4ac85_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_4ac85_row1_col0" class="data row1 col0">Kidnapping</td>
-<td id="T_4ac85_row1_col1" class="data row1 col1">818</td>
+<td id="T_5c4e9_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_5c4e9_row1_col0" class="data row1 col0">Kidnapping</td>
+<td id="T_5c4e9_row1_col1" class="data row1 col1">818</td>
 </tr>
 <tr class="odd">
-<td id="T_4ac85_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_4ac85_row2_col0" class="data row2 col0">Bodily assault</td>
-<td id="T_4ac85_row2_col1" class="data row2 col1">789</td>
+<td id="T_5c4e9_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_5c4e9_row2_col0" class="data row2 col0">Bodily assault</td>
+<td id="T_5c4e9_row2_col1" class="data row2 col1">789</td>
 </tr>
 <tr class="even">
-<td id="T_4ac85_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_4ac85_row3_col0" class="data row3 col0">Unknown</td>
-<td id="T_4ac85_row3_col1" class="data row3 col1">378</td>
+<td id="T_5c4e9_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_5c4e9_row3_col0" class="data row3 col0">Unknown</td>
+<td id="T_5c4e9_row3_col1" class="data row3 col1">378</td>
 </tr>
 <tr class="odd">
-<td id="T_4ac85_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_4ac85_row4_col0" class="data row4 col0">Aerial bombardment</td>
-<td id="T_4ac85_row4_col1" class="data row4 col1">246</td>
+<td id="T_5c4e9_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_5c4e9_row4_col0" class="data row4 col0">Aerial bombardment</td>
+<td id="T_5c4e9_row4_col1" class="data row4 col1">246</td>
 </tr>
 <tr class="even">
-<td id="T_4ac85_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_4ac85_row5_col0" class="data row5 col0">Shelling</td>
-<td id="T_4ac85_row5_col1" class="data row5 col1">153</td>
+<td id="T_5c4e9_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_5c4e9_row5_col0" class="data row5 col0">Shelling</td>
+<td id="T_5c4e9_row5_col1" class="data row5 col1">153</td>
 </tr>
 <tr class="odd">
-<td id="T_4ac85_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
-<td id="T_4ac85_row6_col0" class="data row6 col0">Kidnap-killing</td>
-<td id="T_4ac85_row6_col1" class="data row6 col1">99</td>
+<td id="T_5c4e9_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_5c4e9_row6_col0" class="data row6 col0">Kidnap-killing</td>
+<td id="T_5c4e9_row6_col1" class="data row6 col1">99</td>
 </tr>
 <tr class="even">
-<td id="T_4ac85_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
-<td id="T_4ac85_row7_col0" class="data row7 col0">Vehicle-born IED</td>
-<td id="T_4ac85_row7_col1" class="data row7 col1">74</td>
+<td id="T_5c4e9_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
+<td id="T_5c4e9_row7_col0" class="data row7 col0">Vehicle-born IED</td>
+<td id="T_5c4e9_row7_col1" class="data row7 col1">74</td>
 </tr>
 <tr class="odd">
-<td id="T_4ac85_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
-<td id="T_4ac85_row8_col0" class="data row8 col0">Roadside IED</td>
-<td id="T_4ac85_row8_col1" class="data row8 col1">60</td>
+<td id="T_5c4e9_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
+<td id="T_5c4e9_row8_col0" class="data row8 col0">Roadside IED</td>
+<td id="T_5c4e9_row8_col1" class="data row8 col1">60</td>
 </tr>
 <tr class="even">
-<td id="T_4ac85_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
-<td id="T_4ac85_row9_col0" class="data row9 col0">Other Explosives</td>
-<td id="T_4ac85_row9_col1" class="data row9 col1">41</td>
+<td id="T_5c4e9_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
+<td id="T_5c4e9_row9_col0" class="data row9 col0">Other Explosives</td>
+<td id="T_5c4e9_row9_col1" class="data row9 col1">41</td>
 </tr>
 <tr class="odd">
-<td id="T_4ac85_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
-<td id="T_4ac85_row10_col0" class="data row10 col0">Rape/sexual assault</td>
-<td id="T_4ac85_row10_col1" class="data row10 col1">40</td>
+<td id="T_5c4e9_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
+<td id="T_5c4e9_row10_col0" class="data row10 col0">Rape/sexual assault</td>
+<td id="T_5c4e9_row10_col1" class="data row10 col1">40</td>
 </tr>
 <tr class="even">
-<td id="T_4ac85_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
-<td id="T_4ac85_row11_col0" class="data row11 col0">Complex attack</td>
-<td id="T_4ac85_row11_col1" class="data row11 col1">39</td>
+<td id="T_5c4e9_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
+<td id="T_5c4e9_row11_col0" class="data row11 col0">Complex attack</td>
+<td id="T_5c4e9_row11_col1" class="data row11 col1">39</td>
 </tr>
 <tr class="odd">
-<td id="T_4ac85_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
-<td id="T_4ac85_row12_col0" class="data row12 col0">Landmine</td>
-<td id="T_4ac85_row12_col1" class="data row12 col1">35</td>
+<td id="T_5c4e9_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
+<td id="T_5c4e9_row12_col0" class="data row12 col0">Landmine</td>
+<td id="T_5c4e9_row12_col1" class="data row12 col1">35</td>
 </tr>
 <tr class="even">
-<td id="T_4ac85_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
-<td id="T_4ac85_row13_col0" class="data row13 col0">Body-borne IED</td>
-<td id="T_4ac85_row13_col1" class="data row13 col1">17</td>
+<td id="T_5c4e9_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
+<td id="T_5c4e9_row13_col0" class="data row13 col0">Body-borne IED</td>
+<td id="T_5c4e9_row13_col1" class="data row13 col1">17</td>
 </tr>
 </tbody>
 </table>
@@ -5151,120 +5072,120 @@ Table 1: Means of Attack
 
     <script>
         document.getElementById("table2").innerHTML = `<style type="text/css">
-#T_9e261 caption {
+#T_a715b caption {
   font-weight: bold;
   font-size: 1.1em;
   text-align: center;
 }
-#T_9e261 th {
+#T_a715b th {
   text-align: center;
   background-color: #f2f2f2;
 }
-#T_9e261 td {
+#T_a715b td {
   text-align: center;
 }
-#T_9e261_row0_col0, #T_9e261_row0_col1, #T_9e261_row1_col0, #T_9e261_row1_col1, #T_9e261_row15_col0, #T_9e261_row15_col1 {
+#T_a715b_row0_col0, #T_a715b_row0_col1, #T_a715b_row1_col0, #T_a715b_row1_col1, #T_a715b_row15_col0, #T_a715b_row15_col1 {
   background-color: rgba(255, 0, 0, 0.2);
 }
-#T_9e261_row2_col0, #T_9e261_row2_col1, #T_9e261_row3_col0, #T_9e261_row3_col1, #T_9e261_row4_col0, #T_9e261_row4_col1, #T_9e261_row5_col0, #T_9e261_row5_col1, #T_9e261_row6_col0, #T_9e261_row6_col1, #T_9e261_row7_col0, #T_9e261_row7_col1, #T_9e261_row8_col0, #T_9e261_row8_col1, #T_9e261_row9_col0, #T_9e261_row9_col1, #T_9e261_row10_col0, #T_9e261_row10_col1, #T_9e261_row11_col0, #T_9e261_row11_col1, #T_9e261_row12_col0, #T_9e261_row12_col1, #T_9e261_row13_col0, #T_9e261_row13_col1, #T_9e261_row14_col0, #T_9e261_row14_col1 {
+#T_a715b_row2_col0, #T_a715b_row2_col1, #T_a715b_row3_col0, #T_a715b_row3_col1, #T_a715b_row4_col0, #T_a715b_row4_col1, #T_a715b_row5_col0, #T_a715b_row5_col1, #T_a715b_row6_col0, #T_a715b_row6_col1, #T_a715b_row7_col0, #T_a715b_row7_col1, #T_a715b_row8_col0, #T_a715b_row8_col1, #T_a715b_row9_col0, #T_a715b_row9_col1, #T_a715b_row10_col0, #T_a715b_row10_col1, #T_a715b_row11_col0, #T_a715b_row11_col1, #T_a715b_row12_col0, #T_a715b_row12_col1, #T_a715b_row13_col0, #T_a715b_row13_col1, #T_a715b_row14_col0, #T_a715b_row14_col1 {
   background-color: transparent;
 }
 </style>
 
-<div id="T_9e261" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
+<div id="T_a715b" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_9e261-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_a715b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table 2: Actor Type
 </figcaption>
-<div aria-describedby="T_9e261-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_9e261" class="caption-top" data-quarto-postprocess="true">
+<div aria-describedby="T_a715b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_a715b" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_9e261_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
-<th id="T_9e261_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
+<th id="T_a715b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
+<th id="T_a715b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_9e261_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_9e261_row0_col0" class="data row0 col0">Unknown</td>
-<td id="T_9e261_row0_col1" class="data row0 col1">1985</td>
+<td id="T_a715b_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_a715b_row0_col0" class="data row0 col0">Unknown</td>
+<td id="T_a715b_row0_col1" class="data row0 col1">1985</td>
 </tr>
 <tr class="even">
-<td id="T_9e261_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_9e261_row1_col0" class="data row1 col0">Non-state armed group: Unknown</td>
-<td id="T_9e261_row1_col1" class="data row1 col1">369</td>
+<td id="T_a715b_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_a715b_row1_col0" class="data row1 col0">Non-state armed group: Unknown</td>
+<td id="T_a715b_row1_col1" class="data row1 col1">369</td>
 </tr>
 <tr class="odd">
-<td id="T_9e261_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_9e261_row2_col0" class="data row2 col0">Non-state armed group: National</td>
-<td id="T_9e261_row2_col1" class="data row2 col1">336</td>
+<td id="T_a715b_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_a715b_row2_col0" class="data row2 col0">Non-state armed group: National</td>
+<td id="T_a715b_row2_col1" class="data row2 col1">336</td>
 </tr>
 <tr class="even">
-<td id="T_9e261_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_9e261_row3_col0" class="data row3 col0">Unaffiliated</td>
-<td id="T_9e261_row3_col1" class="data row3 col1">211</td>
+<td id="T_a715b_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_a715b_row3_col0" class="data row3 col0">Unaffiliated</td>
+<td id="T_a715b_row3_col1" class="data row3 col1">211</td>
 </tr>
 <tr class="odd">
-<td id="T_9e261_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_9e261_row4_col0" class="data row4 col0">Foreign or coalition forces</td>
-<td id="T_9e261_row4_col1" class="data row4 col1">199</td>
+<td id="T_a715b_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_a715b_row4_col0" class="data row4 col0">Foreign or coalition forces</td>
+<td id="T_a715b_row4_col1" class="data row4 col1">199</td>
 </tr>
 <tr class="even">
-<td id="T_9e261_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_9e261_row5_col0" class="data row5 col0">Host state</td>
-<td id="T_9e261_row5_col1" class="data row5 col1">188</td>
+<td id="T_a715b_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_a715b_row5_col0" class="data row5 col0">Host state</td>
+<td id="T_a715b_row5_col1" class="data row5 col1">188</td>
 </tr>
 <tr class="odd">
-<td id="T_9e261_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
-<td id="T_9e261_row6_col0" class="data row6 col0">Non-state armed group: Regional</td>
-<td id="T_9e261_row6_col1" class="data row6 col1">176</td>
+<td id="T_a715b_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_a715b_row6_col0" class="data row6 col0">Non-state armed group: Regional</td>
+<td id="T_a715b_row6_col1" class="data row6 col1">176</td>
 </tr>
 <tr class="even">
-<td id="T_9e261_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
-<td id="T_9e261_row7_col0" class="data row7 col0">Non-state armed group: Subnational</td>
-<td id="T_9e261_row7_col1" class="data row7 col1">137</td>
+<td id="T_a715b_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
+<td id="T_a715b_row7_col0" class="data row7 col0">Non-state armed group: Subnational</td>
+<td id="T_a715b_row7_col1" class="data row7 col1">137</td>
 </tr>
 <tr class="odd">
-<td id="T_9e261_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
-<td id="T_9e261_row8_col0" class="data row8 col0">Criminal</td>
-<td id="T_9e261_row8_col1" class="data row8 col1">122</td>
+<td id="T_a715b_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
+<td id="T_a715b_row8_col0" class="data row8 col0">Criminal</td>
+<td id="T_a715b_row8_col1" class="data row8 col1">122</td>
 </tr>
 <tr class="even">
-<td id="T_9e261_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
-<td id="T_9e261_row9_col0" class="data row9 col0">Police or paramilitary</td>
-<td id="T_9e261_row9_col1" class="data row9 col1">84</td>
+<td id="T_a715b_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
+<td id="T_a715b_row9_col0" class="data row9 col0">Police or paramilitary</td>
+<td id="T_a715b_row9_col1" class="data row9 col1">84</td>
 </tr>
 <tr class="odd">
-<td id="T_9e261_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
-<td id="T_9e261_row10_col0" class="data row10 col0">Aid recipient</td>
-<td id="T_9e261_row10_col1" class="data row10 col1">58</td>
+<td id="T_a715b_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
+<td id="T_a715b_row10_col0" class="data row10 col0">Aid recipient</td>
+<td id="T_a715b_row10_col1" class="data row10 col1">58</td>
 </tr>
 <tr class="even">
-<td id="T_9e261_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
-<td id="T_9e261_row11_col0" class="data row11 col0">Staff member</td>
-<td id="T_9e261_row11_col1" class="data row11 col1">29</td>
+<td id="T_a715b_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
+<td id="T_a715b_row11_col0" class="data row11 col0">Staff member</td>
+<td id="T_a715b_row11_col1" class="data row11 col1">29</td>
 </tr>
 <tr class="odd">
-<td id="T_9e261_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
-<td id="T_9e261_row12_col0" class="data row12 col0">Host State</td>
-<td id="T_9e261_row12_col1" class="data row12 col1">26</td>
+<td id="T_a715b_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
+<td id="T_a715b_row12_col0" class="data row12 col0">Host State</td>
+<td id="T_a715b_row12_col1" class="data row12 col1">26</td>
 </tr>
 <tr class="even">
-<td id="T_9e261_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
-<td id="T_9e261_row13_col0" class="data row13 col0">Non-state armed group: Global</td>
-<td id="T_9e261_row13_col1" class="data row13 col1">21</td>
+<td id="T_a715b_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
+<td id="T_a715b_row13_col0" class="data row13 col0">Non-state armed group: Global</td>
+<td id="T_a715b_row13_col1" class="data row13 col1">21</td>
 </tr>
 <tr class="odd">
-<td id="T_9e261_level0_row14" class="row_heading level0 row14" data-quarto-table-cell-role="th">14</td>
-<td id="T_9e261_row14_col0" class="data row14 col0">Non-state armed group: Global</td>
-<td id="T_9e261_row14_col1" class="data row14 col1">10</td>
+<td id="T_a715b_level0_row14" class="row_heading level0 row14" data-quarto-table-cell-role="th">14</td>
+<td id="T_a715b_row14_col0" class="data row14 col0">Non-state armed group: Global</td>
+<td id="T_a715b_row14_col1" class="data row14 col1">10</td>
 </tr>
 <tr class="even">
-<td id="T_9e261_level0_row15" class="row_heading level0 row15" data-quarto-table-cell-role="th">15</td>
-<td id="T_9e261_row15_col0" class="data row15 col0">State: unknown</td>
-<td id="T_9e261_row15_col1" class="data row15 col1">6</td>
+<td id="T_a715b_level0_row15" class="row_heading level0 row15" data-quarto-table-cell-role="th">15</td>
+<td id="T_a715b_row15_col0" class="data row15 col0">State: unknown</td>
+<td id="T_a715b_row15_col1" class="data row15 col1">6</td>
 </tr>
 </tbody>
 </table>
@@ -5280,75 +5201,75 @@ Table 2: Actor Type
 
     <script>
         document.getElementById("table3").innerHTML = `<style type="text/css">
-#T_a734a caption {
+#T_2a809 caption {
   font-weight: bold;
   font-size: 1.1em;
   text-align: center;
 }
-#T_a734a th {
+#T_2a809 th {
   text-align: center;
   background-color: #f2f2f2;
 }
-#T_a734a td {
+#T_2a809 td {
   text-align: center;
 }
-#T_a734a_row0_col0, #T_a734a_row0_col1, #T_a734a_row1_col0, #T_a734a_row1_col1, #T_a734a_row2_col0, #T_a734a_row2_col1, #T_a734a_row4_col0, #T_a734a_row4_col1, #T_a734a_row5_col0, #T_a734a_row5_col1, #T_a734a_row6_col0, #T_a734a_row6_col1 {
+#T_2a809_row0_col0, #T_2a809_row0_col1, #T_2a809_row1_col0, #T_2a809_row1_col1, #T_2a809_row2_col0, #T_2a809_row2_col1, #T_2a809_row4_col0, #T_2a809_row4_col1, #T_2a809_row5_col0, #T_2a809_row5_col1, #T_2a809_row6_col0, #T_2a809_row6_col1 {
   background-color: transparent;
 }
-#T_a734a_row3_col0, #T_a734a_row3_col1 {
+#T_2a809_row3_col0, #T_2a809_row3_col1 {
   background-color: rgba(255, 0, 0, 0.2);
 }
 </style>
 
-<div id="T_a734a" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
+<div id="T_2a809" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_a734a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_2a809-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table 3: Attack Context
 </figcaption>
-<div aria-describedby="T_a734a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_a734a" class="caption-top" data-quarto-postprocess="true">
+<div aria-describedby="T_2a809-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_2a809" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_a734a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
-<th id="T_a734a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
+<th id="T_2a809_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
+<th id="T_2a809_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_a734a_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_a734a_row0_col0" class="data row0 col0">Ambush</td>
-<td id="T_a734a_row0_col1" class="data row0 col1">1298</td>
+<td id="T_2a809_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_2a809_row0_col0" class="data row0 col0">Ambush</td>
+<td id="T_2a809_row0_col1" class="data row0 col1">1298</td>
 </tr>
 <tr class="even">
-<td id="T_a734a_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_a734a_row1_col0" class="data row1 col0">Individual attack</td>
-<td id="T_a734a_row1_col1" class="data row1 col1">821</td>
+<td id="T_2a809_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_2a809_row1_col0" class="data row1 col0">Individual attack</td>
+<td id="T_2a809_row1_col1" class="data row1 col1">821</td>
 </tr>
 <tr class="odd">
-<td id="T_a734a_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_a734a_row2_col0" class="data row2 col0">Combat/Crossfire</td>
-<td id="T_a734a_row2_col1" class="data row2 col1">639</td>
+<td id="T_2a809_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_2a809_row2_col0" class="data row2 col0">Combat/Crossfire</td>
+<td id="T_2a809_row2_col1" class="data row2 col1">639</td>
 </tr>
 <tr class="even">
-<td id="T_a734a_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_a734a_row3_col0" class="data row3 col0">Unknown</td>
-<td id="T_a734a_row3_col1" class="data row3 col1">591</td>
+<td id="T_2a809_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_2a809_row3_col0" class="data row3 col0">Unknown</td>
+<td id="T_2a809_row3_col1" class="data row3 col1">591</td>
 </tr>
 <tr class="odd">
-<td id="T_a734a_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_a734a_row4_col0" class="data row4 col0">Raid</td>
-<td id="T_a734a_row4_col1" class="data row4 col1">467</td>
+<td id="T_2a809_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_2a809_row4_col0" class="data row4 col0">Raid</td>
+<td id="T_2a809_row4_col1" class="data row4 col1">467</td>
 </tr>
 <tr class="even">
-<td id="T_a734a_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_a734a_row5_col0" class="data row5 col0">Mob violence</td>
-<td id="T_a734a_row5_col1" class="data row5 col1">84</td>
+<td id="T_2a809_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_2a809_row5_col0" class="data row5 col0">Mob violence</td>
+<td id="T_2a809_row5_col1" class="data row5 col1">84</td>
 </tr>
 <tr class="odd">
-<td id="T_a734a_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
-<td id="T_a734a_row6_col0" class="data row6 col0">Detention</td>
-<td id="T_a734a_row6_col1" class="data row6 col1">57</td>
+<td id="T_2a809_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_2a809_row6_col0" class="data row6 col0">Detention</td>
+<td id="T_2a809_row6_col1" class="data row6 col1">57</td>
 </tr>
 </tbody>
 </table>
@@ -5364,70 +5285,70 @@ Table 3: Attack Context
 
     <script>
         document.getElementById("table4").innerHTML = `<style type="text/css">
-#T_3ba10 caption {
+#T_39771 caption {
   font-weight: bold;
   font-size: 1.1em;
   text-align: center;
 }
-#T_3ba10 th {
+#T_39771 th {
   text-align: center;
   background-color: #f2f2f2;
 }
-#T_3ba10 td {
+#T_39771 td {
   text-align: center;
 }
-#T_3ba10_row0_col0, #T_3ba10_row0_col1 {
+#T_39771_row0_col0, #T_39771_row0_col1 {
   background-color: rgba(255, 0, 0, 0.2);
 }
-#T_3ba10_row1_col0, #T_3ba10_row1_col1, #T_3ba10_row2_col0, #T_3ba10_row2_col1, #T_3ba10_row3_col0, #T_3ba10_row3_col1, #T_3ba10_row4_col0, #T_3ba10_row4_col1, #T_3ba10_row5_col0, #T_3ba10_row5_col1 {
+#T_39771_row1_col0, #T_39771_row1_col1, #T_39771_row2_col0, #T_39771_row2_col1, #T_39771_row3_col0, #T_39771_row3_col1, #T_39771_row4_col0, #T_39771_row4_col1, #T_39771_row5_col0, #T_39771_row5_col1 {
   background-color: transparent;
 }
 </style>
 
-<div id="T_3ba10" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
+<div id="T_39771" class="quarto-float quarto-figure quarto-figure-center" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_3ba10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_39771-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table 4: Motive
 </figcaption>
-<div aria-describedby="T_3ba10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_3ba10" class="caption-top" data-quarto-postprocess="true">
+<div aria-describedby="T_39771-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_39771" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th"> </th>
-<th id="T_3ba10_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
-<th id="T_3ba10_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
+<th id="T_39771_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Category</th>
+<th id="T_39771_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_3ba10_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
-<td id="T_3ba10_row0_col0" class="data row0 col0">Unknown</td>
-<td id="T_3ba10_row0_col1" class="data row0 col1">1721</td>
+<td id="T_39771_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_39771_row0_col0" class="data row0 col0">Unknown</td>
+<td id="T_39771_row0_col1" class="data row0 col1">1721</td>
 </tr>
 <tr class="even">
-<td id="T_3ba10_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
-<td id="T_3ba10_row1_col0" class="data row1 col0">Political</td>
-<td id="T_3ba10_row1_col1" class="data row1 col1">764</td>
+<td id="T_39771_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_39771_row1_col0" class="data row1 col0">Political</td>
+<td id="T_39771_row1_col1" class="data row1 col1">764</td>
 </tr>
 <tr class="odd">
-<td id="T_3ba10_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
-<td id="T_3ba10_row2_col0" class="data row2 col0">Incidental</td>
-<td id="T_3ba10_row2_col1" class="data row2 col1">734</td>
+<td id="T_39771_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_39771_row2_col0" class="data row2 col0">Incidental</td>
+<td id="T_39771_row2_col1" class="data row2 col1">734</td>
 </tr>
 <tr class="even">
-<td id="T_3ba10_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
-<td id="T_3ba10_row3_col0" class="data row3 col0">Economic</td>
-<td id="T_3ba10_row3_col1" class="data row3 col1">603</td>
+<td id="T_39771_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_39771_row3_col0" class="data row3 col0">Economic</td>
+<td id="T_39771_row3_col1" class="data row3 col1">603</td>
 </tr>
 <tr class="odd">
-<td id="T_3ba10_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
-<td id="T_3ba10_row4_col0" class="data row4 col0">Disputed</td>
-<td id="T_3ba10_row4_col1" class="data row4 col1">113</td>
+<td id="T_39771_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_39771_row4_col0" class="data row4 col0">Disputed</td>
+<td id="T_39771_row4_col1" class="data row4 col1">113</td>
 </tr>
 <tr class="even">
-<td id="T_3ba10_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
-<td id="T_3ba10_row5_col0" class="data row5 col0">Other</td>
-<td id="T_3ba10_row5_col1" class="data row5 col1">19</td>
+<td id="T_39771_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_39771_row5_col0" class="data row5 col0">Other</td>
+<td id="T_39771_row5_col1" class="data row5 col1">19</td>
 </tr>
 </tbody>
 </table>
@@ -5439,22 +5360,8 @@ Table 4: Motive
     </script>
     
 </div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[5]</span><span class="ansi-green-fg">, line 87</span>
-<span class="ansi-green-fg">     85</span> <span style="font-style:italic;color:rgb(95,135,135)"># Alternative approach that works well in most Jupyter environments</span>
-<span class="ansi-green-fg">     86</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">IPython</span><span class="ansi-blue-fg ansi-bold">.</span><span class="ansi-blue-fg ansi-bold">display</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> display_html
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">87</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">IPython</span><span class="ansi-blue-fg ansi-bold">.</span><span class="ansi-blue-fg ansi-bold">core</span><span class="ansi-blue-fg ansi-bold">.</span><span class="ansi-blue-fg ansi-bold">display</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> HTML, display
-<span class="ansi-green-fg">     89</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg">display_side_by_side</span>(dfs, captions=<span style="font-weight:bold;color:rgb(0,135,0)">None</span>):
-<span class="ansi-green-fg">     90</span> <span style="color:rgb(188,188,188)">    </span><span style="font-style:italic" class="ansi-yellow-fg">&quot;&quot;&quot;Display tables side by side in Jupyter.&quot;&quot;&quot;</span>
-
-<span class="ansi-red-fg">ImportError</span>: cannot import name &#39;display&#39; from &#39;IPython.core.display&#39; (/opt/anaconda3/envs/dataviz5200/lib/python3.13/site-packages/IPython/core/display.py)</pre>
 </div>
-</div>
-</div>
-<div id="cell-3" class="cell">
+<div id="cell-3" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_count_tables(df, variables, titles, nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>)):</span>
@@ -5498,7 +5405,7 @@ Table 4: Motive
 </div>
 </div>
 </div>
-<div id="cell-4" class="cell">
+<div id="cell-4" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>unknown_cols <span class="op">=</span> [<span class="st">&#39;means_of_attack&#39;</span>, <span class="st">&#39;attack_context&#39;</span>, <span class="st">&#39;location&#39;</span>, <span class="st">&#39;motive&#39;</span>, <span class="st">&#39;actor_type&#39;</span>, <span class="st">&#39;actor_name&#39;</span>]</span>
@@ -5517,8 +5424,7 @@ Table 4: Motive
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Number of Unknown Fields&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Number of Incidents&#39;</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>unknown_count
@@ -5532,7 +5438,7 @@ Table 4: Motive
 Name: count, dtype: int64</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/vs/3j3cdp2s1nn0lr6x50_9ycj00000gn/T/ipykernel_70341/335863915.py:12: FutureWarning: 
+<pre><code>/var/folders/vs/3j3cdp2s1nn0lr6x50_9ycj00000gn/T/ipykernel_89004/1837422048.py:12: FutureWarning: 
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
@@ -5544,500 +5450,6 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <p><img role="img" src="data:image/png;base64,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008/zVRNaUqXLm14eHjYtDm6v3///Xcjf/78ho+Pj/HDDz+kW8eZM2fS1Xr331dKSopRtmxZw2Kx2LxvU1NTrfv83s/f2bNnG5KMvn37Grdu3bK2JycnGx06dDAkGfv27bO2O/o3dr/PWyA7cSgUkMMEBwdLkv74449M9ffy8krX9jAnFgYFBWV4Qur99OzZU48//rj1uaurq6KioiQp3WEt2e3MmTPatGmTqlSpkm6UoV+/fqpcubI2btxo9/CE6OhoFShQwPq8UqVKaty4sY4ePaorV648cN3z5s2TJE2aNMnml9gSJUpo6NChunXrVrpf7f9qPj4+euedd6y/+ktSr1695Orqqr1799qdJyUlRf/4xz8UHR2tl156SYsXL85wJOtf//qXKlWqZH3u5eWlZ599VoZhKCYmxtqe9lpFRkbanODs5+dnHVVL6yP93yjVpk2bJN055Gz79u1q3ry5mjVrZm2X7oxe3D3P3bp3767GjRtbn7u4uKhXr16SlOH225OSkqIJEyakeyxevDjDef744w998cUXatGihfr06WMzLTAwUK+88oouXLigDRs23HfdCxYskCSNGzdOPj4+1vbixYvrX//6V4bzZcXnxODBg62fT5KUP39+jRs3TpLt3/pHH32k27dv64MPPpC/v7/NMkaOHKkiRYpo0aJF6ZZfs2ZNvfDCCw7VdD+Z3d/z58/X1atXNXz4cNWsWTPdckqUKHHf9Wzfvl0nTpxQ+/bt1aRJE2u7xWJRVFSUXFxc0s0zY8YM+fj4aMaMGTYja+7u7nrrrbckye5rlNm/McBZOBQKyGEMw8hUv/bt22vUqFEaOHCg1q9frzZt2qhJkyaqWLHiQ623evXqmTr06V5PPPFEurY6derIy8tLBw4ceKhaHtb+/fslSWFhYekOwbJYLGratKmOHDmiH3/8USVLlrSZXqtWrXTLS/tCcfny5XSH/dhbt5eXl+rVq5duWtqX3L/69bhXhQoVlD9/fps2V1dXBQYG6vLly3bn6dy5s1atWqXx48c/8ITlB72GadL2k70v//Zeq6ZNmypfvnzavHmzRowYoX379unKlSsKDw/X+fPntWTJEp08eVIhISHavHmzChQoYLeWzNb3IB4eHunOIXqQvXv3KiUlRTdu3LD7Oh47dkyS9Msvv6h9+/YZLufHH3+UZP/vzl5bVn5O3G+dd++vXbt2SZLWrl1rNyi5ubnpl19+Sddu72/HjMzu7z179kiSIiIiHmo999snpUuXVsmSJW3Obbh+/bp++uknBQcH6+233043z61btyTJ7muUVe9hILsQLIAc5vz585KkIkWK3LdfSEiIdu7cqQkTJmjNmjVaunSppDu/tL/xxhvq0qWLQ+sNDAx8qHqLFi2aYfu5c+ceapkPKzExUVLG2xIUFCTpzo3p7mXv0qBpvySmpKRkat33hpXMrNcRaSMNGZ0se/e0u0cl0mR0+VNXV9cMt/G7776Tl5eX2rZt+8D6MvsaJiYmKl++fHbf44GBgcqXL5/Na1WwYEHVrFlT3333nW7fvq3NmzcrX758atq0qfUE8s2bN8vf31/79+/Xk08+afdXYrP72Iw///xTkvT999/r+++/z7DftWvX7ruchIQE5cuXz+5og733fVZ+Ttj7Wy9atGi6/ZW2rWm/vGfWw34GZSSz+zvtC3nx4sUfaj1p257RZ2FgYKBNsLh06ZIMw9C5c+c0YcKEDJdr773gzPcwkBkcCgXkMGknpdatW/eBfatVq6Yvv/xSf/75p3bu3Klx48bp999/V7du3e775cWeh70CS9oXO3vtd/8nmPZFN+1KPXcz+4U7TdqhTL///rvd6Wntdx/ylFUKFCiQ7etNez3vdxWjtEPosuoeChs3bpSXl5ciIiKsv0SbVaBAAaWmpurChQvppsXHxys1NTXdaxUeHq4rV64oJiZGW7ZsUY0aNVSoUCFVqlRJwcHB2rx5s7Zt26bU1FTrFXFykrTtGT58uAzDyPBx9wUW7PHz81NqaqrdQyUzev9l1eeEvb/1tP119/stbVsTExPvu633ctZNPNNOaH7YH0LStj2jz8J790va61O7du37vj5ph/UBuQnBAshBfv31Vy1ZskQeHh56+umnMz2fm5ubGjRooAkTJuiDDz6QYRj66quvrNPTfr3Njl+0vvvuu3Rt+/btU1JSks1VjtKujGLvP++0Q2Pu5eLi4lDNaevbtm1bui8uhmFYa82Oqy/VrFlTSUlJ1sMq7pZ2uV+z661ataokaefOnRn2SZtWrVo1U+tKU7NmTW3cuFGurq5q3bp1loSLtOPY7V3mNqPXKu0QqW+//Vbff/+9mjdvbp0WHh5uvdLQ3X1zkrp168pisdx332VG9erVJdn/u7PXdrcHfU48yP3Weff+ql+/viRlWRDNbmmHYK1bt+6h5r/fPomNjU13Tpevr68qV66sI0eOZNvhS9n5mQ/cD8ECyCG2b9+u1q1bKzk5WaNHj37gsPzevXvt/kKW9uvY3Sdrpp1Aee/1/rPCZ599psOHD1uf3759W6+99pokWU+UlO4cepE/f36tWrXKeqhEWr1vvvmm3WX7+/vrjz/+yPTx7KVKlVJ4eLj18rJ3mzNnjg4fPqzmzZtneMiSGWnbOnr0aOsx0tKdIPXee+/J1dVVzz33nKl1lC1bVk2aNNH+/fttTm5Os2HDBq1evVplypSxe7z3w6pRo4Y2bdokNzc3RURE2L2sqSPSXqsJEyZYD1+T7vzCnXZoyN3vHenO8esuLi6aMWOGrl27ZjMqER4ernPnzunzzz9XwYIFs/2yvQ8jKChIXbt21Y4dO/Tuu+/a/cV+9+7d6e7xcK/nn39ekjRx4kSbQ2XOnTun999/P11/Rz4nHuSDDz7Qb7/9Zn1+9epVTZw40aYuSRowYIBcXV01aNAguxdKuHz5coY/JjhDr169lD9/fk2ZMsXueVAPGslo0qSJQkJC9NVXX9lcxtYwDL322mt2v9wPHjxY169fV79+/ewe8nTy5ElT95zIzs984H44xwL4ix0/ftx68ubNmzet10o/dOiQXFxcNHbsWOuVVu7nP//5j2bOnKlmzZqpfPnyKlCggH7++Wd98803Kly4sM3VVZo3b67//ve/6tKli5588kl5enqqatWqateunentadmypRo0aKBnnnlG/v7++uabb3To0CG1bt1aPXr0sPZzd3fXyy+/rLffflu1atXSU089pStXrmj16tUKCwvT//73v3TLbt68ufbt26cOHTroiSeekLu7u5o0aWJz5ZV7zZo1S02aNFG/fv20evVqValSRT///LNWrVqlIkWKaNasWaa32Z6ePXtq2bJlWrlypapVq6b27dtb72Nx8eJFTZkyRWXLljW9nk8++URNmzZVnz59NG/ePNWrV08uLi46ePCg1q5dK29vb3322Wfp7uFgVvXq1bVp0ya1aNFCbdq00dq1a9WoUaOHWlbTpk01aNAgTZ8+XaGhofrb3/4mwzC0bNkynTlzRoMHD053R/ICBQqodu3a2rNnj1xcXGyCU1rIuHDhgp566im755fkBDNnztTRo0c1cuRIffbZZ2rY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fKLffvtNzZo104kTJ6x9Nm/erMaNG+vy5cv68MMPtXLlStWoUUPdunWzG4JeeOEFubm56bPPPtN///tfubm52a39woULatSokdatW6c33nhDq1atUsuWLTVixAjrORK1atXSzp07FRQUpMaNG2vnzp3auXNnlh8KFRcXp+eee049evTQqlWr1LZtW40ePVqff/55hvOcPXtWTZo0UWxsrHbu3Kl69erZTP/b3/6mihUr6ssvv9SoUaO0cOFCDR061DrdMAx16tRJkydPVs+ePfX1119r2LBhmj9/vpo3b24NZC1btlRiYqI1uEjShg0b5OXlpfXr11vbNm7cKMMw1LJlS5s6XnvtNcXGxuqTTz7R7NmzdezYMXXo0MEmqNxPSkqKbt++bfPIyM8//6y6devq0KFDmjJlir766iu1a9dOgwcP1oQJE+67no0bN+qpp56Sr6+vFi9erHfffVdLlizR3Llzbfrt3LlT3bp1U9myZbV48WJ9/fXXGjdu3H3rAvAIMgAgD5k7d64hydi7d6+RnJxslC1b1qhTp46RmppqGIZhhIWFGY8//ri1/8mTJw1Jxty5c9MtS5Ixfvx46/Px48cbkowpU6bY9KtRo4YhyVi2bJm17datW0aRIkWMzp07W9s2b95sSDJq1aplrccwDOPUqVOGm5ub8Y9//MPa9thjjxk1a9Y0bt26ZbOu9u3bG8WKFTNSUlJstvf555/P1OszatQoQ5Kxe/dum/aXXnrJsFgsxtGjR61tpUuXNtq1a5ep5UoyBg4caHfa0qVLDUnG5s2brW1hYWF266hSpYrRunVr6/O012zp0qXG/v37jeDgYOOJJ54wLl68aDNf2r6ZNGmSTfuAAQMMT09P6+u9du1au/2++OILQ5Ixe/ZswzAM49q1a4a7u7sxceJEwzAM4+zZs4Yk49VXXzW8vLyMGzduGIZhGP369TOCg4PT1fvkk0/aLH/JkiWGJGPnzp32X8D/L21/2nvcunXL7vu1devWRokSJYyEhASbZb388suGp6en8eeffxqGYf+9Xr9+fSM4ONhISkqytiUmJhr+/v7G3V8hJk+ebEgyLl++fN/6ATzaGLEAkGe5u7vrzTff1L59+9IdQmRG+/btbZ5XrlxZFotFbdu2tba5urqqfPnydq9M1b17d5vzH0qXLq1GjRpp8+bNkqTjx4/rl19+0XPPPSdJNr9aP/nkkzp//ny6w2r+9re/Zar2TZs2qUqVKul+6e/du7cMw8jy0Z37CQoKSldHtWrV7L5m3377rZ544gk1bdpU69evl7+/v91lduzYMd3ybty4ofj4eEmybl/v3r1t+nXp0kU+Pj7auHGjJMnb21sNGzbUhg0bJEnr169XwYIF9corr+jmzZvavn27pDujGPeOVmRUhyS722bPggULtHfvXpuHq2v60yZv3LihjRs36umnn5a3t3e698qNGze0a9cuu+u4du2a9u7dq86dO8vT09Pa7uvrqw4dOtj0rVu3rqQ7o3VLlizRuXPnMrUdAB4tBAsAedozzzyjWrVqacyYMbp161aWLPPeL7Xu7u7y9va2+XKW1n7jxo108wcFBdltu3jxoiTp999/lySNGDFCbm5uNo8BAwZIkv744w+b+TN7mNLFixft9g0ODrZOfxguLi4ZHuaTdrjMvYdnBQQEpOvr4eGhpKSkdO0rVqxQUlKSXnrpJXl4eGRYx73LTOubtsyLFy/K1dVVRYoUselnsVhs9oF053CoXbt26dq1a9qwYYOaN2+ugIAA1a5dWxs2bNDJkyd18uRJu8HiQXU8SOXKlVWnTh2bhz0XL17U7du3NX369HTvlSeffFJS+vdKmkuXLik1NTXD9+PdmjZtqhUrVuj27dt6/vnnVaJECYWGhmrRokWZ2h4AjwauCgUgT7NYLHrnnXfUqlUrzZ49O930tDBw78nOD/sFOzPi4uLstqV9GS1cuLAkafTo0ercubPdZVSqVMnmeWavABUQEKDz58+na//tt99s1u2owMDADH/FTmsPDAx8qGVL0tSpU/XFF1+obdu2Wr58uSIiIh5qOQEBAbp9+7YuXLhgEy4Mw1BcXJz1l3lJatGihV5//XVt27ZNGzdu1Pjx463t69atU0hIiPW5sxQqVEguLi7q2bOnBg4caLdPWp325rVYLBm+H+/11FNP6amnnlJycrJ27dql6Ohode/eXWXKlFHDhg3NbQiAXIERCwB5XsuWLdWqVStNnDhRV69etZkWGBgoT09PHTx40KZ95cqV2VbPokWLZBiG9XlsbKx27NihZs2aSboTGipUqKAff/wx3a/WaQ9fX9+HWneLFi30888/64cffrBpX7BggSwWi8LDwx9quS1bttTmzZt14cIFm3bDMLR06VKVKVNG5cuXf6hlS3cC4LJly9S+fXt17NjxofdPWgi49wTxL7/8UteuXbMJCfXq1VOBAgU0bdo0xcXFqVWrVpLubOv+/fu1ZMkSValSxTra4wze3t4KDw/X/v37Va1aNbvvFXsjQ5Lk4+OjevXqadmyZTYja1euXNHq1aszXKeHh4fCwsL0zjvvSJLdK5oBeDQxYgEAkt555x3Vrl1b8fHxevzxx63tFotFPXr00Jw5c1SuXDlVr15de/bs0cKFC7Otlvj4eD399NPq16+fEhISNH78eHl6emr06NHWPh999JHatm2r1q1bq3fv3ipevLj+/PNPHTlyRD/88IOWLl36UOseOnSoFixYoHbt2mnixIkqXbq0vv76a82cOVMvvfSSKlas+FDLHTdunFavXq369etr1KhRqlChguLi4vTxxx9r7969WXKOi5ubmxYtWqR//OMf+vvf/64FCxbo2WefdWgZrVq1UuvWrfXqq68qMTFRjRs31sGDBzV+/HjVrFlTPXv2tPZ1cXFRWFiYVq9erZCQEOtN6Ro3biwPDw9t3LhRgwcPNr1dZr3//vtq0qSJnnjiCb300ksqU6aMrly5ouPHj2v16tX3PW/mjTfeUJs2bdSqVSsNHz5cKSkpeuedd+Tj46M///zT2m/cuHE6e/asWrRooRIlSujy5ct6//335ebmprCwsL9iMwHkAAQLAJBUs2ZNPfvss3YDw5QpUyRJkyZN0tWrV9W8eXN99dVXKlOmTLbUEhUVpb1796pPnz5KTExUvXr1tHjxYpu7KYeHh2vPnj166623NGTIEF26dEkBAQGqUqWKunbt+tDrLlKkiHbs2KHRo0dr9OjRSkxMVNmyZTVp0iQNGzbsoZdbrlw57dmzRxMmTFBkZKQuXLig/Pnzq169elq/fr2aN2/+0Mu+W758+fTpp5/K19dXPXr00LVr1/SPf/wj0/NbLBatWLFCkZGRmjt3rt566y0VLlxYPXv2VFRUVLrzN1q2bKnVq1fbnEfh4eGhJk2aaP369XbPr/irValSRT/88IPeeOMNjR07VvHx8SpYsKAqVKhgPc8iI61atdKKFSs0duxYdevWTUFBQRowYICSkpJsLlVbv3597du3T6+++qouXLigggULqk6dOtq0aZNNUAfwaLMYd4+3AwAAAMBD4BwLAAAAAKYRLAAAAACYRrAAAAAAYBrBAgAAAIBpBAsAAAAAphEsAAAAAJhGsAAAAABgGsECAAAAgGkECwAAAACmESwAAAAAmEawAAAAAGAawQIAAACAaf8P6n+Kh6m5ToYAAAAASUVORK5CYII=" class="img-fluid figure-img"></p>
 </figure>
 </div>
-</div>
-</div>
-<div id="cell-6" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Pre-process the data for all unknown count values</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_interactive_dashboard(df):</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get all possible unknown count values</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    unknown_counts <span class="op">=</span> <span class="bu">sorted</span>(df[<span class="st">&#39;unknown_count&#39;</span>].unique())</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the HTML structure</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    html <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;!DOCTYPE html&gt;</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;html&gt;</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;head&gt;</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;title&gt;Violence Against Humanitarian Aid Workers&lt;/title&gt;</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;script src=&quot;https://cdn.plot.ly/plotly-latest.min.js&quot;&gt;&lt;/script&gt;</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js&quot;&gt;&lt;/script&gt;</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css&quot;&gt;</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;style&gt;</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">            body { font-family: Arial, sans-serif; margin: 20px; }</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">            .dashboard-container { margin-top: 20px; }</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="st">            .row { display: flex; margin-bottom: 20px; }</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="st">            .chart { width: 48%; margin: 0 1%; }</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="st">            h1, h2, h3 { color: #333; }</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="st">            select { padding: 8px; font-size: 16px; }</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="st">            table { border-collapse: collapse; width: 100%; }</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="st">            th, td { border: 1px solid #ddd; padding: 8px; text-align: right; }</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="st">            th { background-color: #f2f2f2; }</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="st">            .control-panel { </span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="st">                background-color: #f8f9fa; </span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="st">                padding: 15px; </span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="st">                border-radius: 5px;</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="st">                margin-bottom: 20px;</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="st">            .data-table-container {</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="st">                margin-top: 30px;</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="st">                overflow-x: auto;</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="st">            .summary-box {</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="st">                background-color: #f8f9fa;</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="st">                padding: 15px;</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="st">                border-radius: 5px;</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="st">                margin-bottom: 15px;</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="st">            .tab-content {</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="st">                padding: 20px;</span></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="st">                border: 1px solid #dee2e6;</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="st">                border-top: none;</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="st">                border-radius: 0 0 5px 5px;</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;/style&gt;</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/head&gt;</span></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;body&gt;</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;div class=&quot;container-fluid&quot;&gt;</span></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="st">            &lt;h1 class=&quot;mt-3 mb-4&quot;&gt;Violence Against Humanitarian Aid Workers&lt;/h1&gt;</span></span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="st">            &lt;div class=&quot;control-panel&quot;&gt;</span></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;div class=&quot;row&quot;&gt;</span></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;div class=&quot;col-md-6&quot;&gt;</span></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;label for=&quot;unknown-selector&quot; class=&quot;form-label&quot;&gt;Select number of unknown fields:&lt;/label&gt;</span></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;select id=&quot;unknown-selector&quot; class=&quot;form-select&quot; onchange=&quot;updateDashboard(this.value)&quot;&gt;</span></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add options to the dropdown</span></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> count <span class="kw">in</span> unknown_counts:</span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>        selected <span class="op">=</span> <span class="st">&quot;selected&quot;</span> <span class="cf">if</span> count <span class="op">==</span> unknown_counts[<span class="dv">0</span>] <span class="cf">else</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>        html <span class="op">+=</span> <span class="ss">f&#39;&lt;option value=&quot;</span><span class="sc">{</span><span class="bu">int</span>(count)<span class="sc">}</span><span class="ss">&quot; </span><span class="sc">{</span>selected<span class="sc">}</span><span class="ss">&gt;</span><span class="sc">{</span><span class="bu">int</span>(count)<span class="sc">}</span><span class="ss">&lt;/option&gt;</span><span class="ch">\n</span><span class="ss">&#39;</span></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>    html <span class="op">+=</span> <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/select&gt;</span></span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/div&gt;</span></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;div class=&quot;col-md-6&quot;&gt;</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;label for=&quot;sort-selector&quot; class=&quot;form-label&quot;&gt;Sort individual incidents by:&lt;/label&gt;</span></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;select id=&quot;sort-selector&quot; class=&quot;form-select&quot; onchange=&quot;sortData(this.value)&quot;&gt;</span></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;option value=&quot;year&quot;&gt;Year&lt;/option&gt;</span></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;option value=&quot;total_affected&quot;&gt;Total Affected&lt;/option&gt;</span></span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;option value=&quot;total_killed&quot;&gt;Total Killed&lt;/option&gt;</span></span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;option value=&quot;total_wounded&quot;&gt;Total Wounded&lt;/option&gt;</span></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;option value=&quot;total_kidnapped&quot;&gt;Total Kidnapped&lt;/option&gt;</span></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;option value=&quot;country&quot;&gt;Country&lt;/option&gt;</span></span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/select&gt;</span></span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/div&gt;</span></span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;/div&gt;</span></span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="st">            &lt;/div&gt;</span></span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="st">            &lt;ul class=&quot;nav nav-tabs&quot; id=&quot;dashboardTabs&quot; role=&quot;tablist&quot;&gt;</span></span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;li class=&quot;nav-item&quot; role=&quot;presentation&quot;&gt;</span></span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;button class=&quot;nav-link active&quot; id=&quot;overview-tab&quot; data-bs-toggle=&quot;tab&quot; data-bs-target=&quot;#overview&quot; type=&quot;button&quot; role=&quot;tab&quot;&gt;Overview&lt;/button&gt;</span></span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;/li&gt;</span></span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;li class=&quot;nav-item&quot; role=&quot;presentation&quot;&gt;</span></span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;button class=&quot;nav-link&quot; id=&quot;data-tab&quot; data-bs-toggle=&quot;tab&quot; data-bs-target=&quot;#data&quot; type=&quot;button&quot; role=&quot;tab&quot;&gt;Raw Data&lt;/button&gt;</span></span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;/li&gt;</span></span>
-<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="st">            &lt;/ul&gt;</span></span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a><span class="st">            &lt;div class=&quot;tab-content&quot; id=&quot;dashboardTabsContent&quot;&gt;</span></span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;div class=&quot;tab-pane fade show active&quot; id=&quot;overview&quot; role=&quot;tabpanel&quot;&gt;</span></span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;div id=&quot;summary-stats&quot; class=&quot;summary-box&quot;&gt;&lt;/div&gt;</span></span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="st">                    </span></span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;div class=&quot;row&quot;&gt;</span></span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;div class=&quot;col-md-6&quot;&gt;</span></span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;div id=&quot;country-chart&quot;&gt;&lt;/div&gt;</span></span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/div&gt;</span></span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;div class=&quot;col-md-6&quot;&gt;</span></span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;div id=&quot;year-chart&quot;&gt;&lt;/div&gt;</span></span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/div&gt;</span></span>
-<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/div&gt;</span></span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="st">                    </span></span>
-<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;div class=&quot;row mt-4&quot;&gt;</span></span>
-<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;div class=&quot;col-md-6&quot;&gt;</span></span>
-<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;div id=&quot;fields-chart&quot;&gt;&lt;/div&gt;</span></span>
-<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/div&gt;</span></span>
-<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;div class=&quot;col-md-6&quot;&gt;</span></span>
-<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;div id=&quot;casualties-table&quot;&gt;&lt;/div&gt;</span></span>
-<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/div&gt;</span></span>
-<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/div&gt;</span></span>
-<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;/div&gt;</span></span>
-<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a><span class="st">                </span></span>
-<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;div class=&quot;tab-pane fade&quot; id=&quot;data&quot; role=&quot;tabpanel&quot;&gt;</span></span>
-<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;div class=&quot;data-table-container&quot;&gt;</span></span>
-<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;h3&gt;Individual Incident Data&lt;/h3&gt;</span></span>
-<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;div id=&quot;data-pagination&quot; class=&quot;d-flex justify-content-between align-items-center mb-3&quot;&gt;</span></span>
-<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;div&gt;</span></span>
-<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a><span class="st">                                &lt;button id=&quot;prev-page&quot; class=&quot;btn btn-sm btn-outline-secondary&quot; onclick=&quot;prevPage()&quot;&gt;Previous&lt;/button&gt;</span></span>
-<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a><span class="st">                                &lt;span id=&quot;page-info&quot; class=&quot;mx-2&quot;&gt;Page 1&lt;/span&gt;</span></span>
-<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a><span class="st">                                &lt;button id=&quot;next-page&quot; class=&quot;btn btn-sm btn-outline-secondary&quot; onclick=&quot;nextPage()&quot;&gt;Next&lt;/button&gt;</span></span>
-<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;/div&gt;</span></span>
-<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;div&gt;</span></span>
-<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a><span class="st">                                &lt;select id=&quot;page-size&quot; class=&quot;form-select form-select-sm&quot; style=&quot;width: auto;&quot; onchange=&quot;changePageSize(this.value)&quot;&gt;</span></span>
-<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="st">                                    &lt;option value=&quot;10&quot;&gt;10 rows&lt;/option&gt;</span></span>
-<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a><span class="st">                                    &lt;option value=&quot;25&quot;&gt;25 rows&lt;/option&gt;</span></span>
-<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a><span class="st">                                    &lt;option value=&quot;50&quot;&gt;50 rows&lt;/option&gt;</span></span>
-<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a><span class="st">                                    &lt;option value=&quot;100&quot;&gt;100 rows&lt;/option&gt;</span></span>
-<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a><span class="st">                                &lt;/select&gt;</span></span>
-<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;/div&gt;</span></span>
-<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/div&gt;</span></span>
-<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;div id=&quot;data-table&quot;&gt;&lt;/div&gt;</span></span>
-<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/div&gt;</span></span>
-<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;/div&gt;</span></span>
-<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a><span class="st">            &lt;/div&gt;</span></span>
-<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;/div&gt;</span></span>
-<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;script&gt;</span></span>
-<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span></span>
-<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a JavaScript data object with pre-computed data for each unknown count</span></span>
-<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a>    data_json <span class="op">=</span> {}</span>
-<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> count <span class="kw">in</span> unknown_counts:</span>
-<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a>        filtered_df <span class="op">=</span> df[df[<span class="st">&#39;unknown_count&#39;</span>] <span class="op">==</span> count]</span>
-<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Country data</span></span>
-<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>        country_counts <span class="op">=</span> filtered_df[<span class="st">&#39;country&#39;</span>].value_counts().reset_index()</span>
-<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a>        country_counts.columns <span class="op">=</span> [<span class="st">&#39;country&#39;</span>, <span class="st">&#39;count&#39;</span>]</span>
-<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>        country_counts <span class="op">=</span> country_counts.head(<span class="dv">5</span>)</span>
-<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Year data</span></span>
-<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>        year_counts <span class="op">=</span> filtered_df[<span class="st">&#39;year&#39;</span>].value_counts().sort_index().reset_index()</span>
-<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>        year_counts.columns <span class="op">=</span> [<span class="st">&#39;year&#39;</span>, <span class="st">&#39;count&#39;</span>]</span>
-<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Unknown fields data</span></span>
-<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>        field_counts <span class="op">=</span> {}</span>
-<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> field <span class="kw">in</span> [<span class="st">&#39;means_of_attack&#39;</span>, <span class="st">&#39;attack_context&#39;</span>, <span class="st">&#39;location&#39;</span>, <span class="st">&#39;motive&#39;</span>, <span class="st">&#39;actor_type&#39;</span>, <span class="st">&#39;actor_name&#39;</span>]:</span>
-<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>            field_counts[field] <span class="op">=</span> <span class="bu">int</span>(filtered_df[filtered_df[field] <span class="op">==</span> <span class="st">&#39;Unknown&#39;</span>].shape[<span class="dv">0</span>])</span>
-<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>        fields_df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;field&#39;</span>: <span class="bu">list</span>(field_counts.keys()), <span class="st">&#39;count&#39;</span>: <span class="bu">list</span>(field_counts.values())})</span>
-<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Casualties data</span></span>
-<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a>        numeric_cols <span class="op">=</span> [<span class="st">&#39;total_killed&#39;</span>, <span class="st">&#39;total_wounded&#39;</span>, <span class="st">&#39;total_kidnapped&#39;</span>, <span class="st">&#39;total_affected&#39;</span>]</span>
-<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a>        stats <span class="op">=</span> filtered_df[numeric_cols].mean().<span class="bu">round</span>(<span class="dv">2</span>).to_dict()</span>
-<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert numpy types to Python native types</span></span>
-<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a>        stats <span class="op">=</span> {k: <span class="bu">float</span>(v) <span class="cf">for</span> k, v <span class="kw">in</span> stats.items()}</span>
-<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Top years</span></span>
-<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a>        top_years <span class="op">=</span> filtered_df[<span class="st">&#39;year&#39;</span>].value_counts().head(<span class="dv">5</span>)</span>
-<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a>        top_years_data <span class="op">=</span> [{<span class="st">&#39;year&#39;</span>: <span class="bu">int</span>(year), <span class="st">&#39;count&#39;</span>: <span class="bu">int</span>(count)} <span class="cf">for</span> year, count <span class="kw">in</span> top_years.items()]</span>
-<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Full dataset (for the data tab)</span></span>
-<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Select a subset of columns for display</span></span>
-<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a>        display_cols <span class="op">=</span> [<span class="st">&#39;incident_id&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;month&#39;</span>, <span class="st">&#39;day&#39;</span>, <span class="st">&#39;country&#39;</span>, </span>
-<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;means_of_attack&#39;</span>, <span class="st">&#39;attack_context&#39;</span>, <span class="st">&#39;location&#39;</span>, <span class="st">&#39;motive&#39;</span>, <span class="st">&#39;actor_type&#39;</span>, <span class="st">&#39;actor_name&#39;</span>,</span>
-<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&#39;total_killed&#39;</span>, <span class="st">&#39;total_wounded&#39;</span>, <span class="st">&#39;total_kidnapped&#39;</span>, <span class="st">&#39;total_affected&#39;</span>]</span>
-<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Only include columns that exist in the dataframe</span></span>
-<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a>        display_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> display_cols <span class="cf">if</span> col <span class="kw">in</span> filtered_df.columns]</span>
-<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert the filtered dataframe to a list of records</span></span>
-<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a>        records <span class="op">=</span> []</span>
-<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> _, row <span class="kw">in</span> filtered_df.iterrows():</span>
-<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a>            record <span class="op">=</span> {}</span>
-<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> col <span class="kw">in</span> display_cols:</span>
-<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a>                val <span class="op">=</span> row[col]</span>
-<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">isinstance</span>(val, (np.integer, np.floating)):</span>
-<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a>                    val <span class="op">=</span> <span class="bu">int</span>(val) <span class="cf">if</span> <span class="bu">isinstance</span>(val, np.integer) <span class="cf">else</span> <span class="bu">float</span>(val)</span>
-<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> pd.isna(val):</span>
-<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a>                    val <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a>                    val <span class="op">=</span> <span class="bu">str</span>(val)</span>
-<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a>                record[col] <span class="op">=</span> val</span>
-<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a>            records.append(record)</span>
-<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store all data for this unknown count</span></span>
-<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a>        data_json[<span class="bu">int</span>(count)] <span class="op">=</span> {</span>
-<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;countries&#39;</span>: [</span>
-<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a>                {<span class="st">&#39;country&#39;</span>: <span class="bu">str</span>(row.country), <span class="st">&#39;count&#39;</span>: <span class="bu">int</span>(row[<span class="st">&#39;count&#39;</span>])} </span>
-<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> _, row <span class="kw">in</span> country_counts.iterrows()</span>
-<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a>            ],</span>
-<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;years&#39;</span>: [</span>
-<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a>                {<span class="st">&#39;year&#39;</span>: <span class="bu">int</span>(row.year), <span class="st">&#39;count&#39;</span>: <span class="bu">int</span>(row[<span class="st">&#39;count&#39;</span>])} </span>
-<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> _, row <span class="kw">in</span> year_counts.iterrows()</span>
-<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a>            ],</span>
-<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;fields&#39;</span>: [</span>
-<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a>                {<span class="st">&#39;field&#39;</span>: <span class="bu">str</span>(row.field), <span class="st">&#39;count&#39;</span>: <span class="bu">int</span>(row[<span class="st">&#39;count&#39;</span>])} </span>
-<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> _, row <span class="kw">in</span> fields_df.iterrows()</span>
-<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a>            ],</span>
-<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;top_years&#39;</span>: top_years_data,</span>
-<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;casualties&#39;</span>: stats,</span>
-<span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;total_incidents&#39;</span>: <span class="bu">int</span>(<span class="bu">len</span>(filtered_df)),</span>
-<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;raw_data&#39;</span>: records,</span>
-<span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;columns&#39;</span>: display_cols</span>
-<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the data to JavaScript</span></span>
-<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a>    html <span class="op">+=</span> <span class="ss">f&quot;const dashboardData = </span><span class="sc">{</span>json<span class="sc">.</span>dumps(data_json)<span class="sc">}</span><span class="ss">;</span><span class="ch">\n</span><span class="ss">&quot;</span></span>
-<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add JavaScript functions for interactivity</span></span>
-<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a>    html <span class="op">+=</span> <span class="st">&quot;&quot;&quot;</span></span>
-<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a><span class="st">        let currentPage = 1;</span></span>
-<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a><span class="st">        let pageSize = 10;</span></span>
-<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a><span class="st">        let currentSort = &#39;year&#39;;</span></span>
-<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a><span class="st">        let currentSortAsc = false;</span></span>
-<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a><span class="st">        let currentUnknownCount = document.getElementById(&#39;unknown-selector&#39;).value;</span></span>
-<span id="cb7-234"><a href="#cb7-234" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-235"><a href="#cb7-235" aria-hidden="true" tabindex="-1"></a><span class="st">        // Initial setup</span></span>
-<span id="cb7-236"><a href="#cb7-236" aria-hidden="true" tabindex="-1"></a><span class="st">        document.addEventListener(&#39;DOMContentLoaded&#39;, function() {</span></span>
-<span id="cb7-237"><a href="#cb7-237" aria-hidden="true" tabindex="-1"></a><span class="st">            updateDashboard(document.getElementById(&#39;unknown-selector&#39;).value);</span></span>
-<span id="cb7-238"><a href="#cb7-238" aria-hidden="true" tabindex="-1"></a><span class="st">        });</span></span>
-<span id="cb7-239"><a href="#cb7-239" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-240"><a href="#cb7-240" aria-hidden="true" tabindex="-1"></a><span class="st">        function updateDashboard(unknownCount) {</span></span>
-<span id="cb7-241"><a href="#cb7-241" aria-hidden="true" tabindex="-1"></a><span class="st">            currentUnknownCount = unknownCount;</span></span>
-<span id="cb7-242"><a href="#cb7-242" aria-hidden="true" tabindex="-1"></a><span class="st">            currentPage = 1; // Reset to first page when changing filters</span></span>
-<span id="cb7-243"><a href="#cb7-243" aria-hidden="true" tabindex="-1"></a><span class="st">            const data = dashboardData[unknownCount];</span></span>
-<span id="cb7-244"><a href="#cb7-244" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-245"><a href="#cb7-245" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update summary stats</span></span>
-<span id="cb7-246"><a href="#cb7-246" aria-hidden="true" tabindex="-1"></a><span class="st">            updateSummaryStats(data);</span></span>
-<span id="cb7-247"><a href="#cb7-247" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-248"><a href="#cb7-248" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update charts</span></span>
-<span id="cb7-249"><a href="#cb7-249" aria-hidden="true" tabindex="-1"></a><span class="st">            updateCharts(data);</span></span>
-<span id="cb7-250"><a href="#cb7-250" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-251"><a href="#cb7-251" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update data table</span></span>
-<span id="cb7-252"><a href="#cb7-252" aria-hidden="true" tabindex="-1"></a><span class="st">            renderDataTable();</span></span>
-<span id="cb7-253"><a href="#cb7-253" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-254"><a href="#cb7-254" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-255"><a href="#cb7-255" aria-hidden="true" tabindex="-1"></a><span class="st">        function updateSummaryStats(data) {</span></span>
-<span id="cb7-256"><a href="#cb7-256" aria-hidden="true" tabindex="-1"></a><span class="st">            let summaryHTML = `</span></span>
-<span id="cb7-257"><a href="#cb7-257" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;div class=&quot;row&quot;&gt;</span></span>
-<span id="cb7-258"><a href="#cb7-258" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;div class=&quot;col-md-12&quot;&gt;</span></span>
-<span id="cb7-259"><a href="#cb7-259" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;h2&gt;Summary for Incidents with $</span><span class="sc">{currentUnknownCount}</span><span class="st"> Unknown Fields&lt;/h2&gt;</span></span>
-<span id="cb7-260"><a href="#cb7-260" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;p&gt;Found $</span><span class="sc">{data.total_incidents}</span><span class="st"> incidents with $</span><span class="sc">{currentUnknownCount}</span><span class="st"> unknown fields.&lt;/p&gt;</span></span>
-<span id="cb7-261"><a href="#cb7-261" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/div&gt;</span></span>
-<span id="cb7-262"><a href="#cb7-262" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;/div&gt;</span></span>
-<span id="cb7-263"><a href="#cb7-263" aria-hidden="true" tabindex="-1"></a><span class="st">            `;</span></span>
-<span id="cb7-264"><a href="#cb7-264" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-265"><a href="#cb7-265" aria-hidden="true" tabindex="-1"></a><span class="st">            document.getElementById(&#39;summary-stats&#39;).innerHTML = summaryHTML;</span></span>
-<span id="cb7-266"><a href="#cb7-266" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-267"><a href="#cb7-267" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-268"><a href="#cb7-268" aria-hidden="true" tabindex="-1"></a><span class="st">        function updateCharts(data) {</span></span>
-<span id="cb7-269"><a href="#cb7-269" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update country chart</span></span>
-<span id="cb7-270"><a href="#cb7-270" aria-hidden="true" tabindex="-1"></a><span class="st">            const countryData = [{</span></span>
-<span id="cb7-271"><a href="#cb7-271" aria-hidden="true" tabindex="-1"></a><span class="st">                x: data.countries.map(d =&gt; d.country),</span></span>
-<span id="cb7-272"><a href="#cb7-272" aria-hidden="true" tabindex="-1"></a><span class="st">                y: data.countries.map(d =&gt; d.count),</span></span>
-<span id="cb7-273"><a href="#cb7-273" aria-hidden="true" tabindex="-1"></a><span class="st">                type: &#39;bar&#39;,</span></span>
-<span id="cb7-274"><a href="#cb7-274" aria-hidden="true" tabindex="-1"></a><span class="st">                marker: {color: &#39;#1f77b4&#39;}</span></span>
-<span id="cb7-275"><a href="#cb7-275" aria-hidden="true" tabindex="-1"></a><span class="st">            }];</span></span>
-<span id="cb7-276"><a href="#cb7-276" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-277"><a href="#cb7-277" aria-hidden="true" tabindex="-1"></a><span class="st">            Plotly.newPlot(&#39;country-chart&#39;, countryData, {</span></span>
-<span id="cb7-278"><a href="#cb7-278" aria-hidden="true" tabindex="-1"></a><span class="st">                title: &#39;Top Countries&#39;,</span></span>
-<span id="cb7-279"><a href="#cb7-279" aria-hidden="true" tabindex="-1"></a><span class="st">                xaxis: {title: &#39;Country&#39;},</span></span>
-<span id="cb7-280"><a href="#cb7-280" aria-hidden="true" tabindex="-1"></a><span class="st">                yaxis: {title: &#39;Number of Incidents&#39;}</span></span>
-<span id="cb7-281"><a href="#cb7-281" aria-hidden="true" tabindex="-1"></a><span class="st">            });</span></span>
-<span id="cb7-282"><a href="#cb7-282" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-283"><a href="#cb7-283" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update year chart</span></span>
-<span id="cb7-284"><a href="#cb7-284" aria-hidden="true" tabindex="-1"></a><span class="st">            const yearData = [{</span></span>
-<span id="cb7-285"><a href="#cb7-285" aria-hidden="true" tabindex="-1"></a><span class="st">                x: data.years.map(d =&gt; d.year),</span></span>
-<span id="cb7-286"><a href="#cb7-286" aria-hidden="true" tabindex="-1"></a><span class="st">                y: data.years.map(d =&gt; d.count),</span></span>
-<span id="cb7-287"><a href="#cb7-287" aria-hidden="true" tabindex="-1"></a><span class="st">                type: &#39;scatter&#39;,</span></span>
-<span id="cb7-288"><a href="#cb7-288" aria-hidden="true" tabindex="-1"></a><span class="st">                mode: &#39;lines+markers&#39;,</span></span>
-<span id="cb7-289"><a href="#cb7-289" aria-hidden="true" tabindex="-1"></a><span class="st">                marker: {color: &#39;#ff7f0e&#39;}</span></span>
-<span id="cb7-290"><a href="#cb7-290" aria-hidden="true" tabindex="-1"></a><span class="st">            }];</span></span>
-<span id="cb7-291"><a href="#cb7-291" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-292"><a href="#cb7-292" aria-hidden="true" tabindex="-1"></a><span class="st">            Plotly.newPlot(&#39;year-chart&#39;, yearData, {</span></span>
-<span id="cb7-293"><a href="#cb7-293" aria-hidden="true" tabindex="-1"></a><span class="st">                title: &#39;Incidents by Year&#39;,</span></span>
-<span id="cb7-294"><a href="#cb7-294" aria-hidden="true" tabindex="-1"></a><span class="st">                xaxis: {title: &#39;Year&#39;},</span></span>
-<span id="cb7-295"><a href="#cb7-295" aria-hidden="true" tabindex="-1"></a><span class="st">                yaxis: {title: &#39;Number of Incidents&#39;}</span></span>
-<span id="cb7-296"><a href="#cb7-296" aria-hidden="true" tabindex="-1"></a><span class="st">            });</span></span>
-<span id="cb7-297"><a href="#cb7-297" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-298"><a href="#cb7-298" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update fields chart</span></span>
-<span id="cb7-299"><a href="#cb7-299" aria-hidden="true" tabindex="-1"></a><span class="st">            const fieldsData = [{</span></span>
-<span id="cb7-300"><a href="#cb7-300" aria-hidden="true" tabindex="-1"></a><span class="st">                x: data.fields.map(d =&gt; d.field),</span></span>
-<span id="cb7-301"><a href="#cb7-301" aria-hidden="true" tabindex="-1"></a><span class="st">                y: data.fields.map(d =&gt; d.count),</span></span>
-<span id="cb7-302"><a href="#cb7-302" aria-hidden="true" tabindex="-1"></a><span class="st">                type: &#39;bar&#39;,</span></span>
-<span id="cb7-303"><a href="#cb7-303" aria-hidden="true" tabindex="-1"></a><span class="st">                marker: {color: &#39;#2ca02c&#39;}</span></span>
-<span id="cb7-304"><a href="#cb7-304" aria-hidden="true" tabindex="-1"></a><span class="st">            }];</span></span>
-<span id="cb7-305"><a href="#cb7-305" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-306"><a href="#cb7-306" aria-hidden="true" tabindex="-1"></a><span class="st">            Plotly.newPlot(&#39;fields-chart&#39;, fieldsData, {</span></span>
-<span id="cb7-307"><a href="#cb7-307" aria-hidden="true" tabindex="-1"></a><span class="st">                title: &#39;Distribution of Unknown Fields&#39;,</span></span>
-<span id="cb7-308"><a href="#cb7-308" aria-hidden="true" tabindex="-1"></a><span class="st">                xaxis: {title: &#39;Field&#39;},</span></span>
-<span id="cb7-309"><a href="#cb7-309" aria-hidden="true" tabindex="-1"></a><span class="st">                yaxis: {title: &#39;Number of Incidents&#39;}</span></span>
-<span id="cb7-310"><a href="#cb7-310" aria-hidden="true" tabindex="-1"></a><span class="st">            });</span></span>
-<span id="cb7-311"><a href="#cb7-311" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-312"><a href="#cb7-312" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update casualties table</span></span>
-<span id="cb7-313"><a href="#cb7-313" aria-hidden="true" tabindex="-1"></a><span class="st">            let tableHTML = `</span></span>
-<span id="cb7-314"><a href="#cb7-314" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;h3&gt;Casualty Statistics (Average per Incident)&lt;/h3&gt;</span></span>
-<span id="cb7-315"><a href="#cb7-315" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;table class=&quot;table table-striped&quot;&gt;</span></span>
-<span id="cb7-316"><a href="#cb7-316" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;thead&gt;</span></span>
-<span id="cb7-317"><a href="#cb7-317" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;tr&gt;</span></span>
-<span id="cb7-318"><a href="#cb7-318" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;th&gt;Metric&lt;/th&gt;</span></span>
-<span id="cb7-319"><a href="#cb7-319" aria-hidden="true" tabindex="-1"></a><span class="st">                            &lt;th&gt;Value&lt;/th&gt;</span></span>
-<span id="cb7-320"><a href="#cb7-320" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/tr&gt;</span></span>
-<span id="cb7-321"><a href="#cb7-321" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/thead&gt;</span></span>
-<span id="cb7-322"><a href="#cb7-322" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;tbody&gt;</span></span>
-<span id="cb7-323"><a href="#cb7-323" aria-hidden="true" tabindex="-1"></a><span class="st">            `;</span></span>
-<span id="cb7-324"><a href="#cb7-324" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-325"><a href="#cb7-325" aria-hidden="true" tabindex="-1"></a><span class="st">            Object.entries(data.casualties).forEach(([key, value]) =&gt; {</span></span>
-<span id="cb7-326"><a href="#cb7-326" aria-hidden="true" tabindex="-1"></a><span class="st">                tableHTML += `</span></span>
-<span id="cb7-327"><a href="#cb7-327" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;tr&gt;</span></span>
-<span id="cb7-328"><a href="#cb7-328" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;td&gt;${key.replace(&#39;total_&#39;, &#39;&#39;).charAt(0).toUpperCase() + key.replace(&#39;total_&#39;, &#39;&#39;).slice(1)}&lt;/td&gt;</span></span>
-<span id="cb7-329"><a href="#cb7-329" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;td&gt;${value.toFixed(2)}&lt;/td&gt;</span></span>
-<span id="cb7-330"><a href="#cb7-330" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/tr&gt;</span></span>
-<span id="cb7-331"><a href="#cb7-331" aria-hidden="true" tabindex="-1"></a><span class="st">                `;</span></span>
-<span id="cb7-332"><a href="#cb7-332" aria-hidden="true" tabindex="-1"></a><span class="st">            });</span></span>
-<span id="cb7-333"><a href="#cb7-333" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-334"><a href="#cb7-334" aria-hidden="true" tabindex="-1"></a><span class="st">            tableHTML += &#39;&lt;/tbody&gt;&lt;/table&gt;&#39;;</span></span>
-<span id="cb7-335"><a href="#cb7-335" aria-hidden="true" tabindex="-1"></a><span class="st">            document.getElementById(&#39;casualties-table&#39;).innerHTML = tableHTML;</span></span>
-<span id="cb7-336"><a href="#cb7-336" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-337"><a href="#cb7-337" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-338"><a href="#cb7-338" aria-hidden="true" tabindex="-1"></a><span class="st">        function renderDataTable() {</span></span>
-<span id="cb7-339"><a href="#cb7-339" aria-hidden="true" tabindex="-1"></a><span class="st">            const data = dashboardData[currentUnknownCount];</span></span>
-<span id="cb7-340"><a href="#cb7-340" aria-hidden="true" tabindex="-1"></a><span class="st">            const rawData = [...data.raw_data]; // Create a copy to avoid modifying the original</span></span>
-<span id="cb7-341"><a href="#cb7-341" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-342"><a href="#cb7-342" aria-hidden="true" tabindex="-1"></a><span class="st">            // Sort data</span></span>
-<span id="cb7-343"><a href="#cb7-343" aria-hidden="true" tabindex="-1"></a><span class="st">            rawData.sort((a, b) =&gt; {</span></span>
-<span id="cb7-344"><a href="#cb7-344" aria-hidden="true" tabindex="-1"></a><span class="st">                const aVal = a[currentSort];</span></span>
-<span id="cb7-345"><a href="#cb7-345" aria-hidden="true" tabindex="-1"></a><span class="st">                const bVal = b[currentSort];</span></span>
-<span id="cb7-346"><a href="#cb7-346" aria-hidden="true" tabindex="-1"></a><span class="st">                </span></span>
-<span id="cb7-347"><a href="#cb7-347" aria-hidden="true" tabindex="-1"></a><span class="st">                // Handle different data types</span></span>
-<span id="cb7-348"><a href="#cb7-348" aria-hidden="true" tabindex="-1"></a><span class="st">                if (typeof aVal === &#39;number&#39; &amp;&amp; typeof bVal === &#39;number&#39;) {</span></span>
-<span id="cb7-349"><a href="#cb7-349" aria-hidden="true" tabindex="-1"></a><span class="st">                    return currentSortAsc ? aVal - bVal : bVal - aVal;</span></span>
-<span id="cb7-350"><a href="#cb7-350" aria-hidden="true" tabindex="-1"></a><span class="st">                } else {</span></span>
-<span id="cb7-351"><a href="#cb7-351" aria-hidden="true" tabindex="-1"></a><span class="st">                    const aStr = String(aVal);</span></span>
-<span id="cb7-352"><a href="#cb7-352" aria-hidden="true" tabindex="-1"></a><span class="st">                    const bStr = String(bVal);</span></span>
-<span id="cb7-353"><a href="#cb7-353" aria-hidden="true" tabindex="-1"></a><span class="st">                    return currentSortAsc ? aStr.localeCompare(bStr) : bStr.localeCompare(aStr);</span></span>
-<span id="cb7-354"><a href="#cb7-354" aria-hidden="true" tabindex="-1"></a><span class="st">                }</span></span>
-<span id="cb7-355"><a href="#cb7-355" aria-hidden="true" tabindex="-1"></a><span class="st">            });</span></span>
-<span id="cb7-356"><a href="#cb7-356" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-357"><a href="#cb7-357" aria-hidden="true" tabindex="-1"></a><span class="st">            // Paginate</span></span>
-<span id="cb7-358"><a href="#cb7-358" aria-hidden="true" tabindex="-1"></a><span class="st">            const startIdx = (currentPage - 1) * pageSize;</span></span>
-<span id="cb7-359"><a href="#cb7-359" aria-hidden="true" tabindex="-1"></a><span class="st">            const endIdx = startIdx + pageSize;</span></span>
-<span id="cb7-360"><a href="#cb7-360" aria-hidden="true" tabindex="-1"></a><span class="st">            const pagedData = rawData.slice(startIdx, endIdx);</span></span>
-<span id="cb7-361"><a href="#cb7-361" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-362"><a href="#cb7-362" aria-hidden="true" tabindex="-1"></a><span class="st">            // Create table HTML</span></span>
-<span id="cb7-363"><a href="#cb7-363" aria-hidden="true" tabindex="-1"></a><span class="st">            let tableHTML = `</span></span>
-<span id="cb7-364"><a href="#cb7-364" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;table class=&quot;table table-striped table-hover&quot;&gt;</span></span>
-<span id="cb7-365"><a href="#cb7-365" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;thead&gt;</span></span>
-<span id="cb7-366"><a href="#cb7-366" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;tr&gt;</span></span>
-<span id="cb7-367"><a href="#cb7-367" aria-hidden="true" tabindex="-1"></a><span class="st">            `;</span></span>
-<span id="cb7-368"><a href="#cb7-368" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-369"><a href="#cb7-369" aria-hidden="true" tabindex="-1"></a><span class="st">            // Add table headers with sort indicators</span></span>
-<span id="cb7-370"><a href="#cb7-370" aria-hidden="true" tabindex="-1"></a><span class="st">            data.columns.forEach(col =&gt; {</span></span>
-<span id="cb7-371"><a href="#cb7-371" aria-hidden="true" tabindex="-1"></a><span class="st">                const sortIcon = col === currentSort </span></span>
-<span id="cb7-372"><a href="#cb7-372" aria-hidden="true" tabindex="-1"></a><span class="st">                    ? currentSortAsc ? &#39;↑&#39; : &#39;↓&#39; </span></span>
-<span id="cb7-373"><a href="#cb7-373" aria-hidden="true" tabindex="-1"></a><span class="st">                    : &#39;&#39;;</span></span>
-<span id="cb7-374"><a href="#cb7-374" aria-hidden="true" tabindex="-1"></a><span class="st">                tableHTML += `&lt;th onclick=&quot;changeSort(&#39;$</span><span class="sc">{col}</span><span class="st">&#39;)&quot; style=&quot;cursor: pointer;&quot;&gt;$</span><span class="sc">{col}</span><span class="st"> $</span><span class="sc">{sortIcon}</span><span class="st">&lt;/th&gt;`;</span></span>
-<span id="cb7-375"><a href="#cb7-375" aria-hidden="true" tabindex="-1"></a><span class="st">            });</span></span>
-<span id="cb7-376"><a href="#cb7-376" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-377"><a href="#cb7-377" aria-hidden="true" tabindex="-1"></a><span class="st">            tableHTML += `</span></span>
-<span id="cb7-378"><a href="#cb7-378" aria-hidden="true" tabindex="-1"></a><span class="st">                        &lt;/tr&gt;</span></span>
-<span id="cb7-379"><a href="#cb7-379" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/thead&gt;</span></span>
-<span id="cb7-380"><a href="#cb7-380" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;tbody&gt;</span></span>
-<span id="cb7-381"><a href="#cb7-381" aria-hidden="true" tabindex="-1"></a><span class="st">            `;</span></span>
-<span id="cb7-382"><a href="#cb7-382" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-383"><a href="#cb7-383" aria-hidden="true" tabindex="-1"></a><span class="st">            // Add table rows</span></span>
-<span id="cb7-384"><a href="#cb7-384" aria-hidden="true" tabindex="-1"></a><span class="st">            pagedData.forEach(row =&gt; {</span></span>
-<span id="cb7-385"><a href="#cb7-385" aria-hidden="true" tabindex="-1"></a><span class="st">                tableHTML += &#39;&lt;tr&gt;&#39;;</span></span>
-<span id="cb7-386"><a href="#cb7-386" aria-hidden="true" tabindex="-1"></a><span class="st">                data.columns.forEach(col =&gt; {</span></span>
-<span id="cb7-387"><a href="#cb7-387" aria-hidden="true" tabindex="-1"></a><span class="st">                    tableHTML += `&lt;td&gt;$</span><span class="sc">{row[col]}</span><span class="st">&lt;/td&gt;`;</span></span>
-<span id="cb7-388"><a href="#cb7-388" aria-hidden="true" tabindex="-1"></a><span class="st">                });</span></span>
-<span id="cb7-389"><a href="#cb7-389" aria-hidden="true" tabindex="-1"></a><span class="st">                tableHTML += &#39;&lt;/tr&gt;&#39;;</span></span>
-<span id="cb7-390"><a href="#cb7-390" aria-hidden="true" tabindex="-1"></a><span class="st">            });</span></span>
-<span id="cb7-391"><a href="#cb7-391" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-392"><a href="#cb7-392" aria-hidden="true" tabindex="-1"></a><span class="st">            tableHTML += `</span></span>
-<span id="cb7-393"><a href="#cb7-393" aria-hidden="true" tabindex="-1"></a><span class="st">                    &lt;/tbody&gt;</span></span>
-<span id="cb7-394"><a href="#cb7-394" aria-hidden="true" tabindex="-1"></a><span class="st">                &lt;/table&gt;</span></span>
-<span id="cb7-395"><a href="#cb7-395" aria-hidden="true" tabindex="-1"></a><span class="st">            `;</span></span>
-<span id="cb7-396"><a href="#cb7-396" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-397"><a href="#cb7-397" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update the table</span></span>
-<span id="cb7-398"><a href="#cb7-398" aria-hidden="true" tabindex="-1"></a><span class="st">            document.getElementById(&#39;data-table&#39;).innerHTML = tableHTML;</span></span>
-<span id="cb7-399"><a href="#cb7-399" aria-hidden="true" tabindex="-1"></a><span class="st">            </span></span>
-<span id="cb7-400"><a href="#cb7-400" aria-hidden="true" tabindex="-1"></a><span class="st">            // Update pagination info</span></span>
-<span id="cb7-401"><a href="#cb7-401" aria-hidden="true" tabindex="-1"></a><span class="st">            const totalPages = Math.ceil(rawData.length / pageSize);</span></span>
-<span id="cb7-402"><a href="#cb7-402" aria-hidden="true" tabindex="-1"></a><span class="st">            document.getElementById(&#39;page-info&#39;).textContent = `Page $</span><span class="sc">{currentPage}</span><span class="st"> of $</span><span class="sc">{totalPages}</span><span class="st">`;</span></span>
-<span id="cb7-403"><a href="#cb7-403" aria-hidden="true" tabindex="-1"></a><span class="st">            document.getElementById(&#39;prev-page&#39;).disabled = currentPage === 1;</span></span>
-<span id="cb7-404"><a href="#cb7-404" aria-hidden="true" tabindex="-1"></a><span class="st">            document.getElementById(&#39;next-page&#39;).disabled = currentPage === totalPages;</span></span>
-<span id="cb7-405"><a href="#cb7-405" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-406"><a href="#cb7-406" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-407"><a href="#cb7-407" aria-hidden="true" tabindex="-1"></a><span class="st">        function changeSort(column) {</span></span>
-<span id="cb7-408"><a href="#cb7-408" aria-hidden="true" tabindex="-1"></a><span class="st">            if (currentSort === column) {</span></span>
-<span id="cb7-409"><a href="#cb7-409" aria-hidden="true" tabindex="-1"></a><span class="st">                // Toggle sort direction</span></span>
-<span id="cb7-410"><a href="#cb7-410" aria-hidden="true" tabindex="-1"></a><span class="st">                currentSortAsc = !currentSortAsc;</span></span>
-<span id="cb7-411"><a href="#cb7-411" aria-hidden="true" tabindex="-1"></a><span class="st">            } else {</span></span>
-<span id="cb7-412"><a href="#cb7-412" aria-hidden="true" tabindex="-1"></a><span class="st">                // Set new sort column</span></span>
-<span id="cb7-413"><a href="#cb7-413" aria-hidden="true" tabindex="-1"></a><span class="st">                currentSort = column;</span></span>
-<span id="cb7-414"><a href="#cb7-414" aria-hidden="true" tabindex="-1"></a><span class="st">                currentSortAsc = false; // Default to descending</span></span>
-<span id="cb7-415"><a href="#cb7-415" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
-<span id="cb7-416"><a href="#cb7-416" aria-hidden="true" tabindex="-1"></a><span class="st">            renderDataTable();</span></span>
-<span id="cb7-417"><a href="#cb7-417" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-418"><a href="#cb7-418" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-419"><a href="#cb7-419" aria-hidden="true" tabindex="-1"></a><span class="st">        function sortData(column) {</span></span>
-<span id="cb7-420"><a href="#cb7-420" aria-hidden="true" tabindex="-1"></a><span class="st">            currentSort = column;</span></span>
-<span id="cb7-421"><a href="#cb7-421" aria-hidden="true" tabindex="-1"></a><span class="st">            currentSortAsc = false;</span></span>
-<span id="cb7-422"><a href="#cb7-422" aria-hidden="true" tabindex="-1"></a><span class="st">            renderDataTable();</span></span>
-<span id="cb7-423"><a href="#cb7-423" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-424"><a href="#cb7-424" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-425"><a href="#cb7-425" aria-hidden="true" tabindex="-1"></a><span class="st">        function prevPage() {</span></span>
-<span id="cb7-426"><a href="#cb7-426" aria-hidden="true" tabindex="-1"></a><span class="st">            if (currentPage &gt; 1) {</span></span>
-<span id="cb7-427"><a href="#cb7-427" aria-hidden="true" tabindex="-1"></a><span class="st">                currentPage--;</span></span>
-<span id="cb7-428"><a href="#cb7-428" aria-hidden="true" tabindex="-1"></a><span class="st">                renderDataTable();</span></span>
-<span id="cb7-429"><a href="#cb7-429" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
-<span id="cb7-430"><a href="#cb7-430" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-431"><a href="#cb7-431" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-432"><a href="#cb7-432" aria-hidden="true" tabindex="-1"></a><span class="st">        function nextPage() {</span></span>
-<span id="cb7-433"><a href="#cb7-433" aria-hidden="true" tabindex="-1"></a><span class="st">            const data = dashboardData[currentUnknownCount];</span></span>
-<span id="cb7-434"><a href="#cb7-434" aria-hidden="true" tabindex="-1"></a><span class="st">            const totalPages = Math.ceil(data.raw_data.length / pageSize);</span></span>
-<span id="cb7-435"><a href="#cb7-435" aria-hidden="true" tabindex="-1"></a><span class="st">            if (currentPage &lt; totalPages) {</span></span>
-<span id="cb7-436"><a href="#cb7-436" aria-hidden="true" tabindex="-1"></a><span class="st">                currentPage++;</span></span>
-<span id="cb7-437"><a href="#cb7-437" aria-hidden="true" tabindex="-1"></a><span class="st">                renderDataTable();</span></span>
-<span id="cb7-438"><a href="#cb7-438" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
-<span id="cb7-439"><a href="#cb7-439" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-440"><a href="#cb7-440" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
-<span id="cb7-441"><a href="#cb7-441" aria-hidden="true" tabindex="-1"></a><span class="st">        function changePageSize(size) {</span></span>
-<span id="cb7-442"><a href="#cb7-442" aria-hidden="true" tabindex="-1"></a><span class="st">            pageSize = parseInt(size);</span></span>
-<span id="cb7-443"><a href="#cb7-443" aria-hidden="true" tabindex="-1"></a><span class="st">            currentPage = 1; // Reset to first page</span></span>
-<span id="cb7-444"><a href="#cb7-444" aria-hidden="true" tabindex="-1"></a><span class="st">            renderDataTable();</span></span>
-<span id="cb7-445"><a href="#cb7-445" aria-hidden="true" tabindex="-1"></a><span class="st">        }</span></span>
-<span id="cb7-446"><a href="#cb7-446" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;/script&gt;</span></span>
-<span id="cb7-447"><a href="#cb7-447" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/body&gt;</span></span>
-<span id="cb7-448"><a href="#cb7-448" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/html&gt;</span></span>
-<span id="cb7-449"><a href="#cb7-449" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span></span>
-<span id="cb7-450"><a href="#cb7-450" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-451"><a href="#cb7-451" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> html</span>
-<span id="cb7-452"><a href="#cb7-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-453"><a href="#cb7-453" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the HTML content</span></span>
-<span id="cb7-454"><a href="#cb7-454" aria-hidden="true" tabindex="-1"></a>html_output <span class="op">=</span> create_interactive_dashboard(df)</span>
-<span id="cb7-455"><a href="#cb7-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-456"><a href="#cb7-456" aria-hidden="true" tabindex="-1"></a><span class="co"># Save to external file in the analysis folder</span></span>
-<span id="cb7-457"><a href="#cb7-457" aria-hidden="true" tabindex="-1"></a><span class="co"># Save to the _site folder directly</span></span>
-<span id="cb7-458"><a href="#cb7-458" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;interactive_dashboard.html&#39;</span>, <span class="st">&#39;w&#39;</span>) <span class="im">as</span> f:</span>
-<span id="cb7-459"><a href="#cb7-459" aria-hidden="true" tabindex="-1"></a>    f.write(html_output)</span>
-<span id="cb7-460"><a href="#cb7-460" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[1]</span><span class="ansi-green-fg">, line 454</span>
-<span class="ansi-green-fg">    451</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> html
-<span class="ansi-green-fg">    453</span> <span style="font-style:italic;color:rgb(95,135,135)"># Generate the HTML content</span>
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">454</span> html_output = create_interactive_dashboard(<span class="ansi-yellow-bg">df</span>)
-<span class="ansi-green-fg">    456</span> <span style="font-style:italic;color:rgb(95,135,135)"># Save to external file in the analysis folder</span>
-<span class="ansi-green-fg">    457</span> <span style="font-style:italic;color:rgb(95,135,135)"># Save to the _site folder directly</span>
-<span class="ansi-green-fg">    458</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">open</span>(<span class="ansi-yellow-fg">&#39;</span><span class="ansi-yellow-fg">interactive_dashboard.html</span><span class="ansi-yellow-fg">&#39;</span>, <span class="ansi-yellow-fg">&#39;</span><span class="ansi-yellow-fg">w</span><span class="ansi-yellow-fg">&#39;</span>) <span style="font-weight:bold;color:rgb(0,135,0)">as</span> f:
-
-<span class="ansi-red-fg">NameError</span>: name &#39;df&#39; is not defined</pre>
-</div>
-</div>
-</div>
-<div id="cell-7" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the dashboard in an iframe</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>IFrame(src<span class="op">=</span><span class="st">&#39;interactive_dashboard.html&#39;</span>, width<span class="op">=</span><span class="st">&#39;100%&#39;</span>, height<span class="op">=</span><span class="dv">800</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="36">
-
-        <iframe role="img" width="100%" height="800" src="analysis/interactive_dashboard.html" frameborder="0" allowfullscreen></iframe>
-        
 </div>
 </div>
 
