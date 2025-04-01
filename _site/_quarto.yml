@@ -14,7 +14,7 @@ website:
         text: "Background & Context"
       - href: analysis/tables.ipynb
         text: "Analysis"
-      - href: analysis/interactive_dashboard.html
+      - href: analysis/interactive_dashboard.qmd
         text: "Dashboard"
 
 format:

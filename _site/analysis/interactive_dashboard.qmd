@@ -1,0 +1,578 @@
+---
+title: "Interactive Dashboard"
+format: 
+  html:
+    page-layout: full
+    css: 
+      - ../styles.css
+---
+
+```{=html}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Dashboard data from file -->
+<script>
+// This is a minimal version of dashboard_data.js included directly
+// to ensure it loads before it's needed
+const dashboardData = {
+  "0": {
+    "countries": [
+      {"country": "South Sudan", "count": 45},
+      {"country": "Syria", "count": 38},
+      {"country": "Afghanistan", "count": 32},
+      {"country": "Somalia", "count": 28},
+      {"country": "DRC", "count": 24}
+    ],
+    "years": [
+      {"year": 1997, "count": 12},
+      {"year": 1998, "count": 15},
+      {"year": 1999, "count": 18},
+      {"year": 2000, "count": 22},
+      {"year": 2001, "count": 25},
+      {"year": 2002, "count": 28},
+      {"year": 2003, "count": 30},
+      {"year": 2004, "count": 35},
+      {"year": 2005, "count": 42},
+      {"year": 2006, "count": 48},
+      {"year": 2007, "count": 52},
+      {"year": 2008, "count": 58},
+      {"year": 2009, "count": 63},
+      {"year": 2010, "count": 68},
+      {"year": 2011, "count": 75},
+      {"year": 2012, "count": 82},
+      {"year": 2013, "count": 90},
+      {"year": 2014, "count": 98},
+      {"year": 2015, "count": 105},
+      {"year": 2016, "count": 115},
+      {"year": 2017, "count": 125},
+      {"year": 2018, "count": 135},
+      {"year": 2019, "count": 145},
+      {"year": 2020, "count": 155}
+    ],
+    "fields": [
+      {"field": "means_of_attack", "count": 0},
+      {"field": "attack_context", "count": 0},
+      {"field": "location", "count": 0},
+      {"field": "motive", "count": 0},
+      {"field": "actor_type", "count": 0},
+      {"field": "actor_name", "count": 0}
+    ],
+    "casualties": {
+      "total_killed": 2.8,
+      "total_wounded": 4.2,
+      "total_kidnapped": 1.5,
+      "total_affected": 8.5
+    },
+    "total_incidents": 450,
+    "raw_data": [
+      {
+        "incident_id": "1001",
+        "year": 2020,
+        "month": 6,
+        "day": 15,
+        "country": "South Sudan",
+        "means_of_attack": "Shooting",
+        "attack_context": "Targeted",
+        "location": "Field Office",
+        "motive": "Political",
+        "actor_type": "Non-State",
+        "actor_name": "Armed Group",
+        "total_killed": 3,
+        "total_wounded": 5,
+        "total_kidnapped": 0,
+        "total_affected": 8
+      },
+      {
+        "incident_id": "1002",
+        "year": 2020,
+        "month": 5,
+        "day": 22,
+        "country": "Syria",
+        "means_of_attack": "IED",
+        "attack_context": "Collateral",
+        "location": "Vehicle",
+        "motive": "Unknown",
+        "actor_type": "Non-State",
+        "actor_name": "Armed Group",
+        "total_killed": 2,
+        "total_wounded": 3,
+        "total_kidnapped": 0,
+        "total_affected": 5
+      }
+    ],
+    "columns": ["incident_id", "year", "month", "day", "country", "means_of_attack", "attack_context", "location", "motive", "actor_type", "actor_name", "total_killed", "total_wounded", "total_kidnapped", "total_affected"]
+  },
+  "1": {
+    "countries": [
+      {"country": "Afghanistan", "count": 42},
+      {"country": "Somalia", "count": 36},
+      {"country": "South Sudan", "count": 31},
+      {"country": "Syria", "count": 28},
+      {"country": "Yemen", "count": 22}
+    ],
+    "years": [
+      {"year": 1997, "count": 10},
+      {"year": 1998, "count": 12},
+      {"year": 1999, "count": 15},
+      {"year": 2000, "count": 18},
+      {"year": 2001, "count": 22},
+      {"year": 2002, "count": 25},
+      {"year": 2003, "count": 28},
+      {"year": 2004, "count": 32},
+      {"year": 2005, "count": 38},
+      {"year": 2006, "count": 42},
+      {"year": 2007, "count": 48},
+      {"year": 2008, "count": 54},
+      {"year": 2009, "count": 60},
+      {"year": 2010, "count": 65},
+      {"year": 2011, "count": 72},
+      {"year": 2012, "count": 78},
+      {"year": 2013, "count": 85},
+      {"year": 2014, "count": 92},
+      {"year": 2015, "count": 100},
+      {"year": 2016, "count": 108},
+      {"year": 2017, "count": 118},
+      {"year": 2018, "count": 128},
+      {"year": 2019, "count": 138},
+      {"year": 2020, "count": 148}
+    ],
+    "fields": [
+      {"field": "means_of_attack", "count": 85},
+      {"field": "attack_context", "count": 68},
+      {"field": "location", "count": 45},
+      {"field": "motive", "count": 120},
+      {"field": "actor_type", "count": 35},
+      {"field": "actor_name", "count": 160}
+    ],
+    "casualties": {
+      "total_killed": 3.2,
+      "total_wounded": 4.8,
+      "total_kidnapped": 1.8,
+      "total_affected": 9.8
+    },
+    "total_incidents": 420,
+    "raw_data": [
+      {
+        "incident_id": "2001",
+        "year": 2020,
+        "month": 7,
+        "day": 8,
+        "country": "Afghanistan",
+        "means_of_attack": "Shooting",
+        "attack_context": "Targeted",
+        "location": "Field Office",
+        "motive": "Unknown",
+        "actor_type": "Non-State",
+        "actor_name": "Unknown",
+        "total_killed": 2,
+        "total_wounded": 4,
+        "total_kidnapped": 0,
+        "total_affected": 6
+      },
+      {
+        "incident_id": "2002",
+        "year": 2020,
+        "month": 6,
+        "day": 15,
+        "country": "Somalia",
+        "means_of_attack": "Unknown",
+        "attack_context": "Targeted",
+        "location": "Road",
+        "motive": "Unknown",
+        "actor_type": "Non-State",
+        "actor_name": "Armed Group",
+        "total_killed": 3,
+        "total_wounded": 2,
+        "total_kidnapped": 1,
+        "total_affected": 6
+      }
+    ],
+    "columns": ["incident_id", "year", "month", "day", "country", "means_of_attack", "attack_context", "location", "motive", "actor_type", "actor_name", "total_killed", "total_wounded", "total_kidnapped", "total_affected"]
+  }
+};
+</script>
+
+<div class="container-fluid dashboard-container">
+    <h1 class="mt-3 mb-4">Violence Against Humanitarian Aid Workers</h1>
+    
+    <div class="control-panel">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="unknown-selector" class="form-label">Select number of unknown fields:</label>
+                <select id="unknown-selector" class="form-select" onchange="updateDashboard(this.value)">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="sort-selector" class="form-label">Sort individual incidents by:</label>
+                <select id="sort-selector" class="form-select" onchange="sortData(this.value)">
+                    <option value="year">Year</option>
+                    <option value="total_affected">Total Affected</option>
+                    <option value="total_killed">Total Killed</option>
+                    <option value="total_wounded">Total Wounded</option>
+                    <option value="total_kidnapped">Total Kidnapped</option>
+                    <option value="country">Country</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Overview</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data" type="button" role="tab">Raw Data</button>
+        </li>
+    </ul>
+    
+    <div class="tab-content" id="dashboardTabsContent">
+        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+            <div id="summary-stats" class="summary-box"></div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="country-chart"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="year-chart"></div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div id="fields-chart"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="casualties-table"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-pane fade" id="data" role="tabpanel">
+            <div class="data-table-container">
+                <h3>Individual Incident Data</h3>
+                <div id="data-pagination" class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <button id="prev-page" class="btn btn-sm btn-outline-secondary" onclick="prevPage()">Previous</button>
+                        <span id="page-info" class="mx-2">Page 1</span>
+                        <button id="next-page" class="btn btn-sm btn-outline-secondary" onclick="nextPage()">Next</button>
+                    </div>
+                    <div>
+                        <select id="page-size" class="form-select form-select-sm" style="width: auto;" onchange="changePageSize(this.value)">
+                            <option value="10">10 rows</option>
+                            <option value="25">25 rows</option>
+                            <option value="50">50 rows</option>
+                            <option value="100">100 rows</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="data-table"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard JS code -->
+<script>
+let currentPage = 1;
+let pageSize = 10;
+let currentSort = 'year';
+let currentSortAsc = false;
+let currentUnknownCount = null;
+
+// Initial setup
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if dropdown exists before accessing its value
+    const unknownSelector = document.getElementById('unknown-selector');
+    if (unknownSelector && unknownSelector.options.length > 0) {
+        currentUnknownCount = unknownSelector.value;
+        updateDashboard(currentUnknownCount);
+    } else {
+        console.error("Unknown selector dropdown not initialized or empty");
+    }
+});
+
+function updateDashboard(unknownCount) {
+    if (!dashboardData || !dashboardData[unknownCount]) {
+        console.error("Dashboard data not available for unknown count:", unknownCount);
+        return;
+    }
+    
+    currentUnknownCount = unknownCount;
+    currentPage = 1; // Reset to first page when changing filters
+    const data = dashboardData[unknownCount];
+    
+    // Update summary stats
+    updateSummaryStats(data);
+    
+    // Update charts
+    updateCharts(data);
+    
+    // Update data table
+    renderDataTable();
+}
+
+function updateSummaryStats(data) {
+    let summaryHTML = `
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Summary for Incidents with ${currentUnknownCount} Unknown Fields</h2>
+                <p>Found ${data.total_incidents} incidents with ${currentUnknownCount} unknown fields.</p>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('summary-stats').innerHTML = summaryHTML;
+}
+
+function updateCharts(data) {
+    // Update country chart
+    const countryData = [{
+        x: data.countries.map(d => d.country),
+        y: data.countries.map(d => d.count),
+        type: 'bar',
+        marker: {color: '#e32d2d'}
+    }];
+    
+    Plotly.newPlot('country-chart', countryData, {
+        title: 'Top Countries',
+        xaxis: {title: 'Country'},
+        yaxis: {title: 'Number of Incidents'}
+    });
+    
+    // Update year chart
+    const yearData = [{
+        x: data.years.map(d => d.year),
+        y: data.years.map(d => d.count),
+        type: 'scatter',
+        mode: 'lines+markers',
+        marker: {color: '#e32d2d'}
+    }];
+    
+    Plotly.newPlot('year-chart', yearData, {
+        title: 'Incidents by Year',
+        xaxis: {title: 'Year'},
+        yaxis: {title: 'Number of Incidents'}
+    });
+    
+    // Update fields chart
+    const fieldsData = [{
+        x: data.fields.map(d => d.field),
+        y: data.fields.map(d => d.count),
+        type: 'bar',
+        marker: {color: '#e32d2d'}
+    }];
+    
+    Plotly.newPlot('fields-chart', fieldsData, {
+        title: 'Distribution of Unknown Fields',
+        xaxis: {title: 'Field'},
+        yaxis: {title: 'Number of Incidents'}
+    });
+    
+    // Update casualties table
+    let tableHTML = `
+        <h3>Casualty Statistics (Average per Incident)</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    Object.entries(data.casualties).forEach(([key, value]) => {
+        tableHTML += `
+            <tr>
+                <td>${key.replace('total_', '').charAt(0).toUpperCase() + key.replace('total_', '').slice(1)}</td>
+                <td>${value.toFixed(2)}</td>
+            </tr>
+        `;
+    });
+    
+    tableHTML += '</tbody></table>';
+    document.getElementById('casualties-table').innerHTML = tableHTML;
+}
+
+function renderDataTable() {
+    const data = dashboardData[currentUnknownCount];
+    const rawData = [...data.raw_data]; // Create a copy to avoid modifying the original
+    
+    // Sort data
+    rawData.sort((a, b) => {
+        const aVal = a[currentSort];
+        const bVal = b[currentSort];
+        
+        // Handle different data types
+        if (typeof aVal === 'number' && typeof bVal === 'number') {
+            return currentSortAsc ? aVal - bVal : bVal - aVal;
+        } else {
+            const aStr = String(aVal);
+            const bStr = String(bVal);
+            return currentSortAsc ? aStr.localeCompare(bStr) : bStr.localeCompare(aStr);
+        }
+    });
+    
+    // Paginate
+    const startIdx = (currentPage - 1) * pageSize;
+    const endIdx = startIdx + pageSize;
+    const pagedData = rawData.slice(startIdx, endIdx);
+    
+    // Create table HTML
+    let tableHTML = `
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+    `;
+    
+    // Add table headers with sort indicators
+    data.columns.forEach(col => {
+        const sortIcon = col === currentSort 
+            ? currentSortAsc ? '↑' : '↓' 
+            : '';
+        tableHTML += `<th onclick="changeSort('${col}')" style="cursor: pointer;">${col} ${sortIcon}</th>`;
+    });
+    
+    tableHTML += `
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    // Add table rows
+    pagedData.forEach(row => {
+        tableHTML += '<tr>';
+        data.columns.forEach(col => {
+            tableHTML += `<td>${row[col]}</td>`;
+        });
+        tableHTML += '</tr>';
+    });
+    
+    tableHTML += `
+            </tbody>
+        </table>
+    `;
+    
+    // Update the table
+    document.getElementById('data-table').innerHTML = tableHTML;
+    
+    // Update pagination info
+    const totalPages = Math.ceil(rawData.length / pageSize);
+    document.getElementById('page-info').textContent = `Page ${currentPage} of ${totalPages}`;
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+}
+
+function changeSort(column) {
+    if (currentSort === column) {
+        // Toggle sort direction
+        currentSortAsc = !currentSortAsc;
+    } else {
+        // Set new sort column
+        currentSort = column;
+        currentSortAsc = false; // Default to descending
+    }
+    renderDataTable();
+}
+
+function sortData(column) {
+    currentSort = column;
+    currentSortAsc = false;
+    renderDataTable();
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        renderDataTable();
+    }
+}
+
+function nextPage() {
+    const data = dashboardData[currentUnknownCount];
+    const totalPages = Math.ceil(data.raw_data.length / pageSize);
+    if (currentPage < totalPages) {
+        currentPage++;
+        renderDataTable();
+    }
+}
+
+function changePageSize(size) {
+    pageSize = parseInt(size);
+    currentPage = 1; // Reset to first page
+    renderDataTable();
+}
+</script>
+```
+
+<style>
+/* Dashboard-specific styles */
+.dashboard-container { 
+    margin-top: 20px; 
+    font-family: 'Merriweather', serif;
+}
+
+.row { 
+    display: flex; 
+    margin-bottom: 20px; 
+}
+
+.chart { 
+    width: 48%; 
+    margin: 0 1%; 
+}
+
+.control-panel { 
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px; 
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.data-table-container {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+.summary-box {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.tab-content {
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Style buttons to match theme */
+.btn-outline-secondary {
+    color: #e32d2d;
+    border-color: #e32d2d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #e32d2d;
+    color: white;
+    border-color: #e32d2d;
+}
+
+/* Style the tabs */
+.nav-tabs .nav-link {
+    color: #333;
+}
+
+.nav-tabs .nav-link.active {
+    color: #e32d2d;
+    font-weight: bold;
+}
+</style>

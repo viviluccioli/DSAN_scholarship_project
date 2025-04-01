@@ -1,3 +1,46 @@
+/* Import Merriweather font */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+/* Set global font to Merriweather */
+body {
+  font-family: 'Merriweather', serif;
+}
+
+/* Default background for all pages except home */
+body:not(.home-page) {
+  background-color: #fca7a7;
+}
+
+/* Home page specific styling */
+body.home-page {
+  background-color: black;
+  color: white;
+}
+
+/* Home page content */
+.home-content {
+  text-align: center;
+  margin-top: 15vh;
+}
+
+.home-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 5rem;
+}
+
+.stat-highlight {
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+.highlight-number {
+  color: #e32d2d;
+  font-size: 4rem;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
 /* Link colors */
 a {
   color: #e32d2d;
@@ -13,6 +56,7 @@ a:hover {
 .navbar {
   background-color: black !important;
   color: white !important;
+  font-family: 'Merriweather', serif;
 }
 
 .navbar-brand, .navbar-title, .nav-link {
@@ -23,16 +67,49 @@ a:hover {
   color: #ff6b6b !important;
 }
 
-/* Background page styling */
-body.background-page {
-  background-color: #fca7a7;
-}
-
 /* For anchor links to section headers */
 h2::before, h3::before {
-  display: block; 
-  content: " "; 
-  margin-top: -70px; 
-  height: 70px; 
-  visibility: hidden; 
+  display: block;
+  content: " ";
+  margin-top: -70px;
+  height: 70px;
+  visibility: hidden;
+}
+
+/* Dashboard specific styling overrides */
+.dashboard-container h1, 
+.dashboard-container h2, 
+.dashboard-container h3, 
+.dashboard-container p, 
+.dashboard-container label, 
+.dashboard-container select, 
+.dashboard-container button,
+.dashboard-container table {
+  font-family: 'Merriweather', serif;
+}
+
+.control-panel,
+.summary-box {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.tab-content {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Make buttons match the theme */
+.btn-outline-secondary {
+  color: #e32d2d;
+  border-color: #e32d2d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #e32d2d;
+  color: white;
+  border-color: #e32d2d;
+}
+
+/* Style table headers */
+th {
+  background-color: rgba(227, 45, 45, 0.1) !important;
 }

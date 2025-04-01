@@ -1,0 +1,90 @@
+.dashboard-container { 
+    margin-top: 20px; 
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.row { 
+    display: flex; 
+    margin-bottom: 20px; 
+}
+
+.chart { 
+    width: 48%; 
+    margin: 0 1%; 
+}
+
+h1, h2, h3 { 
+    color: #333; 
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+select { 
+    padding: 8px; 
+    font-size: 16px; 
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+table { 
+    border-collapse: collapse; 
+    width: 100%; 
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+th, td { 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: right; 
+}
+
+th { 
+    background-color: rgba(227, 45, 45, 0.1); 
+}
+
+.control-panel { 
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px; 
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.data-table-container {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+.summary-box {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.tab-content {
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Style buttons to match theme */
+.btn-outline-secondary {
+    color: #e32d2d;
+    border-color: #e32d2d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #e32d2d;
+    color: white;
+    border-color: #e32d2d;
+}
+
+/* Style the tabs */
+.nav-tabs .nav-link {
+    color: #333;
+}
+
+.nav-tabs .nav-link.active {
+    color: #e32d2d;
+    font-weight: bold;
+}
