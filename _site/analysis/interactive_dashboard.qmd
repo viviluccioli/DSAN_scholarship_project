@@ -1,5 +1,5 @@
 ---
-title: "Interactive Dashboard"
+title: ""
 format: 
   html:
     page-layout: full
@@ -12,187 +12,8 @@ format:
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Dashboard data from file -->
-<script>
-// This is a minimal version of dashboard_data.js included directly
-// to ensure it loads before it's needed
-const dashboardData = {
-  "0": {
-    "countries": [
-      {"country": "South Sudan", "count": 45},
-      {"country": "Syria", "count": 38},
-      {"country": "Afghanistan", "count": 32},
-      {"country": "Somalia", "count": 28},
-      {"country": "DRC", "count": 24}
-    ],
-    "years": [
-      {"year": 1997, "count": 12},
-      {"year": 1998, "count": 15},
-      {"year": 1999, "count": 18},
-      {"year": 2000, "count": 22},
-      {"year": 2001, "count": 25},
-      {"year": 2002, "count": 28},
-      {"year": 2003, "count": 30},
-      {"year": 2004, "count": 35},
-      {"year": 2005, "count": 42},
-      {"year": 2006, "count": 48},
-      {"year": 2007, "count": 52},
-      {"year": 2008, "count": 58},
-      {"year": 2009, "count": 63},
-      {"year": 2010, "count": 68},
-      {"year": 2011, "count": 75},
-      {"year": 2012, "count": 82},
-      {"year": 2013, "count": 90},
-      {"year": 2014, "count": 98},
-      {"year": 2015, "count": 105},
-      {"year": 2016, "count": 115},
-      {"year": 2017, "count": 125},
-      {"year": 2018, "count": 135},
-      {"year": 2019, "count": 145},
-      {"year": 2020, "count": 155}
-    ],
-    "fields": [
-      {"field": "means_of_attack", "count": 0},
-      {"field": "attack_context", "count": 0},
-      {"field": "location", "count": 0},
-      {"field": "motive", "count": 0},
-      {"field": "actor_type", "count": 0},
-      {"field": "actor_name", "count": 0}
-    ],
-    "casualties": {
-      "total_killed": 2.8,
-      "total_wounded": 4.2,
-      "total_kidnapped": 1.5,
-      "total_affected": 8.5
-    },
-    "total_incidents": 450,
-    "raw_data": [
-      {
-        "incident_id": "1001",
-        "year": 2020,
-        "month": 6,
-        "day": 15,
-        "country": "South Sudan",
-        "means_of_attack": "Shooting",
-        "attack_context": "Targeted",
-        "location": "Field Office",
-        "motive": "Political",
-        "actor_type": "Non-State",
-        "actor_name": "Armed Group",
-        "total_killed": 3,
-        "total_wounded": 5,
-        "total_kidnapped": 0,
-        "total_affected": 8
-      },
-      {
-        "incident_id": "1002",
-        "year": 2020,
-        "month": 5,
-        "day": 22,
-        "country": "Syria",
-        "means_of_attack": "IED",
-        "attack_context": "Collateral",
-        "location": "Vehicle",
-        "motive": "Unknown",
-        "actor_type": "Non-State",
-        "actor_name": "Armed Group",
-        "total_killed": 2,
-        "total_wounded": 3,
-        "total_kidnapped": 0,
-        "total_affected": 5
-      }
-    ],
-    "columns": ["incident_id", "year", "month", "day", "country", "means_of_attack", "attack_context", "location", "motive", "actor_type", "actor_name", "total_killed", "total_wounded", "total_kidnapped", "total_affected"]
-  },
-  "1": {
-    "countries": [
-      {"country": "Afghanistan", "count": 42},
-      {"country": "Somalia", "count": 36},
-      {"country": "South Sudan", "count": 31},
-      {"country": "Syria", "count": 28},
-      {"country": "Yemen", "count": 22}
-    ],
-    "years": [
-      {"year": 1997, "count": 10},
-      {"year": 1998, "count": 12},
-      {"year": 1999, "count": 15},
-      {"year": 2000, "count": 18},
-      {"year": 2001, "count": 22},
-      {"year": 2002, "count": 25},
-      {"year": 2003, "count": 28},
-      {"year": 2004, "count": 32},
-      {"year": 2005, "count": 38},
-      {"year": 2006, "count": 42},
-      {"year": 2007, "count": 48},
-      {"year": 2008, "count": 54},
-      {"year": 2009, "count": 60},
-      {"year": 2010, "count": 65},
-      {"year": 2011, "count": 72},
-      {"year": 2012, "count": 78},
-      {"year": 2013, "count": 85},
-      {"year": 2014, "count": 92},
-      {"year": 2015, "count": 100},
-      {"year": 2016, "count": 108},
-      {"year": 2017, "count": 118},
-      {"year": 2018, "count": 128},
-      {"year": 2019, "count": 138},
-      {"year": 2020, "count": 148}
-    ],
-    "fields": [
-      {"field": "means_of_attack", "count": 85},
-      {"field": "attack_context", "count": 68},
-      {"field": "location", "count": 45},
-      {"field": "motive", "count": 120},
-      {"field": "actor_type", "count": 35},
-      {"field": "actor_name", "count": 160}
-    ],
-    "casualties": {
-      "total_killed": 3.2,
-      "total_wounded": 4.8,
-      "total_kidnapped": 1.8,
-      "total_affected": 9.8
-    },
-    "total_incidents": 420,
-    "raw_data": [
-      {
-        "incident_id": "2001",
-        "year": 2020,
-        "month": 7,
-        "day": 8,
-        "country": "Afghanistan",
-        "means_of_attack": "Shooting",
-        "attack_context": "Targeted",
-        "location": "Field Office",
-        "motive": "Unknown",
-        "actor_type": "Non-State",
-        "actor_name": "Unknown",
-        "total_killed": 2,
-        "total_wounded": 4,
-        "total_kidnapped": 0,
-        "total_affected": 6
-      },
-      {
-        "incident_id": "2002",
-        "year": 2020,
-        "month": 6,
-        "day": 15,
-        "country": "Somalia",
-        "means_of_attack": "Unknown",
-        "attack_context": "Targeted",
-        "location": "Road",
-        "motive": "Unknown",
-        "actor_type": "Non-State",
-        "actor_name": "Armed Group",
-        "total_killed": 3,
-        "total_wounded": 2,
-        "total_kidnapped": 1,
-        "total_affected": 6
-      }
-    ],
-    "columns": ["incident_id", "year", "month", "day", "country", "means_of_attack", "attack_context", "location", "motive", "actor_type", "actor_name", "total_killed", "total_wounded", "total_kidnapped", "total_affected"]
-  }
-};
-</script>
+<!-- Load the dashboard data -->
+<script src="dashboard_data.js"></script>
 
 <div class="container-fluid dashboard-container">
     <h1 class="mt-3 mb-4">Violence Against Humanitarian Aid Workers</h1>
@@ -202,8 +23,7 @@ const dashboardData = {
             <div class="col-md-6">
                 <label for="unknown-selector" class="form-label">Select number of unknown fields:</label>
                 <select id="unknown-selector" class="form-select" onchange="updateDashboard(this.value)">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
+                    <!-- Options will be populated by JavaScript -->
                 </select>
             </div>
             <div class="col-md-6">
@@ -235,16 +55,16 @@ const dashboardData = {
             
             <div class="row">
                 <div class="col-md-6">
-                    <div id="country-chart"></div>
+                    <div id="country-chart" class="chart-container"></div>
                 </div>
                 <div class="col-md-6">
-                    <div id="year-chart"></div>
+                    <div id="year-chart" class="chart-container"></div>
                 </div>
             </div>
             
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <div id="fields-chart"></div>
+                    <div id="fields-chart" class="chart-container"></div>
                 </div>
                 <div class="col-md-6">
                     <div id="casualties-table"></div>
@@ -263,14 +83,14 @@ const dashboardData = {
                     </div>
                     <div>
                         <select id="page-size" class="form-select form-select-sm" style="width: auto;" onchange="changePageSize(this.value)">
-                            <option value="10">10 rows</option>
-                            <option value="25">25 rows</option>
+                            <option value="5">5 rows</option>
+                            <option value="10" selected>10 rows</option>
+                            <option value="20">20 rows</option>
                             <option value="50">50 rows</option>
-                            <option value="100">100 rows</option>
                         </select>
                     </div>
                 </div>
-                <div id="data-table"></div>
+                <div id="data-table" class="table-responsive"></div>
             </div>
         </div>
     </div>
@@ -286,13 +106,33 @@ let currentUnknownCount = null;
 
 // Initial setup
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if dropdown exists before accessing its value
+    // Populate the unknown count dropdown with available options
     const unknownSelector = document.getElementById('unknown-selector');
-    if (unknownSelector && unknownSelector.options.length > 0) {
-        currentUnknownCount = unknownSelector.value;
+    
+    // Clear existing options
+    unknownSelector.innerHTML = '';
+    
+    // Check if dashboardData is available
+    if (!window.dashboardData) {
+        console.error("Dashboard data is not available. Make sure dashboard_data.js is loaded correctly.");
+        document.getElementById('summary-stats').innerHTML = '<div class="alert alert-danger">Error: Data could not be loaded.</div>';
+        return;
+    }
+    
+    // Add options based on available data
+    Object.keys(dashboardData).sort((a, b) => parseInt(a) - parseInt(b)).forEach(count => {
+        const option = document.createElement('option');
+        option.value = count;
+        option.textContent = count;
+        unknownSelector.appendChild(option);
+    });
+    
+    // Select the first option
+    if (unknownSelector.options.length > 0) {
+        currentUnknownCount = unknownSelector.options[0].value;
         updateDashboard(currentUnknownCount);
     } else {
-        console.error("Unknown selector dropdown not initialized or empty");
+        console.error("No unknown count options available");
     }
 });
 
@@ -338,11 +178,17 @@ function updateCharts(data) {
         marker: {color: '#e32d2d'}
     }];
     
-    Plotly.newPlot('country-chart', countryData, {
+    const countryLayout = {
         title: 'Top Countries',
         xaxis: {title: 'Country'},
-        yaxis: {title: 'Number of Incidents'}
-    });
+        yaxis: {title: 'Number of Incidents'},
+        autosize: true,
+        margin: {l: 60, r: 30, t: 50, b: 80}
+    };
+
+    const config = {responsive: true};
+    
+    Plotly.newPlot('country-chart', countryData, countryLayout, config);
     
     // Update year chart
     const yearData = [{
@@ -353,11 +199,15 @@ function updateCharts(data) {
         marker: {color: '#e32d2d'}
     }];
     
-    Plotly.newPlot('year-chart', yearData, {
+    const yearLayout = {
         title: 'Incidents by Year',
         xaxis: {title: 'Year'},
-        yaxis: {title: 'Number of Incidents'}
-    });
+        yaxis: {title: 'Number of Incidents'},
+        autosize: true,
+        margin: {l: 60, r: 30, t: 50, b: 50}
+    };
+    
+    Plotly.newPlot('year-chart', yearData, yearLayout, config);
     
     // Update fields chart
     const fieldsData = [{
@@ -367,11 +217,15 @@ function updateCharts(data) {
         marker: {color: '#e32d2d'}
     }];
     
-    Plotly.newPlot('fields-chart', fieldsData, {
+    const fieldsLayout = {
         title: 'Distribution of Unknown Fields',
         xaxis: {title: 'Field'},
-        yaxis: {title: 'Number of Incidents'}
-    });
+        yaxis: {title: 'Number of Incidents'},
+        autosize: true,
+        margin: {l: 60, r: 30, t: 50, b: 100}
+    };
+    
+    Plotly.newPlot('fields-chart', fieldsData, fieldsLayout, config);
     
     // Update casualties table
     let tableHTML = `
@@ -412,8 +266,8 @@ function renderDataTable() {
         if (typeof aVal === 'number' && typeof bVal === 'number') {
             return currentSortAsc ? aVal - bVal : bVal - aVal;
         } else {
-            const aStr = String(aVal);
-            const bStr = String(bVal);
+            const aStr = String(aVal || '');
+            const bStr = String(bVal || '');
             return currentSortAsc ? aStr.localeCompare(bStr) : bStr.localeCompare(aStr);
         }
     });
@@ -430,12 +284,21 @@ function renderDataTable() {
                 <tr>
     `;
     
+    // For responsive design, show fewer columns on smaller screens
+    let displayColumns = data.columns;
+    if (window.innerWidth < 768) {
+        // Limited set of columns for mobile view
+        displayColumns = ['incident_id', 'year', 'country', 'total_killed', 'total_affected'];
+        displayColumns = displayColumns.filter(col => data.columns.includes(col));
+    }
+    
     // Add table headers with sort indicators
-    data.columns.forEach(col => {
+    displayColumns.forEach(col => {
         const sortIcon = col === currentSort 
             ? currentSortAsc ? '↑' : '↓' 
             : '';
-        tableHTML += `<th onclick="changeSort('${col}')" style="cursor: pointer;">${col} ${sortIcon}</th>`;
+        const displayName = col.replace('total_', '').replace(/_/g, ' ');
+        tableHTML += `<th onclick="changeSort('${col}')" style="cursor: pointer;">${displayName.charAt(0).toUpperCase() + displayName.slice(1)} ${sortIcon}</th>`;
     });
     
     tableHTML += `
@@ -447,8 +310,8 @@ function renderDataTable() {
     // Add table rows
     pagedData.forEach(row => {
         tableHTML += '<tr>';
-        data.columns.forEach(col => {
-            tableHTML += `<td>${row[col]}</td>`;
+        displayColumns.forEach(col => {
+            tableHTML += `<td>${row[col] || ''}</td>`;
         });
         tableHTML += '</tr>';
     });
@@ -465,7 +328,7 @@ function renderDataTable() {
     const totalPages = Math.ceil(rawData.length / pageSize);
     document.getElementById('page-info').textContent = `Page ${currentPage} of ${totalPages}`;
     document.getElementById('prev-page').disabled = currentPage === 1;
-    document.getElementById('next-page').disabled = currentPage === totalPages;
+    document.getElementById('next-page').disabled = currentPage === totalPages || totalPages === 0;
 }
 
 function changeSort(column) {
@@ -507,6 +370,15 @@ function changePageSize(size) {
     currentPage = 1; // Reset to first page
     renderDataTable();
 }
+
+// Handle window resize to make plots responsive
+window.addEventListener('resize', function() {
+    const data = dashboardData[currentUnknownCount];
+    if (data) {
+        updateCharts(data);
+        renderDataTable(); // Re-render table to adjust columns for screen size
+    }
+});
 </script>
 ```
 
@@ -515,16 +387,19 @@ function changePageSize(size) {
 .dashboard-container { 
     margin-top: 20px; 
     font-family: 'Merriweather', serif;
+    padding: 0 15px;
 }
 
 .row { 
     display: flex; 
+    flex-wrap: wrap;
     margin-bottom: 20px; 
 }
 
-.chart { 
-    width: 48%; 
-    margin: 0 1%; 
+.chart-container { 
+    width: 100%; 
+    height: 350px;
+    margin-bottom: 15px;
 }
 
 .control-panel { 
@@ -535,7 +410,7 @@ function changePageSize(size) {
 }
 
 .data-table-container {
-    margin-top: 30px;
+    margin-top: 20px;
     overflow-x: auto;
 }
 
@@ -552,6 +427,12 @@ function changePageSize(size) {
     border-top: none;
     border-radius: 0 0 5px 5px;
     background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Table responsiveness */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Style buttons to match theme */
@@ -575,4 +456,125 @@ function changePageSize(size) {
     color: #e32d2d;
     font-weight: bold;
 }
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .col-md-6 {
+        width: 100%;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+}
 </style>
+```
+
+## Python Script to Generate Data File
+
+Now, you need to run your Python script to generate the necessary data file:
+
+```python
+import pandas as pd
+import json
+import numpy as np
+
+def generate_dashboard_data(df_path):
+    # Read the data
+    df = pd.read_csv(df_path)
+    
+    # Define unknown fields
+    unknown_fields = ['means_of_attack', 'attack_context', 'location', 'motive', 'actor_type', 'actor_name']
+    
+    # Calculate unknown count
+    df['unknown_count'] = df[unknown_fields].apply(lambda row: sum(row == 'Unknown'), axis=1)
+    
+    # Get all possible unknown count values
+    unknown_counts = sorted(df['unknown_count'].unique())
+    
+    # Create data structure
+    data_json = {}
+    
+    for count in unknown_counts:
+        filtered_df = df[df['unknown_count'] == count]
+        
+        # Country data
+        country_counts = filtered_df['country'].value_counts().reset_index()
+        country_counts.columns = ['country', 'count']
+        country_counts = country_counts.head(5)
+        
+        # Year data
+        year_counts = filtered_df['year'].value_counts().sort_index().reset_index()
+        year_counts.columns = ['year', 'count']
+        
+        # Unknown fields data
+        field_counts = {}
+        for field in unknown_fields:
+            field_counts[field] = int(filtered_df[filtered_df[field] == 'Unknown'].shape[0])
+        
+        fields_df = pd.DataFrame({'field': list(field_counts.keys()), 'count': list(field_counts.values())})
+        
+        # Casualties data
+        numeric_cols = ['total_killed', 'total_wounded', 'total_kidnapped', 'total_affected']
+        stats = filtered_df[numeric_cols].mean().round(2).to_dict()
+        # Convert numpy types to Python native types
+        stats = {k: float(v) for k, v in stats.items()}
+        
+        # Full dataset (for the data tab)
+        # Select a subset of columns for display
+        display_cols = ['incident_id', 'year', 'month', 'day', 'country', 
+                         'means_of_attack', 'attack_context', 'location', 'motive', 'actor_type', 'actor_name',
+                         'total_killed', 'total_wounded', 'total_kidnapped', 'total_affected']
+        
+        # Only include columns that exist in the dataframe
+        display_cols = [col for col in display_cols if col in filtered_df.columns]
+        
+        # Limit to max 100 records for performance
+        records_df = filtered_df.head(100)
+        
+        # Convert the filtered dataframe to a list of records
+        records = []
+        for _, row in records_df.iterrows():
+            record = {}
+            for col in display_cols:
+                val = row[col]
+                if isinstance(val, (np.integer, np.floating)):
+                    val = int(val) if isinstance(val, np.integer) else float(val)
+                elif pd.isna(val):
+                    val = ""
+                else:
+                    val = str(val)
+                record[col] = val
+            records.append(record)
+        
+        # Store all data for this unknown count
+        data_json[int(count)] = {
+            'countries': [
+                {'country': str(row.country), 'count': int(row['count'])} 
+                for _, row in country_counts.iterrows()
+            ],
+            'years': [
+                {'year': int(row.year), 'count': int(row['count'])} 
+                for _, row in year_counts.iterrows()
+            ],
+            'fields': [
+                {'field': str(row.field), 'count': int(row['count'])} 
+                for _, row in fields_df.iterrows()
+            ],
+            'casualties': stats,
+            'total_incidents': int(len(filtered_df)),
+            'raw_data': records,
+            'columns': display_cols
+        }
+    
+    return data_json
+
+# Generate the data
+data = generate_dashboard_data('../data/cleaned_security_incidents.csv')
+
+# Write to JS file
+with open('analysis/dashboard_data.js', 'w') as f:
+    f.write('const dashboardData = ' + json.dumps(data, indent=2) + ';')
+
+print("Dashboard data saved to analysis/dashboard_data.js")
+```
