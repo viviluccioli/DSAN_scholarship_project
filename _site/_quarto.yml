@@ -21,3 +21,5 @@ format:
   html:
     theme: cosmo
     css: styles.css
+resources:
+  - dashboard_data.js

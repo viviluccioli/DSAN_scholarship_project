@@ -89,7 +89,7 @@ for count in unknown_counts:
     }
 
 # Write to JS file
-with open('analysis/dashboard_data.js', 'w') as f:
+with open('_site/analysis/dashboard_data.js', 'w') as f:
     f.write('const dashboardData = ' + json.dumps(data_json, indent=2) + ';')
 
 print("Dashboard data saved to analysis/dashboard_data.js")
